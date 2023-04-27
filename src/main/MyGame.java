@@ -7,7 +7,7 @@ public class MyGame {
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(true);
+        window.setResizable(false);
         window.setTitle("Killian's Adventure");
         
         GamePanel gamePanel = new GamePanel();
