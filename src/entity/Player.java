@@ -44,14 +44,14 @@ public class Player extends Entity {
     public void getPlayerImage() {
         try {
 
-            File f1 = new File("./res/player/blue_boy/boy_up_1.png");
-            File f2 = new File("./res/player/blue_boy/boy_up_2.png");
-            File f3 = new File("./res/player/blue_boy/boy_down_1.png");
-            File f4 = new File("./res/player/blue_boy/boy_down_2.png");
-            File f5 = new File("./res/player/blue_boy/boy_left_1.png");
-            File f6 = new File("./res/player/blue_boy/boy_left_2.png");
-            File f7 = new File("./res/player/blue_boy/boy_right_1.png");
-            File f8 = new File("./res/player/blue_boy/boy_right_2.png");
+            File f1 = new File("./res/player/hust_boy/hust_boy_up_1.png");
+            File f2 = new File("./res/player/hust_boy/hust_boy_up_2.png");
+            File f3 = new File("./res/player/hust_boy/hust_boy_down_1.png");
+            File f4 = new File("./res/player/hust_boy/hust_boy_down_2.png");
+            File f5 = new File("./res/player/hust_boy/hust_boy_left_1.png");
+            File f6 = new File("./res/player/hust_boy/hust_boy_left_2.png");
+            File f7 = new File("./res/player/hust_boy/hust_boy_right_1.png");
+            File f8 = new File("./res/player/hust_boy/hust_boy_right_2.png");
             up1 = ImageIO.read(f1);
             up2 = ImageIO.read(f2);
             down1 = ImageIO.read(f3);
@@ -88,7 +88,7 @@ public class Player extends Entity {
                 worldX -= speed;
             }
             spriteCounter++;
-            if (spriteCounter > 15) {
+            if (spriteCounter > 13) {
                 spriteNum = 3 - spriteNum;
                 spriteCounter = 0;
             }
