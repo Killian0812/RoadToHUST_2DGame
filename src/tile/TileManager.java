@@ -12,8 +12,8 @@ import main.GamePanel;
 public class TileManager {
 
     GamePanel gp;
-    Tile[] tile;
-    int mapTileNum[][];
+    public Tile[] tile;
+    public int mapTileNum[][];
 
     public TileManager(GamePanel gp) {
 
@@ -64,16 +64,24 @@ public class TileManager {
             File f3 = new File("./res/tiles/earth.png");
             File f4 = new File("./res/tiles/tree.png");
             File f5 = new File("./res/tiles/sand.png");
+
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(f0);
+
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(f1);
+            tile[1].collison = true;
+
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(f2);
+            
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(f3);
+            
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(f4);
+            tile[4].collison = true;
+
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(f5);
         } catch (IOException e) {
@@ -96,13 +104,13 @@ public class TileManager {
             int playerToTileX = worldX - gp.player.worldX;
             int playerToTileY = worldY - gp.player.worldY;
             // playerToTileX = distance from player to tile
-            // --> player.screenX + playerToTileX = tile position on screen
+            // --> player.screenX + playerToTileX = position of tile on screen
             int screenX = gp.player.screenX + playerToTileX;
             int screenY = gp.player.screenY + playerToTileY;
 
-            // only draw if tile is in the screen
+            // only draw if tile is in screen range
             if (Math.abs(playerToTileX) < gp.player.screenX + gp.tileSize &&
-                Math.abs(playerToTileY) < gp.player.screenY + gp.tileSize)
+                    Math.abs(playerToTileY) < gp.player.screenY + gp.tileSize)
                 g2.drawImage(tile[tileType].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
             worldCol++;

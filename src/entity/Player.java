@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +24,10 @@ public class Player extends Entity {
         this.gp = gp;
         this.keyH = keyH;
 
-        screenX = gp.screenWidth/2 - gp.tileSize/2;
-        screenY = gp.screenHeight/2 - gp.tileSize/2;
+        screenX = gp.screenWidth / 2 - gp.tileSize / 2;
+        screenY = gp.screenHeight / 2 - gp.tileSize / 2;
+
+        solidArea = new Rectangle(8, 16, gp.tileSize/2, gp.tileSize/2 + 8);
 
         setDefaultValues();
         try {
@@ -71,27 +74,41 @@ public class Player extends Entity {
 
         if (keyH.downPressed == true || keyH.upPressed == true || keyH.leftPressed == true
                 || keyH.rightPressed == true) {
-            if (keyH.upPressed == true) {
+            if (keyH.upPressed == true)
                 direction = "up";
-                worldY -= speed;
-            }
-            if (keyH.downPressed == true) {
+            if (keyH.downPressed == true)
                 direction = "down";
-                worldY += speed;
-            }
-            if (keyH.rightPressed == true) {
+            if (keyH.rightPressed == true)
                 direction = "right";
-                worldX += speed;
-            }
-            if (keyH.leftPressed == true) {
+            if (keyH.leftPressed == true)
                 direction = "left";
-                worldX -= speed;
-            }
+
             spriteCounter++;
             if (spriteCounter > 13) {
                 spriteNum = 3 - spriteNum;
                 spriteCounter = 0;
             }
+
+            /// Check collision
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+            if (collisionOn == false)
+                switch (direction) {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                }
+
         }
     }
 
