@@ -42,7 +42,7 @@ public class TileManager {
             int i = 0, j;
             while (sc.hasNextLine() && i < gp.maxWorldRow) {
                 String line = sc.nextLine();
-                System.out.println(line);
+                // System.out.println(line);
                 String numbers[] = line.split(" ");
                 for (j = 0; j < gp.maxWorldCol; j++) {
                     mapTileNum[i][j] = Integer.parseInt(numbers[j]);
@@ -74,10 +74,10 @@ public class TileManager {
 
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(f2);
-            
+
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(f3);
-            
+
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(f4);
             tile[4].collison = true;
