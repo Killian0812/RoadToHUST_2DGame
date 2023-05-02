@@ -32,6 +32,8 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityTopRow][entityRightCol];
                 if (gp.tileM.tile[tileNum1].collison == true || gp.tileM.tile[tileNum2].collison == true)
                     entity.collisionOn = true;
+                if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
+                    gp.ui.gameFinished = true;
                 break;
             case "down":
                 entityBottomRow = (entityBottomY + entity.speed) / gp.tileSize;
@@ -39,6 +41,8 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];
                 if (gp.tileM.tile[tileNum1].collison == true || gp.tileM.tile[tileNum2].collison == true)
                     entity.collisionOn = true;
+                if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
+                    gp.ui.gameFinished = true;
                 break;
             case "left":
                 entityLeftCol = (entityLeftX - entity.speed) / gp.tileSize;
@@ -46,6 +50,8 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityLeftCol];
                 if (gp.tileM.tile[tileNum1].collison == true || gp.tileM.tile[tileNum2].collison == true)
                     entity.collisionOn = true;
+                if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
+                    gp.ui.gameFinished = true;
                 break;
             case "right":
                 entityRightCol = (entityRightX + entity.speed) / gp.tileSize;
@@ -53,6 +59,8 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];
                 if (gp.tileM.tile[tileNum1].collison == true || gp.tileM.tile[tileNum2].collison == true)
                     entity.collisionOn = true;
+                if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
+                    gp.ui.gameFinished = true;
         }
 
     }

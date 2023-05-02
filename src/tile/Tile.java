@@ -6,5 +6,6 @@ public class Tile {
 
     public BufferedImage image;
     public boolean collison = false;
+    public boolean isFinishLine = false;
     
 }

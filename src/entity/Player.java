@@ -149,11 +149,11 @@ public class Player extends Entity {
                     gp.playSE(3);
                     gp.ui.showMsg("Speed up!");
                     break;
-                case "Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(2);
-                    break;
+                // case "Chest":
+                //     gp.ui.gameFinished = true;
+                //     gp.stopMusic();
+                //     gp.playSE(2);
+                //     break;
                 case "Backpack":
                     gp.obj[index] = null;
                     gp.playSE(1);

@@ -18,7 +18,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
 
         this.gp = gp;
-        tile = new Tile[10];
+        tile = new Tile[15];
         mapTileNum = new int[gp.maxWorldRow][gp.maxWorldCol];
 
         try {
@@ -63,10 +63,13 @@ public class TileManager {
             File f2 = new File("./res/tiles/pathh.png");
             File f3 = new File("./res/tiles/wall.png");
             File f4 = new File("./res/tiles/tree.png");
-            File f5 = new File("./res/tiles/wood.png");  
-            File f6 = new File("./res/tiles/grass.png");  
-            File f7 = new File("./res/tiles/water.png");  
-            
+            File f5 = new File("./res/tiles/wood.png");
+            File f6 = new File("./res/tiles/grass.png");
+            File f7 = new File("./res/tiles/water.png");
+            File f8 = new File("./res/tiles/h.png");
+            File f9 = new File("./res/tiles/u.png");
+            File f10 = new File("./res/tiles/s.png");
+            File f11 = new File("./res/tiles/t.png");
 
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(f0);
@@ -94,6 +97,22 @@ public class TileManager {
             tile[7] = new Tile();
             tile[7].image = ImageIO.read(f7);
             tile[7].collison = true;
+
+            tile[8] = new Tile();
+            tile[8].image = ImageIO.read(f8);
+            tile[8].isFinishLine = true;
+
+            tile[9] = new Tile();
+            tile[9].image = ImageIO.read(f9);
+            tile[9].isFinishLine = true;
+
+            tile[10] = new Tile();
+            tile[10].image = ImageIO.read(f10);
+            tile[10].isFinishLine = true;
+
+            tile[11] = new Tile();
+            tile[11].image = ImageIO.read(f11);
+            tile[11].isFinishLine = true;
 
         } catch (IOException e) {
             e.printStackTrace();
