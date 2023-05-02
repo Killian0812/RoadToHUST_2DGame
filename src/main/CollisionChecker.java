@@ -30,7 +30,7 @@ public class CollisionChecker {
                 entityTopRow = (entityTopY - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityLeftCol];
                 tileNum2 = gp.tileM.mapTileNum[entityTopRow][entityRightCol];
-                if (gp.tileM.tile[tileNum1].collison == true || gp.tileM.tile[tileNum2].collison == true)
+                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
                     entity.collisionOn = true;
                 if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
                     gp.ui.gameFinished = true;
@@ -39,7 +39,7 @@ public class CollisionChecker {
                 entityBottomRow = (entityBottomY + entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityBottomRow][entityLeftCol];
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];
-                if (gp.tileM.tile[tileNum1].collison == true || gp.tileM.tile[tileNum2].collison == true)
+                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
                     entity.collisionOn = true;
                 if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
                     gp.ui.gameFinished = true;
@@ -48,7 +48,7 @@ public class CollisionChecker {
                 entityLeftCol = (entityLeftX - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityLeftCol];
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityLeftCol];
-                if (gp.tileM.tile[tileNum1].collison == true || gp.tileM.tile[tileNum2].collison == true)
+                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
                     entity.collisionOn = true;
                 if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
                     gp.ui.gameFinished = true;
@@ -57,7 +57,7 @@ public class CollisionChecker {
                 entityRightCol = (entityRightX + entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityRightCol];
                 tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];
-                if (gp.tileM.tile[tileNum1].collison == true || gp.tileM.tile[tileNum2].collison == true)
+                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
                     entity.collisionOn = true;
                 if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
                     gp.ui.gameFinished = true;

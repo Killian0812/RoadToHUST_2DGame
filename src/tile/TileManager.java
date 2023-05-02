@@ -2,12 +2,12 @@ package tile;
 
 import java.awt.Graphics2D;
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 public class TileManager {
 
@@ -57,64 +57,34 @@ public class TileManager {
     }
 
     public void getTileImage() {
+
+        setup(0, "path", false, false);
+        setup(1, "pathv", false, false);
+        setup(2, "pathh", false, false);
+        setup(3, "wall", true, false);
+        setup(4, "tree", true, false);
+        setup(5, "wood", false, false);
+        setup(6, "grass", false, false);
+        setup(7, "water", true, false);
+        setup(8, "h", false, true);
+        setup(9, "u", false, true);
+        setup(10, "s", false, true);
+        setup(11, "t", false, true);
+
+    }
+
+    public void setup(int index, String imagePath, boolean collision, boolean isFinishLine) {
+
+        UtilityTool uTool = new UtilityTool();
+
         try {
-            File f0 = new File("./res/tiles/path.png");
-            File f1 = new File("./res/tiles/pathv.png");
-            File f2 = new File("./res/tiles/pathh.png");
-            File f3 = new File("./res/tiles/wall.png");
-            File f4 = new File("./res/tiles/tree.png");
-            File f5 = new File("./res/tiles/wood.png");
-            File f6 = new File("./res/tiles/grass.png");
-            File f7 = new File("./res/tiles/water.png");
-            File f8 = new File("./res/tiles/h.png");
-            File f9 = new File("./res/tiles/u.png");
-            File f10 = new File("./res/tiles/s.png");
-            File f11 = new File("./res/tiles/t.png");
-
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(f0);
-
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(f1);
-
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(f2);
-
-            tile[3] = new Tile();
-            tile[3].image = ImageIO.read(f3);
-            tile[3].collison = true;
-
-            tile[4] = new Tile();
-            tile[4].image = ImageIO.read(f4);
-            tile[4].collison = true;
-
-            tile[5] = new Tile();
-            tile[5].image = ImageIO.read(f5);
-
-            tile[6] = new Tile();
-            tile[6].image = ImageIO.read(f6);
-
-            tile[7] = new Tile();
-            tile[7].image = ImageIO.read(f7);
-            tile[7].collison = true;
-
-            tile[8] = new Tile();
-            tile[8].image = ImageIO.read(f8);
-            tile[8].isFinishLine = true;
-
-            tile[9] = new Tile();
-            tile[9].image = ImageIO.read(f9);
-            tile[9].isFinishLine = true;
-
-            tile[10] = new Tile();
-            tile[10].image = ImageIO.read(f10);
-            tile[10].isFinishLine = true;
-
-            tile[11] = new Tile();
-            tile[11].image = ImageIO.read(f11);
-            tile[11].isFinishLine = true;
-
-        } catch (IOException e) {
+            tile[index] = new Tile();
+            File f = new File("./res/tiles/" + imagePath + ".png");
+            tile[index].image = ImageIO.read(f);
+            tile[index].image = uTool.scaledImage(tile[index].image, gp.tileSize, gp.tileSize);
+            tile[index].collision = collision;
+            tile[index].isFinishLine = isFinishLine;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

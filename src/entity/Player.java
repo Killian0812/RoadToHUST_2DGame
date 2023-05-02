@@ -4,12 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 public class Player extends Entity {
 
@@ -53,29 +53,30 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
+
+            up1 = setup("up_1");
+            up2 = setup("up_2");
+            down1 = setup("down_1");
+            down2 = setup("down_2");
+            left1 = setup("left_1");
+            left2 = setup("left_2");
+            right1 = setup("right_1");
+            right2 = setup("right_2");
+
+    }
+
+    public BufferedImage setup(String imageName) {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
         try {
-
-            File f1 = new File("./res/player/hust_boy/hust_boy_up_1.png");
-            File f2 = new File("./res/player/hust_boy/hust_boy_up_2.png");
-            File f3 = new File("./res/player/hust_boy/hust_boy_down_1.png");
-            File f4 = new File("./res/player/hust_boy/hust_boy_down_2.png");
-            File f5 = new File("./res/player/hust_boy/hust_boy_left_1.png");
-            File f6 = new File("./res/player/hust_boy/hust_boy_left_2.png");
-            File f7 = new File("./res/player/hust_boy/hust_boy_right_1.png");
-            File f8 = new File("./res/player/hust_boy/hust_boy_right_2.png");
-            up1 = ImageIO.read(f1);
-            up2 = ImageIO.read(f2);
-            down1 = ImageIO.read(f3);
-            down2 = ImageIO.read(f4);
-            left1 = ImageIO.read(f5);
-            left2 = ImageIO.read(f6);
-            right1 = ImageIO.read(f7);
-            right2 = ImageIO.read(f8);
-
-        } catch (IOException e) {
+            File f = new File("./res/player/hust_boy/hust_boy_" + imageName + ".png");
+            image = ImageIO.read(f);
+            image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return image;
     }
 
     public void update() {
@@ -150,10 +151,10 @@ public class Player extends Entity {
                     gp.ui.showMsg("Speed up!");
                     break;
                 // case "Chest":
-                //     gp.ui.gameFinished = true;
-                //     gp.stopMusic();
-                //     gp.playSE(2);
-                //     break;
+                // gp.ui.gameFinished = true;
+                // gp.stopMusic();
+                // gp.playSE(2);
+                // break;
                 case "Backpack":
                     gp.obj[index] = null;
                     gp.playSE(1);

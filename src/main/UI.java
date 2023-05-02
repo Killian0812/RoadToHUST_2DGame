@@ -29,13 +29,13 @@ public class UI {
         this.gp = gp;
         arial_25 = new Font("Arial", Font.PLAIN, 25);
         arial_80B = new Font("Arial", Font.BOLD, 80);
-        OBJ_Key key = new OBJ_Key();
+        OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
-        OBJ_StudentID studentID = new OBJ_StudentID();
+        OBJ_StudentID studentID = new OBJ_StudentID(gp);
         studentIDImage = studentID.image;
-        OBJ_Book book = new OBJ_Book();
+        OBJ_Book book = new OBJ_Book(gp);
         bookImage = book.image;
-        OBJ_Pencil pencil = new OBJ_Pencil();
+        OBJ_Pencil pencil = new OBJ_Pencil(gp);
         pencilImage = pencil.image;
     }
 
@@ -71,6 +71,7 @@ public class UI {
             y = gp.screenHeight / 2 + gp.tileSize * 2;
             g2.drawString(text, x, y);
 
+            gp.stopMusic();
             gp.gameThread = null;
             return;
         }
