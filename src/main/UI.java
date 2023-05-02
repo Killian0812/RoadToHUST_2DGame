@@ -6,7 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
+import object.OBJ_Book;
 import object.OBJ_Key;
+import object.OBJ_Pencil;
+import object.OBJ_StudentID;
 
 public class UI {
 
@@ -16,7 +19,7 @@ public class UI {
     GamePanel gp;
     Font arial_25, arial_80B;
 
-    BufferedImage keyImage;
+    BufferedImage keyImage, studentIDImage, bookImage, pencilImage;
     public boolean messageOn = false;
     public String message = "";
     int msgCount = 0;
@@ -28,6 +31,12 @@ public class UI {
         arial_80B = new Font("Arial", Font.BOLD, 80);
         OBJ_Key key = new OBJ_Key();
         keyImage = key.image;
+        OBJ_StudentID studentID = new OBJ_StudentID();
+        studentIDImage = studentID.image;
+        OBJ_Book book = new OBJ_Book();
+        bookImage = book.image;
+        OBJ_Pencil pencil = new OBJ_Pencil();
+        pencilImage = pencil.image;
     }
 
     public void showMsg(String text) {
@@ -42,7 +51,7 @@ public class UI {
             g2.setFont(arial_25);
             g2.setFont(g2.getFont().deriveFont(40f));
             g2.setColor(Color.white);
-            String text = "You found the treasure!";
+            String text = "You are at HUST!";
             int txtLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
             int x = gp.screenWidth / 2 - txtLength / 2;
             int y = gp.screenHeight / 2 - gp.tileSize * 3;
@@ -71,6 +80,15 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawImage(keyImage, 20, 15, 30, 30, null);
         g2.drawString(" x " + gp.player.keyCount, 45, 40);
+
+        if (gp.player.hasBook == true)
+            g2.drawImage(bookImage, 20, 55, 30, 30, null);
+
+        if (gp.player.hasPencil == true)
+            g2.drawImage(pencilImage, 60, 55, 20, 30, null);
+
+        if (gp.player.hasID == true)
+            g2.drawImage(studentIDImage, 20, 90, 30, 30, null);
 
         // message
         if (messageOn == true) {

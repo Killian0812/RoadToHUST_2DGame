@@ -20,6 +20,10 @@ public class Player extends Entity {
     public final int screenY;
 
     public int keyCount = 0;
+    public boolean hasPencil = false;
+    public boolean hasID = false;
+    public boolean hasBook = false;
+    public boolean hasBackpack = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -42,8 +46,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 50;
+        worldY = gp.tileSize * 8;
         speed = 4;
         direction = "down1";
     }
@@ -98,7 +102,7 @@ public class Player extends Entity {
             gp.cChecker.checkTile(this);
 
             int objIndex = gp.cChecker.checkObject(this, true);
-            pickUpObject(objIndex);
+            objectInteraction(objIndex);
 
             if (collisionOn == false)
                 switch (direction) {
@@ -119,7 +123,7 @@ public class Player extends Entity {
         }
     }
 
-    public void pickUpObject(int index) {
+    public void objectInteraction(int index) {
         if (index != 999) {
             String objectName = gp.obj[index].name;
             switch (objectName) {
@@ -149,6 +153,37 @@ public class Player extends Entity {
                     gp.ui.gameFinished = true;
                     gp.stopMusic();
                     gp.playSE(2);
+                    break;
+                case "Backpack":
+                    gp.obj[index] = null;
+                    gp.playSE(1);
+                    gp.ui.showMsg("You've got a backpack!");
+                    hasBackpack = true;
+                    break;
+                case "Book":
+                    if (hasBackpack == true) {
+                        gp.obj[index] = null;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've got a book!");
+                        hasBook = true;
+                    } else
+                        gp.ui.showMsg("You need a backpack!");
+                    break;
+                case "StudentID":
+                    gp.obj[index] = null;
+                    gp.playSE(1);
+                    gp.ui.showMsg("You've got a student ID!");
+                    hasID = true;
+                    break;
+                case "Pencil":
+                    if (hasBackpack == true) {
+                        gp.obj[index] = null;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've got a pencil!");
+                        hasPencil = true;
+                    } else
+                        gp.ui.showMsg("You need a backpack!");
+                    break;
             }
         }
     }

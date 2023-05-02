@@ -58,25 +58,28 @@ public class TileManager {
 
     public void getTileImage() {
         try {
-            File f0 = new File("./res/tiles/grass.png");
-            File f1 = new File("./res/tiles/wall.png");
-            File f2 = new File("./res/tiles/water.png");
-            File f3 = new File("./res/tiles/earth.png");
+            File f0 = new File("./res/tiles/path.png");
+            File f1 = new File("./res/tiles/pathv.png");
+            File f2 = new File("./res/tiles/pathh.png");
+            File f3 = new File("./res/tiles/wall.png");
             File f4 = new File("./res/tiles/tree.png");
-            File f5 = new File("./res/tiles/sand.png");
+            File f5 = new File("./res/tiles/wood.png");  
+            File f6 = new File("./res/tiles/grass.png");  
+            File f7 = new File("./res/tiles/water.png");  
+            
 
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(f0);
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(f1);
-            tile[1].collison = true;
 
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(f2);
 
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(f3);
+            tile[3].collison = true;
 
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(f4);
@@ -84,6 +87,14 @@ public class TileManager {
 
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(f5);
+
+            tile[6] = new Tile();
+            tile[6].image = ImageIO.read(f6);
+
+            tile[7] = new Tile();
+            tile[7].image = ImageIO.read(f7);
+            tile[7].collison = true;
+
         } catch (IOException e) {
             e.printStackTrace();
         }

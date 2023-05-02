@@ -8,7 +8,7 @@ public class MyGame {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Killian's Adventure");
+        window.setTitle("Road to HUST");
         
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);

@@ -24,9 +24,13 @@ public class SuperObject {
         int screenX = gp.player.screenX + playerToObjX;
         int screenY = gp.player.screenY + playerToObjY;
 
+        int drawSize = gp.tileSize / 2;
+        if (name == "Door" || name == "Chest" || name == "Backpack")
+            drawSize *= 2;
+
         if (Math.abs(playerToObjX) < gp.player.screenX + gp.tileSize &&
                 Math.abs(playerToObjY) < gp.player.screenY + gp.tileSize)
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(image, screenX, screenY, drawSize, drawSize, null);
     }
 
 }
