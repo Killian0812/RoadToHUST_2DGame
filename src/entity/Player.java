@@ -126,13 +126,19 @@ public class Player extends Entity {
                 case "Key":
                     gp.obj[index] = null;
                     keyCount++;
+                    gp.playSE(1);
                     break;
                 case "Door":
                     if (keyCount > 0) {
                         keyCount--;
                         gp.obj[index] = null;
+                        gp.playSE(4);
                     }
                     break;
+                case "Boots":
+                    speed += 2;
+                    gp.obj[index] = null;
+                    gp.playSE(3);
             }
         }
     }
