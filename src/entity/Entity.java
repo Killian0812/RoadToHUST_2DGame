@@ -37,7 +37,7 @@ public class Entity {
     }
 
     public void setAction() {
-///
+        ///
     }
 
     public void update() {
@@ -64,6 +64,12 @@ public class Entity {
                     worldX += speed;
                     break;
             }
+
+        spriteCounter++;
+        if (spriteCounter > 13) {
+            spriteNum = 3 - spriteNum;
+            spriteCounter = 0;
+        }
 
     }
 

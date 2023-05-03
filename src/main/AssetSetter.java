@@ -53,5 +53,15 @@ public class AssetSetter {
         gp.npc[0] = new NPC_OldMan(gp);
         gp.npc[0].worldX = gp.tileSize * 49;
         gp.npc[0].worldY = gp.tileSize * 8;
+
+        gp.npc[1] = new NPC_HustGirl(gp);
+        gp.npc[1].direction = "up";
+        gp.npc[1].worldX = gp.tileSize * 58;
+        gp.npc[1].worldY = gp.tileSize * 8;
+
+        gp.npc[2] = new NPC_HustGirl(gp);
+        gp.npc[2].direction = "left";
+        gp.npc[2].worldX = gp.tileSize * 53;
+        gp.npc[2].worldY = gp.tileSize * 8;
     }
 }
