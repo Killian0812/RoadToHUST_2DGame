@@ -27,6 +27,8 @@ public class Player extends Entity {
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
+        super(gp);
+
         this.gp = gp;
         this.keyH = keyH;
 
@@ -54,18 +56,19 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
 
-            up1 = setup("up_1");
-            up2 = setup("up_2");
-            down1 = setup("down_1");
-            down2 = setup("down_2");
-            left1 = setup("left_1");
-            left2 = setup("left_2");
-            right1 = setup("right_1");
-            right2 = setup("right_2");
+        up1 = setup("up_1");
+        up2 = setup("up_2");
+        down1 = setup("down_1");
+        down2 = setup("down_2");
+        left1 = setup("left_1");
+        left2 = setup("left_2");
+        right1 = setup("right_1");
+        right2 = setup("right_2");
 
     }
 
     public BufferedImage setup(String imageName) {
+
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
@@ -98,12 +101,17 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
 
-            /// Check collision
+            /// Check tile collision
             collisionOn = false;
-            gp.cChecker.checkTile(this);
+            gp.cChecker.checkTile(this, true);
 
+            /// Check object collision & interact
             int objIndex = gp.cChecker.checkObject(this, true);
             objectInteraction(objIndex);
+
+            /// Check npc collision & interact
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            npcInteraction(npcIndex);
 
             if (collisionOn == false)
                 switch (direction) {
@@ -186,6 +194,13 @@ public class Player extends Entity {
                         gp.ui.showMsg("You need a backpack!");
                     break;
             }
+        }
+    }
+
+    public void npcInteraction(int index) {
+
+        if (index != 999) {
+///
         }
     }
 

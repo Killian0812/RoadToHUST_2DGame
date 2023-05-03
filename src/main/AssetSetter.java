@@ -1,5 +1,6 @@
 package main;
 
+import entity.*;
 import object.*;
 
 public class AssetSetter {
@@ -18,7 +19,7 @@ public class AssetSetter {
         gp.obj[1] = new OBJ_Key(gp);
         gp.obj[1].worldX = gp.tileSize * 91;
         gp.obj[1].worldY = gp.tileSize * 7;
- 
+
         gp.obj[2] = new OBJ_StudentID(gp);
         gp.obj[2].worldX = gp.tileSize * 50;
         gp.obj[2].worldY = gp.tileSize * 11;
@@ -46,9 +47,11 @@ public class AssetSetter {
         gp.obj[8] = new OBJ_Door(gp);
         gp.obj[8].worldX = gp.tileSize * 97;
         gp.obj[8].worldY = gp.tileSize * 21;
+    }
 
-        // gp.obj[9] = new OBJ_Chest();
-        // gp.obj[9].worldX = gp.tileSize * 24;
-        // gp.obj[9].worldY = gp.tileSize * 48;
+    public void setNPC() {
+        gp.npc[0] = new NPC_OldMan(gp);
+        gp.npc[0].worldX = gp.tileSize * 49;
+        gp.npc[0].worldY = gp.tileSize * 8;
     }
 }
