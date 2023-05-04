@@ -1,23 +1,44 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 public class Player extends Entity {
 
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int screenX;
+    public final int screenY;
+
+    public int keyCount = 0;
+    public boolean hasPencil = false;
+    public boolean hasID = false;
+    public boolean hasBook = false;
+    public boolean hasBackpack = false;
+
     public Player(GamePanel gp, KeyHandler keyH) {
+
+        super(gp);
+
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screenWidth / 2 - gp.tileSize / 2;
+        screenY = gp.screenHeight / 2 - gp.tileSize / 2;
+
+        solidArea = new Rectangle(8, 20, gp.tileSize / 2, gp.tileSize / 2);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
         setDefaultValues();
         try {
             getPlayerImage();
@@ -27,70 +48,171 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldX = gp.tileSize * 50;
+        worldY = gp.tileSize * 8;
         speed = 4;
         direction = "down1";
     }
 
     public void getPlayerImage() {
+
+        up1 = setup("up_1");
+        up2 = setup("up_2");
+        down1 = setup("down_1");
+        down2 = setup("down_2");
+        left1 = setup("left_1");
+        left2 = setup("left_2");
+        right1 = setup("right_1");
+        right2 = setup("right_2");
+
+    }
+
+    public BufferedImage setup(String imageName) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
         try {
 
-            File f1 = new File("./res/player/boy_up_1.png");
-            File f2 = new File("./res/player/boy_up_2.png");
-            File f3 = new File("./res/player/boy_down_1.png");
-            File f4 = new File("./res/player/boy_down_2.png");
-            File f5 = new File("./res/player/boy_left_1.png");
-            File f6 = new File("./res/player/boy_left_2.png");
-            File f7 = new File("./res/player/boy_right_1.png");
-            File f8 = new File("./res/player/boy_right_2.png");
-            up1 = ImageIO.read(f1);
-            up2 = ImageIO.read(f2);
-            down1 = ImageIO.read(f3);
-            down2 = ImageIO.read(f4);
-            left1 = ImageIO.read(f5);
-            left2 = ImageIO.read(f6);
-            right1 = ImageIO.read(f7);
-            right2 = ImageIO.read(f8);
+            File f = null;
+            f = new File("./res/player/hust_boy/hust_boy_" + imageName + ".png");
+            if (gp.playerGender == 1)
+                f = new File("./res/player/hust_girl/hust_girl_" + imageName + ".png");
+            image = ImageIO.read(f);
+            image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return image;
     }
 
     public void update() {
 
         if (keyH.downPressed == true || keyH.upPressed == true || keyH.leftPressed == true
-                || keyH.rightPressed == true) {
-            if (keyH.upPressed == true) {
+                || keyH.rightPressed == true || keyH.enterPressed == true) {
+
+            if (keyH.upPressed == true)
                 direction = "up";
-                y -= speed;
-            }
-            if (keyH.downPressed == true) {
+            if (keyH.downPressed == true)
                 direction = "down";
-                y += speed;
-            }
-            if (keyH.rightPressed == true) {
+            if (keyH.rightPressed == true)
                 direction = "right";
-                x += speed;
-            }
-            if (keyH.leftPressed == true) {
+            if (keyH.leftPressed == true)
                 direction = "left";
-                x -= speed;
-            }
+
             spriteCounter++;
-            if (spriteCounter > 12) {
+            if (spriteCounter > 13) {
                 spriteNum = 3 - spriteNum;
                 spriteCounter = 0;
+            }
+
+            /// Check tile collision
+            collisionOn = false;
+            gp.cChecker.checkTile(this, true);
+
+            /// Check object collision & interact
+            int objIndex = gp.cChecker.checkObject(this, true);
+            objectInteraction(objIndex);
+
+            /// Check npc collision & interact
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            npcInteraction(npcIndex);
+
+            if (collisionOn == false && keyH.enterPressed == false)
+                switch (direction) {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                }
+
+        }
+    }
+
+    public void objectInteraction(int index) {
+        if (index != 999) {
+            String objectName = gp.obj[index].name;
+            switch (objectName) {
+                case "Key":
+                    gp.obj[index] = null;
+                    keyCount++;
+                    gp.playSE(1);
+                    gp.ui.showMsg("You've got a key!");
+                    break;
+                case "Door":
+                    if (keyCount > 0) {
+                        keyCount--;
+                        gp.obj[index] = null;
+                        gp.playSE(4);
+                        gp.ui.showMsg("You've opened the door!");
+                    } else {
+                        gp.ui.showMsg("You need a key!");
+                    }
+                    break;
+                case "Boots":
+                    speed += 2;
+                    gp.obj[index] = null;
+                    gp.playSE(3);
+                    gp.ui.showMsg("Speed up!");
+                    break;
+                case "Backpack":
+                    gp.obj[index] = null;
+                    gp.playSE(1);
+                    gp.ui.showMsg("You've got a backpack!");
+                    hasBackpack = true;
+                    break;
+                case "Book":
+                    if (hasBackpack == true) {
+                        gp.obj[index] = null;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've got a book!");
+                        hasBook = true;
+                    } else
+                        gp.ui.showMsg("You need a backpack!");
+                    break;
+                case "StudentID":
+                    if (hasBackpack == true) {
+                        gp.obj[index] = null;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've got a student ID!");
+                        hasID = true;
+                    } else
+                        gp.ui.showMsg("You need a backpack!");
+                    break;
+                case "Pencil":
+                    if (hasBackpack == true) {
+                        gp.obj[index] = null;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've got a pencil!");
+                        hasPencil = true;
+                    } else
+                        gp.ui.showMsg("You need a backpack!");
+                    break;
+            }
+        }
+    }
+
+    public void npcInteraction(int index) {
+
+        if (index != 999) {
+            if (gp.keyH.enterPressed == true) {
+                gp.gameState = gp.dialogueState;
+                gp.npc[index].speak();
             }
         }
     }
 
     public void draw(Graphics2D g2) {
 
-        // g2.setColor(Color.white);
-        // g2.fillRect(x, y, gp.tileSize, gp.tileSize);
         BufferedImage image = down1;
         switch (direction) {
             case "up":
@@ -117,7 +239,7 @@ public class Player extends Entity {
                 if (spriteNum == 2)
                     image = left2;
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
     }
 }
