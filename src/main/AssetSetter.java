@@ -54,14 +54,31 @@ public class AssetSetter {
         gp.npc[0].worldX = gp.tileSize * 49;
         gp.npc[0].worldY = gp.tileSize * 8;
 
-        gp.npc[1] = new NPC_HustGirl(gp);
+        gp.npc[1] = new NPC_HustBoy(gp);
         gp.npc[1].direction = "up";
         gp.npc[1].worldX = gp.tileSize * 58;
         gp.npc[1].worldY = gp.tileSize * 8;
 
-        gp.npc[2] = new NPC_HustGirl(gp);
+        gp.npc[2] = new NPC_HustBoy(gp);
         gp.npc[2].direction = "left";
         gp.npc[2].worldX = gp.tileSize * 53;
         gp.npc[2].worldY = gp.tileSize * 8;
+
+        gp.npc[3] = new NPC_HustGirl(gp);
+        gp.npc[3].worldX = gp.tileSize * 36;
+        gp.npc[3].worldY = gp.tileSize * 8;
+
+        gp.npc[4] = new NPC_HustGirl(gp);
+        gp.npc[4].worldX = gp.tileSize * 26;
+        gp.npc[4].worldY = gp.tileSize * 30;
+        
+        gp.npc[5] = new NPC_HustGirl(gp);
+        gp.npc[5].worldX = gp.tileSize * 63;
+        gp.npc[5].worldY = gp.tileSize * 26;
+
+        gp.npc[6] = new NPC_HustBoy(gp);
+        gp.npc[6].direction = "left";
+        gp.npc[6].worldX = gp.tileSize * 64;
+        gp.npc[6].worldY = gp.tileSize * 25;
     }
 }

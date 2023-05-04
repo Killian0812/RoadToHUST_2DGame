@@ -47,6 +47,7 @@ public class Entity {
         collisionOn = false;
         gp.cChecker.checkTile(this, false);
         gp.cChecker.checkObject(this, false);
+        gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkPlayer(this);
 
         if (collisionOn == false)

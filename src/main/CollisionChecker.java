@@ -138,7 +138,7 @@ public class CollisionChecker {
 
         int index = 999;
         for (int i = 0; i < target.length; i++) {
-            if (target[i] == null)
+            if (target[i] == null || target[i] == entity)
                 continue;
 
             entity.solidArea.x = entity.worldX + entity.solidArea.x;

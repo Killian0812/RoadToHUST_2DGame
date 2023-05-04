@@ -19,7 +19,7 @@ public class UI {
     Graphics2D g2;
     GamePanel gp;
 
-    Font arial_25, arial_80B;
+    Font arial_25, arial_80B, cambria_80;
 
     BufferedImage keyImage, studentIDImage, bookImage, pencilImage;
     public boolean messageOn = false;
@@ -35,6 +35,7 @@ public class UI {
         this.gp = gp;
         arial_25 = new Font("Arial", Font.PLAIN, 25);
         arial_80B = new Font("Arial", Font.BOLD, 80);
+        cambria_80 = new Font("Cambria", Font.BOLD, 80);
         OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
         OBJ_StudentID studentID = new OBJ_StudentID(gp);
@@ -143,14 +144,14 @@ public class UI {
         }
 
         if (gp.tCount <= 30)
-            g2.drawImage(gp.player.down1, 80, 300, gp.tileSize * 4, gp.tileSize * 4, null);
+            g2.drawImage(gp.player.down1, 70, 300, gp.tileSize * 4, gp.tileSize * 4, null);
         else {
-            g2.drawImage(gp.player.down2, 80, 300, gp.tileSize * 4, gp.tileSize * 4, null);
+            g2.drawImage(gp.player.down2, 70, 300, gp.tileSize * 4, gp.tileSize * 4, null);
             if (gp.tCount == 60)
                 gp.tCount = 0;
         }
 
-        g2.setFont(arial_80B);
+        g2.setFont(cambria_80);
         g2.setColor(Color.red);
         g2.setFont(g2.getFont().deriveFont(48f));
 
@@ -189,7 +190,7 @@ public class UI {
             }
         } else if (titleScreenState == 1) {
 
-            g2.setFont(arial_80B);
+            g2.setFont(cambria_80);
             g2.setFont(g2.getFont().deriveFont(30f));
             text = "CHOOSE YOUR GENDER: ";
             x = gp.screenWidth / 2 - gp.tileSize;
