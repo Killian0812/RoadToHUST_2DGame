@@ -6,8 +6,6 @@ import main.GamePanel;
 
 public class NPC_HustGirl extends Entity {
 
-    GamePanel gp;
-
     public NPC_HustGirl(GamePanel gp) {
 
         super(gp);

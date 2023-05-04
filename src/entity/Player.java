@@ -90,7 +90,8 @@ public class Player extends Entity {
     public void update() {
 
         if (keyH.downPressed == true || keyH.upPressed == true || keyH.leftPressed == true
-                || keyH.rightPressed == true) {
+                || keyH.rightPressed == true || keyH.enterPressed == true) {
+
             if (keyH.upPressed == true)
                 direction = "up";
             if (keyH.downPressed == true)
@@ -118,7 +119,7 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             npcInteraction(npcIndex);
 
-            if (collisionOn == false)
+            if (collisionOn == false && keyH.enterPressed == false)
                 switch (direction) {
                     case "up":
                         worldY -= speed;
@@ -163,11 +164,6 @@ public class Player extends Entity {
                     gp.playSE(3);
                     gp.ui.showMsg("Speed up!");
                     break;
-                // case "Chest":
-                // gp.ui.gameFinished = true;
-                // gp.stopMusic();
-                // gp.playSE(2);
-                // break;
                 case "Backpack":
                     gp.obj[index] = null;
                     gp.playSE(1);
@@ -184,10 +180,13 @@ public class Player extends Entity {
                         gp.ui.showMsg("You need a backpack!");
                     break;
                 case "StudentID":
-                    gp.obj[index] = null;
-                    gp.playSE(1);
-                    gp.ui.showMsg("You've got a student ID!");
-                    hasID = true;
+                    if (hasBackpack == true) {
+                        gp.obj[index] = null;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've got a student ID!");
+                        hasID = true;
+                    } else
+                        gp.ui.showMsg("You need a backpack!");
                     break;
                 case "Pencil":
                     if (hasBackpack == true) {
@@ -205,7 +204,10 @@ public class Player extends Entity {
     public void npcInteraction(int index) {
 
         if (index != 999) {
-            ///
+            if (gp.keyH.enterPressed == true) {
+                gp.gameState = gp.dialogueState;
+                gp.npc[index].speak();
+            }
         }
     }
 

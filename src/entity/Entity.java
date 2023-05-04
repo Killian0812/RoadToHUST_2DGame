@@ -31,13 +31,51 @@ public class Entity {
 
     public int actionLockCounter = 0;
 
+    public String dialogues0[] = new String[20];
+    public String dialogues1[] = new String[20];
+    public int dialogueIndex = 0;
+
     public Entity(GamePanel gp) {
         this.gp = gp;
         this.solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
     }
 
+    public void speak() {
+
+        if (gp.playerGender == 0) {
+            gp.ui.currentDialogue = dialogues0[dialogueIndex];
+            if (dialogues0[dialogueIndex + 1] != null)
+                dialogueIndex++;
+        } else {
+            gp.ui.currentDialogue = dialogues1[dialogueIndex];
+            if (dialogues1[dialogueIndex + 1] != null)
+                dialogueIndex++;
+        }
+
+        switch (gp.player.direction) {
+            case "up":
+                direction = "down";
+                break;
+            case "down":
+                direction = "up";
+                break;
+            case "left":
+                direction = "right";
+                break;
+            case "right":
+                direction = "left";
+        }
+    }
+
     public void setAction() {
         ///
+    }
+
+    public void setDialogue(String textForBoy[], String textForGirl[]) {
+        for (int i = 0; i < textForBoy.length; i++)
+            dialogues0[i] = textForBoy[i];
+        for (int i = 0; i < textForGirl.length; i++)
+            dialogues1[i] = textForGirl[i];
     }
 
     public void update() {

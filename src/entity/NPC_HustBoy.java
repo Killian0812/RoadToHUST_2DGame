@@ -6,8 +6,6 @@ import main.GamePanel;
 
 public class NPC_HustBoy extends Entity {
 
-    GamePanel gp;
-
     public NPC_HustBoy(GamePanel gp) {
 
         super(gp);
@@ -48,5 +46,4 @@ public class NPC_HustBoy extends Entity {
             actionLockCounter = 0;
         }
     }
-
 }

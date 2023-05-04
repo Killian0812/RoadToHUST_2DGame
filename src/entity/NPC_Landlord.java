@@ -4,11 +4,9 @@ import java.util.Random;
 
 import main.GamePanel;
 
-public class NPC_OldMan extends Entity {
+public class NPC_Landlord extends Entity {
 
-    GamePanel gp;
-
-    public NPC_OldMan(GamePanel gp) {
+    public NPC_Landlord(GamePanel gp) {
 
         super(gp);
         direction = "down";
@@ -19,14 +17,14 @@ public class NPC_OldMan extends Entity {
 
     public void getImage() {
 
-        up1 = setup("./res/npc/oldman/oldman_up_1");
-        up2 = setup("./res/npc/oldman/oldman_up_2");
-        down1 = setup("./res/npc/oldman/oldman_down_1");
-        down2 = setup("./res/npc/oldman/oldman_down_2");
-        left1 = setup("./res/npc/oldman/oldman_left_1");
-        left2 = setup("./res/npc/oldman/oldman_left_2");
-        right1 = setup("./res/npc/oldman/oldman_right_1");
-        right2 = setup("./res/npc/oldman/oldman_right_2");
+        up1 = setup("./res/npc/landlord/landlord_up_1");
+        up2 = setup("./res/npc/landlord/landlord_up_2");
+        down1 = setup("./res/npc/landlord/landlord_down_1");
+        down2 = setup("./res/npc/landlord/landlord_down_2");
+        left1 = setup("./res/npc/landlord/landlord_left_1");
+        left2 = setup("./res/npc/landlord/landlord_left_2");
+        right1 = setup("./res/npc/landlord/landlord_right_1");
+        right2 = setup("./res/npc/landlord/landlord_right_2");
 
     }
 

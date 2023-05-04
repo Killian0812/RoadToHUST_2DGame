@@ -28,8 +28,10 @@ public class SuperObject {
         int screenY = gp.player.screenY + playerToObjY;
 
         int drawSize = gp.tileSize / 2;
-        if (name == "Door" || name == "Chest" || name == "Backpack")
+        if (name == "Door" || name == "Chest")
             drawSize *= 2;
+        if (name == "Backpack")
+            drawSize += 15;
 
         if (Math.abs(playerToObjX) < gp.player.screenX + gp.tileSize &&
                 Math.abs(playerToObjY) < gp.player.screenY + gp.tileSize)

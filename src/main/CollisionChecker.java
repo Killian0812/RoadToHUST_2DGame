@@ -34,7 +34,12 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 if (isPlayer == true)
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        gp.ui.gameFinished = true;
+                        if (gp.player.hasID == true)
+                            gp.ui.gameFinished = true;
+                        else {
+                            gp.ui.showMsg("You don't have a student ID");
+                            gp.player.worldY += gp.player.speed;
+                        }
                 break;
             case "down":
                 entityBottomRow = (entityBottomY + entity.speed) / gp.tileSize;
@@ -44,7 +49,12 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 if (isPlayer == true)
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        gp.ui.gameFinished = true;
+                        if (gp.player.hasID == true)
+                            gp.ui.gameFinished = true;
+                        else {
+                            gp.ui.showMsg("You don't have a student ID");
+                            gp.player.worldY -= gp.player.speed;
+                        }
                 break;
             case "left":
                 entityLeftCol = (entityLeftX - entity.speed) / gp.tileSize;
@@ -54,7 +64,12 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 if (isPlayer == true)
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        gp.ui.gameFinished = true;
+                        if (gp.player.hasID == true)
+                            gp.ui.gameFinished = true;
+                        else {
+                            gp.ui.showMsg("You don't have a student ID");
+                            gp.player.worldX += gp.player.speed;
+                        }
                 break;
             case "right":
                 entityRightCol = (entityRightX + entity.speed) / gp.tileSize;
@@ -64,7 +79,12 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 if (isPlayer == true)
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        gp.ui.gameFinished = true;
+                        if (gp.player.hasID == true)
+                            gp.ui.gameFinished = true;
+                        else {
+                            gp.ui.showMsg("You don't have a student ID");
+                            gp.player.worldX -= gp.player.speed;
+                        }
         }
 
     }
@@ -88,7 +108,7 @@ public class CollisionChecker {
                     if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
                         if (gp.obj[i].collision == true)
                             entity.collisionOn = true;
-                        if (isPlayer == true)
+                        if (isPlayer == true && gp.keyH.enterPressed == true)
                             index = i;
                     }
                     break;
@@ -98,7 +118,7 @@ public class CollisionChecker {
                     if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
                         if (gp.obj[i].collision == true)
                             entity.collisionOn = true;
-                        if (isPlayer == true)
+                        if (isPlayer == true && gp.keyH.enterPressed == true)
                             index = i;
                     }
                     break;
@@ -108,7 +128,7 @@ public class CollisionChecker {
                     if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
                         if (gp.obj[i].collision == true)
                             entity.collisionOn = true;
-                        if (isPlayer == true)
+                        if (isPlayer == true && gp.keyH.enterPressed == true)
                             index = i;
                     }
                     break;
@@ -119,7 +139,7 @@ public class CollisionChecker {
                     if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
                         if (gp.obj[i].collision == true)
                             entity.collisionOn = true;
-                        if (isPlayer == true)
+                        if (isPlayer == true && gp.keyH.enterPressed == true)
                             index = i;
                     }
                     break;
@@ -234,6 +254,6 @@ public class CollisionChecker {
         entity.solidArea.y = entity.solidAreaDefaultY;
         gp.player.solidArea.x = gp.player.solidAreaDefaultX;
         gp.player.solidArea.y = gp.player.solidAreaDefaultY;
-        
+
     }
 }
