@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.text.DecimalFormat;
 
-import object.OBJ_Book;
-import object.OBJ_Key;
-import object.OBJ_Pencil;
-import object.OBJ_StudentID;
+import javax.imageio.ImageIO;
+
+import object.*;
 
 public class UI {
 
@@ -17,15 +17,19 @@ public class UI {
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
     Graphics2D g2;
-
     GamePanel gp;
+
     Font arial_25, arial_80B;
 
     BufferedImage keyImage, studentIDImage, bookImage, pencilImage;
     public boolean messageOn = false;
     public String message = "";
     int msgCount = 0;
+
     public boolean gameFinished = false;
+
+    public int commandNum = 0;
+    public int titleScreenState = 0;
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -49,9 +53,6 @@ public class UI {
     public void draw(Graphics2D g2) {
 
         this.g2 = g2;
-
-        g2.setFont(arial_25);
-        g2.setColor(Color.white);
 
         if (gp.gameState == gp.playState) {
             if (gameFinished == true) {
@@ -121,11 +122,115 @@ public class UI {
         if (gp.gameState == gp.pauseState) {
             drawPauseScreen();
         }
+
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+        }
+    }
+
+    public void drawTitleScreen() {
+
+        g2.setColor(Color.white);
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        try {
+            File f = new File("./res/title/title.png");
+            BufferedImage image = null;
+            image = ImageIO.read(f);
+            g2.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight / 2 - 50, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (gp.tCount <= 30)
+            g2.drawImage(gp.player.down1, 80, 300, gp.tileSize * 4, gp.tileSize * 4, null);
+        else {
+            g2.drawImage(gp.player.down2, 80, 300, gp.tileSize * 4, gp.tileSize * 4, null);
+            if (gp.tCount == 60)
+                gp.tCount = 0;
+        }
+
+        g2.setFont(arial_80B);
+        g2.setColor(Color.red);
+        g2.setFont(g2.getFont().deriveFont(48f));
+
+        String text;
+        int x, y;
+
+        if (titleScreenState == 0) {
+
+            text = "NEW GAME";
+            x = gp.screenWidth / 2;
+            y = gp.screenHeight / 2 + gp.tileSize;
+            g2.drawString(text, x, y);
+
+            if (commandNum == 0) {
+                g2.drawImage(gp.player.right1, x - gp.tileSize - 10, y - gp.tileSize + 10, gp.tileSize,
+                        gp.tileSize - 10,
+                        null);
+            }
+
+            text = "LOAD GAME";
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawImage(gp.player.right1, x - gp.tileSize - 10, y - gp.tileSize + 10, gp.tileSize,
+                        gp.tileSize - 10,
+                        null);
+            }
+
+            text = "QUIT";
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.drawImage(gp.player.right1, x - gp.tileSize - 10, y - gp.tileSize + 10, gp.tileSize,
+                        gp.tileSize - 10,
+                        null);
+            }
+        } else if (titleScreenState == 1) {
+
+            g2.setFont(arial_80B);
+            g2.setFont(g2.getFont().deriveFont(30f));
+            text = "CHOOSE YOUR GENDER: ";
+            x = gp.screenWidth / 2 - gp.tileSize;
+            y = gp.screenHeight / 2 + gp.tileSize;
+            g2.drawString(text, x, y);
+
+            text = "MALE";
+            x = gp.screenWidth / 2;
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawImage(gp.player.right1, x - gp.tileSize - 10, y - gp.tileSize + 10, gp.tileSize,
+                        gp.tileSize - 10,
+                        null);
+            }
+
+            text = "FEMALE";
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawImage(gp.player.right1, x - gp.tileSize - 10, y - gp.tileSize + 10, gp.tileSize,
+                        gp.tileSize - 10,
+                        null);
+            }
+
+            text = "BACK";
+            x = gp.screenWidth / 2 - gp.tileSize / 2;
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.drawImage(gp.player.right1, x - gp.tileSize - 10, y - gp.tileSize + 10, gp.tileSize,
+                        gp.tileSize - 10,
+                        null);
+            }
+        }
     }
 
     public void drawPauseScreen() {
 
         g2.setFont(arial_80B);
+        g2.setColor(Color.white);
         String text = "PAUSED";
         int x = getXforCenteredText(text);
         int y = gp.screenHeight / 2;

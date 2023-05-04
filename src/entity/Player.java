@@ -73,9 +73,14 @@ public class Player extends Entity {
         BufferedImage image = null;
 
         try {
-            File f = new File("./res/player/hust_boy/hust_boy_" + imageName + ".png");
+
+            File f = null;
+            f = new File("./res/player/hust_boy/hust_boy_" + imageName + ".png");
+            if (gp.playerGender == 1)
+                f = new File("./res/player/hust_girl/hust_girl_" + imageName + ".png");
             image = ImageIO.read(f);
             image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -200,7 +205,7 @@ public class Player extends Entity {
     public void npcInteraction(int index) {
 
         if (index != 999) {
-///
+            ///
         }
     }
 
