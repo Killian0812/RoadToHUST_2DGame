@@ -26,6 +26,8 @@ public class Entity {
 
     public boolean collisionOn = false;
 
+    public boolean isCar = false;
+
     public Rectangle solidArea;
     public int solidAreaDefaultX, solidAreaDefaultY;
 
@@ -73,11 +75,7 @@ public class Entity {
 
     public void setDialogue(String textForBoy[], String textForGirl[]) {
         dialogues0 = textForBoy;
-        // for (int i = 0; i < textForBoy.length; i++)
-        // dialogues0[i] = textForBoy[i];
         dialogues1 = textForGirl;
-        // for (int i = 0; i < textForGirl.length; i++)
-        // dialogues1[i] = textForGirl[i];
     }
 
     public void update() {
@@ -165,7 +163,11 @@ public class Entity {
                     if (spriteNum == 2)
                         image = left2;
             }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        if (isCar == false)
+            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        else
+            g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize + 20, null);
+
     }
 
 }

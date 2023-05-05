@@ -104,5 +104,11 @@ public class AssetSetter {
         gp.npc[6].worldX = gp.tileSize * 64;
         gp.npc[6].worldY = gp.tileSize * 25;
         gp.npc[6].setDialogue(text6, text66);
+
+        gp.npc[7] = new NPC_Car(gp);
+        gp.npc[7].direction = "left";
+        gp.npc[7].worldX = gp.tileSize * 72;
+        gp.npc[7].worldY = gp.tileSize * 22;
+        
     }
 }
