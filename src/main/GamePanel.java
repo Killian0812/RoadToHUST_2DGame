@@ -109,14 +109,20 @@ public class GamePanel extends JPanel implements Runnable {
 
             player.update();
 
-            for (int i = 0; i < npc.length; i++)
-                if (npc[i] != null)
+            for (int i = 0; i < npc.length; i++) {
+                if (npc[i] != null) {
+                    if (i == 4 && player.hasID == true) {
+                        String text44[] = { "Nhanh đi học đi" };
+                        npc[i].setDialogue(text44, text44);
+                        npc[i].dialogueIndex = 0;
+                    }
                     npc[i].update();
-
+                }
+            }
         }
         if (gameState == pauseState) {
-        }
 
+        }
     }
 
     public void paintComponent(Graphics g) {

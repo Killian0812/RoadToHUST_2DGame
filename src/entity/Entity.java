@@ -44,11 +44,11 @@ public class Entity {
 
         if (gp.playerGender == 0) {
             gp.ui.currentDialogue = dialogues0[dialogueIndex];
-            if (dialogues0[dialogueIndex + 1] != null)
+            if (dialogueIndex + 1 < dialogues0.length)
                 dialogueIndex++;
         } else {
             gp.ui.currentDialogue = dialogues1[dialogueIndex];
-            if (dialogues1[dialogueIndex + 1] != null)
+            if (dialogueIndex + 1 < dialogues1.length)
                 dialogueIndex++;
         }
 
@@ -72,10 +72,12 @@ public class Entity {
     }
 
     public void setDialogue(String textForBoy[], String textForGirl[]) {
-        for (int i = 0; i < textForBoy.length; i++)
-            dialogues0[i] = textForBoy[i];
-        for (int i = 0; i < textForGirl.length; i++)
-            dialogues1[i] = textForGirl[i];
+        dialogues0 = textForBoy;
+        // for (int i = 0; i < textForBoy.length; i++)
+        // dialogues0[i] = textForBoy[i];
+        dialogues1 = textForGirl;
+        // for (int i = 0; i < textForGirl.length; i++)
+        // dialogues1[i] = textForGirl[i];
     }
 
     public void update() {

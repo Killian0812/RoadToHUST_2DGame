@@ -21,8 +21,8 @@ public class AssetSetter {
         gp.obj[1].worldY = gp.tileSize * 7;
 
         gp.obj[2] = new OBJ_StudentID(gp);
-        gp.obj[2].worldX = gp.tileSize * 79;
-        gp.obj[2].worldY = gp.tileSize * 41;
+        gp.obj[2].worldX = gp.tileSize * 82;
+        gp.obj[2].worldY = gp.tileSize * 44;
 
         gp.obj[3] = new OBJ_Backpack(gp);
         gp.obj[3].worldX = gp.tileSize * 65;
