@@ -109,6 +109,32 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.playState;
         }
 
+        else if (gp.gameState == gp.gameOverState) {
+            if (code == KeyEvent.VK_W) {
+                gp.ui.commandNum--;
+                if (gp.ui.commandNum == -1)
+                    gp.ui.commandNum = 1;
+            }
+            if (code == KeyEvent.VK_S) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum == 2)
+                    gp.ui.commandNum = 0;
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if (gp.ui.commandNum == 0) {
+                    gp.ui.playTime = 0.0;
+                    gp.setupGame();
+                    gp.gameState = gp.playState;
+                    gp.player.setDefaultValues();
+                }
+                if (gp.ui.commandNum == 1) {
+                    System.exit(0);
+                }
+            }
+            if (code == KeyEvent.VK_P)
+                gp.gameState = gp.playState;
+        }
+
         /// Dialogue state
         else if (gp.gameState == gp.dialogueState) {
             if (code == KeyEvent.VK_ENTER)

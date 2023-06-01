@@ -84,10 +84,13 @@ public class AssetSetter {
         gp.npc[3].setDialogue(text3, text33);
 
         String text4[] = { "Cậu bị rơi thẻ sinh viên à?",
-                "Hình như có một cái bị rơi ở hồ nước /n Cậu ra đó thử xem" };
-        gp.npc[4] = new NPC_HustGirl(gp);
-        gp.npc[4].worldX = gp.tileSize * 26;
-        gp.npc[4].worldY = gp.tileSize * 30;
+                "Hình như có một cái rơi ở hồ nước /n Cậu ra đó thử xem" };
+        gp.npc[4] = new NPC_HustBoy(gp);
+        gp.npc[4].worldX = gp.tileSize * 25;
+        gp.npc[4].worldY = gp.tileSize * 29;
+        // gp.npc[4] = new NPC_HustGirl(gp);
+        // gp.npc[4].worldX = gp.tileSize * 25;
+        // gp.npc[4].worldY = gp.tileSize * 29;
         gp.npc[4].setDialogue(text4, text4);
 
         String text5[] = { "Cậu đi theo tôi đấy à?", "Tránh xa tôi ra!" };
