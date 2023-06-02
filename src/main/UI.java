@@ -28,6 +28,7 @@ public class UI {
     int msgCount = 0;
 
     public boolean gameFinished = false;
+    public boolean isDead = false;
 
     public String currentDialogue = "";
 
@@ -302,25 +303,58 @@ public class UI {
 
     public void drawGameOverScreen() {
 
-        g2.setFont(arial_25);
-        g2.setFont(g2.getFont().deriveFont(40f));
-        g2.setColor(Color.white);
-        String text = "You are at HUST!";
-        int txtLength = (int) g2.getFontMetrics().getStringBounds(text,
-                g2).getWidth();
-        int x = gp.screenWidth / 2 - txtLength / 2;
-        int y = gp.screenHeight / 2 - gp.tileSize * 2;
-        g2.drawString(text, x, y);
+        String text;
+        int x, y, txtLength;
+        if (isDead == false) {
+            g2.setFont(arial_25);
+            g2.setFont(g2.getFont().deriveFont(40f));
+            g2.setColor(Color.white);
+            text = "You are at HUST!";
+            txtLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            x = gp.screenWidth / 2 - txtLength / 2;
+            y = gp.screenHeight / 2 - gp.tileSize * 2;
+            g2.drawString(text, x, y);
 
-        text = "Your time is: " + dFormat.format(playTime);
-        txtLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        x = gp.screenWidth / 2 - txtLength / 2;
-        y = gp.screenHeight / 2 - gp.tileSize;
-        g2.drawString(text, x, y);
+            text = "Your time is: " + dFormat.format(playTime);
+            txtLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            x = gp.screenWidth / 2 - txtLength / 2;
+            y = gp.screenHeight / 2 - gp.tileSize;
+            g2.drawString(text, x, y);
+
+            g2.setFont(arial_80B);
+            g2.setColor(Color.yellow);
+            text = "Congratulations!";
+            txtLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            x = gp.screenWidth / 2 - txtLength / 2;
+            y = gp.screenHeight / 2 - gp.tileSize * 3;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(40f));
+            g2.setColor(Color.white);
+
+            text = "RESTART";
+            x = getXforCenteredText(text);
+            y = gp.screenHeight / 2 + gp.tileSize * 2;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x - gp.tileSize - 5, y);
+            }
+            text = "QUIT";
+            x = getXforCenteredText(text);
+            y = gp.screenHeight / 2 + gp.tileSize * 3;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x - gp.tileSize - 5, y);
+            }
+
+            gp.stopMusic();
+            // gp.gameThread = null;
+            return;
+        }
 
         g2.setFont(arial_80B);
-        g2.setColor(Color.yellow);
-        text = "Congratulations!";
+        g2.setColor(Color.red);
+        text = "You're dead!";
         txtLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         x = gp.screenWidth / 2 - txtLength / 2;
         y = gp.screenHeight / 2 - gp.tileSize * 3;
@@ -343,10 +377,7 @@ public class UI {
         if (commandNum == 1) {
             g2.drawString(">", x - gp.tileSize - 5, y);
         }
-
         gp.stopMusic();
-        // gp.gameThread = null;
-        // return;
     }
 
     public int getXforCenteredText(String text) {

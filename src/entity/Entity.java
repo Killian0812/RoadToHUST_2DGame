@@ -37,6 +37,8 @@ public class Entity {
     public String dialogues1[] = new String[20];
     public int dialogueIndex = 0;
 
+    public boolean hitPlayer = false;    
+
     public Entity(GamePanel gp) {
         this.gp = gp;
         this.solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
@@ -86,7 +88,7 @@ public class Entity {
         gp.cChecker.checkTile(this, false);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
-        gp.cChecker.checkPlayer(this);
+        hitPlayer = gp.cChecker.checkPlayer(this);
 
         if (collisionOn == false)
             switch (direction) {
@@ -103,7 +105,7 @@ public class Entity {
                     worldX += speed;
                     break;
             }
-
+        
         spriteCounter++;
         if (spriteCounter > 13) {
             spriteNum = 3 - spriteNum;
