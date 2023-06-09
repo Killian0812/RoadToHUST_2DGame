@@ -121,14 +121,15 @@ public class GamePanel extends JPanel implements Runnable {
                         npc[i].dialogueIndex = 0;
                     }
                     npc[i].update();
-                    if (i == 7 && npc[i].hitPlayer == true)
+                    if (i == 7 && npc[i].hitPlayer == true) {
                         gameState = gameOverState;
                         ui.isDead = true;
+                    }
                 }
             }
-        }
-        if (gameState == pauseState) {
+            if (gameState == pauseState) {
 
+            }
         }
     }
 

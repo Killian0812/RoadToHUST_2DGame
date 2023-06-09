@@ -89,6 +89,10 @@ public class Entity {
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
         hitPlayer = gp.cChecker.checkPlayer(this);
+        if (hitPlayer == true)
+        {
+            
+        }
 
         if (collisionOn == false)
             switch (direction) {

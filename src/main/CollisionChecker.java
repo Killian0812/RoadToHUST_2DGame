@@ -1,5 +1,7 @@
 package main;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import entity.Entity;
 
 public class CollisionChecker {
@@ -218,11 +220,13 @@ public class CollisionChecker {
         gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
         gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
 
+        boolean flag = false;
         switch (entity.direction) {
             case "up": {
                 entity.solidArea.y -= entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
+                    flag = true;
                 }
                 break;
             }
@@ -230,6 +234,7 @@ public class CollisionChecker {
                 entity.solidArea.y += entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
+                    flag = true;
                 }
                 break;
             }
@@ -237,6 +242,7 @@ public class CollisionChecker {
                 entity.solidArea.x -= entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
+                    flag = true;
                 }
                 break;
             }
@@ -245,6 +251,7 @@ public class CollisionChecker {
                 entity.solidArea.x += entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
+                    flag = true;
                 }
                 break;
             }
@@ -255,6 +262,6 @@ public class CollisionChecker {
         gp.player.solidArea.x = gp.player.solidAreaDefaultX;
         gp.player.solidArea.y = gp.player.solidAreaDefaultY;
 
-        return entity.collisionOn;
+        return flag;
     }
 }

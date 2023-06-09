@@ -18,7 +18,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
 
         this.gp = gp;
-        tile = new Tile[15];
+        tile = new Tile[20];
         mapTileNum = new int[gp.maxWorldRow][gp.maxWorldCol];
 
         try {
@@ -62,14 +62,22 @@ public class TileManager {
         setup(1, "pathv", false, false);
         setup(2, "pathh", false, false);
         setup(3, "wall", true, false);
-        setup(4, "tree", true, false);
+        setup(4, "tree new", true, false);
         setup(5, "wood", false, false);
-        setup(6, "grass", false, false);
-        setup(7, "water", true, false);
-        setup(8, "h", false, true);
-        setup(9, "u", false, true);
-        setup(10, "s", false, true);
-        setup(11, "t", false, true);
+        setup(6, "grass new", false, false);
+        setup(7, "water new 10", true, false);
+        setup(8, "h new", false, true);
+        setup(9, "u new", false, true);
+        setup(10, "s new", false, true);
+        setup(11, "t new", false, true);
+        setup(12, "water new 2", true, false);
+        setup(13, "water new 3", true, false);
+        setup(14, "water new 4", true, false);
+        setup(15, "water new 9", true, false);
+        setup(16, "water new 5", true, false);
+        setup(17, "water new 8", true, false);
+        setup(18, "water new 6", true, false);
+        setup(19, "water new 7", true, false);
 
     }
 
