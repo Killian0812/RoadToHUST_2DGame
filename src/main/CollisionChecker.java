@@ -79,9 +79,9 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 if (isPlayer == true)
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        if (gp.player.hasID == true)
+                        if (gp.player.hasID == true) {
                             gp.gameState = gp.gameOverState;
-                        else {
+                        } else {
                             gp.ui.showMsg("You don't have a student ID");
                             gp.player.worldX -= gp.player.speed;
                         }

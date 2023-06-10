@@ -54,7 +54,13 @@ public class KeyHandler implements KeyListener {
                 }
                 if (code == KeyEvent.VK_ENTER) {
                     if (gp.ui.commandNum == 0) {
-                        gp.setupGame();
+                        gp.aSetter.setObj();
+                        gp.aSetter.setNPC();
+                        gp.playMusic(0);
+                        gp.ui.playTime = 0.0;
+                        gp.ui.isDead = false;
+                        gp.ui.gameFinished = false;
+                        gp.gameState = gp.titleState;
                         gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
                     }

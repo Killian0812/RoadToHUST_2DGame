@@ -21,7 +21,7 @@ public class Player extends Entity {
 
     public int keyCount = 0;
     public boolean hasPencil = false;
-    public boolean hasID = true;
+    public boolean hasID = false;
     public boolean hasBook = false;
     public boolean hasBackpack = false;
 
@@ -57,11 +57,12 @@ public class Player extends Entity {
         worldY = gp.tileSize * 26;
         // worldX = gp.tileSize * 25;
         // worldY = gp.tileSize * 25;
+        isDead = 0;
         speed = 4;
         direction = "down1";
         keyCount = 0;
         hasPencil = false;
-        hasID = false;
+        hasID = true;
         hasBook = false;
         hasBackpack = false;
     }
