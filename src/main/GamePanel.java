@@ -74,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setObj();
         aSetter.setNPC();
         ui.isDead = false;
+        player.isDead = 0;
         ui.gameFinished = false;
         playMusic(0);
         gameState = titleState;
@@ -122,6 +123,14 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                     npc[i].update();
                     if (i == 7 && npc[i].hitPlayer == true) {
+                        if (npc[i].direction == "left") {
+                            player.worldX -= tileSize / 2;
+                            player.isDead = 1;
+                        }
+                        if (npc[i].direction == "right") {
+                            player.worldX += tileSize / 2;
+                            player.isDead = 2;
+                        }
                         gameState = gameOverState;
                         ui.isDead = true;
                     }
@@ -172,8 +181,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void playMusic(int i) {
         music.setFile(i);
-        music.play();
-        music.loop();
+        // music.play();
+        // music.loop();
     }
 
     public void stopMusic() {
@@ -182,6 +191,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void playSE(int i) {
         se.setFile(i);
-        se.play();
+        // se.play();
     }
 }

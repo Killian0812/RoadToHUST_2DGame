@@ -53,8 +53,11 @@ public class KeyHandler implements KeyListener {
                         gp.ui.commandNum = 0;
                 }
                 if (code == KeyEvent.VK_ENTER) {
-                    if (gp.ui.commandNum == 0)
+                    if (gp.ui.commandNum == 0) {
+                        gp.setupGame();
+                        gp.player.setDefaultValues();
                         gp.gameState = gp.playState;
+                    }
                     if (gp.ui.commandNum == 1) {
                         gp.playerGender = 1;
                         gp.player = new Player(gp, this);
@@ -124,11 +127,13 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum == 0) {
                     gp.ui.playTime = 0.0;
                     gp.setupGame();
-                    gp.gameState = gp.playState;
                     gp.player.setDefaultValues();
+                    gp.gameState = gp.playState;
                 }
                 if (gp.ui.commandNum == 1) {
-                    System.exit(0);
+                    gp.ui.titleScreenState = 0;
+                    gp.ui.commandNum = 0;
+                    gp.gameState = gp.titleState;
                 }
             }
             if (code == KeyEvent.VK_P)

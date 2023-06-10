@@ -1,7 +1,5 @@
 package main;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import entity.Entity;
 
 public class CollisionChecker {

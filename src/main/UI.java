@@ -292,7 +292,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", x - gp.tileSize - 5, y);
         }
-        text = "QUIT";
+        text = "QUIT TO MENU";
         x = getXforCenteredText(text);
         y = gp.screenHeight / 2 + gp.tileSize;
         g2.drawString(text, x, y);
@@ -339,7 +339,7 @@ public class UI {
             if (commandNum == 0) {
                 g2.drawString(">", x - gp.tileSize - 5, y);
             }
-            text = "QUIT";
+            text = "QUIT TO MENU";
             x = getXforCenteredText(text);
             y = gp.screenHeight / 2 + gp.tileSize * 3;
             g2.drawString(text, x, y);
@@ -370,7 +370,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", x - gp.tileSize - 5, y);
         }
-        text = "QUIT";
+        text = "QUIT TO MENU";
         x = getXforCenteredText(text);
         y = gp.screenHeight / 2 + gp.tileSize * 3;
         g2.drawString(text, x, y);

@@ -25,6 +25,8 @@ public class Player extends Entity {
     public boolean hasBook = false;
     public boolean hasBackpack = false;
 
+    public int isDead = 0;
+
     public Player(GamePanel gp, KeyHandler keyH) {
 
         super(gp);
@@ -74,6 +76,8 @@ public class Player extends Entity {
         left2 = setup("left_2");
         right1 = setup("right_1");
         right2 = setup("right_2");
+        dead1 = setup("dead_1");
+        dead2 = setup("dead_2");
 
     }
 
@@ -224,7 +228,14 @@ public class Player extends Entity {
     public void draw(Graphics2D g2) {
 
         BufferedImage image = down1;
-        switch (direction) {
+
+        if (isDead != 0) {
+            if (isDead == 1)
+                image = dead1;
+            else
+                image = dead2;
+        }
+        else switch (direction) {
             case "up":
                 if (spriteNum == 1)
                     image = up1;
