@@ -22,10 +22,10 @@ public class NPC_Car extends Entity {
         // down2 = setup("./res/npc/car/car_down_2");
         // up1 = setup("./res/npc/car/car_up_1");
         // up2 = setup("./res/npc/car/car_up_2");
-        left1 = setup("./res/npc/car/car_left_1");
-        left2 = setup("./res/npc/car/car_left_2");
-        right1 = setup("./res/npc/car/car_right_1");
-        right2 = setup("./res/npc/car/car_right_2");
+        left1 = setup("./res/npc/car/sprite_0");
+        left2 = setup("./res/npc/car/sprite_1");
+        right1 = setup("./res/npc/car/sprite_2");
+        right2 = setup("./res/npc/car/sprite_3");
 
     }
 

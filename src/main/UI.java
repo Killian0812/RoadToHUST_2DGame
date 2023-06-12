@@ -23,6 +23,7 @@ public class UI {
     Font arial_25, arial_80B, cambria_80;
 
     BufferedImage keyImage, studentIDImage, bookImage, pencilImage;
+    BufferedImage heart_full, heart_half, heart_blank;
     public boolean messageOn = false;
     public String message = "";
     int msgCount = 0;
@@ -40,6 +41,8 @@ public class UI {
         arial_25 = new Font("Arial", Font.PLAIN, 25);
         arial_80B = new Font("Arial", Font.BOLD, 80);
         cambria_80 = new Font("Cambria", Font.BOLD, 80);
+
+        // HUD
         OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
         OBJ_StudentID studentID = new OBJ_StudentID(gp);
@@ -48,6 +51,12 @@ public class UI {
         bookImage = book.image;
         OBJ_Pencil pencil = new OBJ_Pencil(gp);
         pencilImage = pencil.image;
+
+        SuperObject heart = new OBJ_Heart(gp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
+
     }
 
     public void showMsg(String text) {
@@ -60,9 +69,11 @@ public class UI {
         this.g2 = g2;
 
         if (gp.gameState == gp.playState) {
+            drawPlayerLife();
             drawPlayScreen();
         }
         if (gp.gameState == gp.pauseState) {
+            drawPlayerLife();
             drawPauseScreen();
         }
 
@@ -71,10 +82,12 @@ public class UI {
         }
 
         if (gp.gameState == gp.gameOverState) {
+            drawPlayerLife();
             drawGameOverScreen();
         }
 
         if (gp.gameState == gp.dialogueState) {
+            drawPlayerLife();
             drawDialogue();
         }
     }
@@ -111,8 +124,31 @@ public class UI {
 
         // playtime
         playTime += (double) 1 / 60;
-        g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 12, 65);
+        g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 12, 80);
 
+    }
+
+    public void drawPlayerLife() {
+
+        // gp.player.life = 0;
+
+        int x = 12 * gp.tileSize;
+        int y = gp.tileSize - 32;
+        int i = 0;
+        while (i < gp.player.maxLife / 2) {
+            g2.drawImage(heart_blank, null, x, y);
+            i++;
+            x += gp.tileSize - 16;
+        }
+        x = 12 * gp.tileSize;
+        for (i = 1; i <= gp.player.life - 2; i += 2) {
+            g2.drawImage(heart_full, null, x, y);
+            x += gp.tileSize - 16;
+        }
+        if (gp.player.life % 2 == 1)
+            g2.drawImage(heart_half, null, x, y);
+        else if (gp.player.life > 0)
+            g2.drawImage(heart_full, null, x, y);
     }
 
     public void drawDialogue() {

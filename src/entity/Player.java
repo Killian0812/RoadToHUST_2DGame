@@ -65,6 +65,8 @@ public class Player extends Entity {
         hasID = true;
         hasBook = false;
         hasBackpack = false;
+        maxLife = 6;
+        life = maxLife;
     }
 
     public void getPlayerImage() {

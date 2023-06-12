@@ -39,6 +39,10 @@ public class Entity {
 
     public boolean hitPlayer = false;    
 
+    // Character status
+    public int maxLife;
+    public int life; 
+
     public Entity(GamePanel gp) {
         this.gp = gp;
         this.solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
