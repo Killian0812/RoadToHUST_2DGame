@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -25,14 +26,17 @@ public class Player extends Entity {
     public boolean hasBook = false;
     public boolean hasBackpack = false;
 
+    public int gender = 0;
     public int isDead = 0;
 
-    public Player(GamePanel gp, KeyHandler keyH) {
+    public Player(GamePanel gp, KeyHandler keyH, int gender) {
 
         super(gp);
 
         this.gp = gp;
         this.keyH = keyH;
+
+        this.gender = gender;
 
         screenX = gp.screenWidth / 2 - gp.tileSize / 2;
         screenY = gp.screenHeight / 2 - gp.tileSize / 2;
@@ -51,10 +55,10 @@ public class Player extends Entity {
 
     public void setDefaultValues() {
 
-        // worldX = gp.tileSize * 50;
-        // worldY = gp.tileSize * 8;
         worldX = gp.tileSize * 50;
-        worldY = gp.tileSize * 26;
+        worldY = gp.tileSize * 8;
+        // worldX = gp.tileSize * 50;
+        // worldY = gp.tileSize * 26;
         // worldX = gp.tileSize * 25;
         // worldY = gp.tileSize * 25;
         isDead = 0;
@@ -93,7 +97,7 @@ public class Player extends Entity {
 
             File f = null;
             f = new File("./res/player/hust_boy/hust_boy_" + imageName + ".png");
-            if (gp.playerGender == 1)
+            if (gender == 1)
                 f = new File("./res/player/hust_girl/hust_girl_" + imageName + ".png");
             image = ImageIO.read(f);
             image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
@@ -136,6 +140,10 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             npcInteraction(npcIndex);
 
+            /// Check monster collision
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            contactMonster(monsterIndex);
+
             if (collisionOn == false && keyH.enterPressed == false)
                 switch (direction) {
                     case "up":
@@ -152,6 +160,14 @@ public class Player extends Entity {
                         break;
                 }
 
+        }
+
+        if (isInvicible == true) {
+            invincibleCounter++;
+            if (invincibleCounter > 60) {
+                isInvicible = false;
+                invincibleCounter = 0;
+            }
         }
     }
 
@@ -228,6 +244,15 @@ public class Player extends Entity {
         }
     }
 
+    public void contactMonster(int index) {
+        if (index != 999) {
+            if (isInvicible == false) {
+                life -= 1;
+                isInvicible = true;
+            }
+        }
+    }
+
     public void draw(Graphics2D g2) {
 
         BufferedImage image = down1;
@@ -237,33 +262,38 @@ public class Player extends Entity {
                 image = dead1;
             else
                 image = dead2;
-        }
-        else switch (direction) {
-            case "up":
-                if (spriteNum == 1)
-                    image = up1;
-                if (spriteNum == 2)
-                    image = up2;
-                break;
-            case "down":
-                if (spriteNum == 1)
-                    image = down1;
-                if (spriteNum == 2)
-                    image = down2;
-                break;
-            case "right":
-                if (spriteNum == 1)
-                    image = right1;
-                if (spriteNum == 2)
-                    image = right2;
-                break;
-            case "left":
-                if (spriteNum == 1)
-                    image = left1;
-                if (spriteNum == 2)
-                    image = left2;
-        }
+        } else
+            switch (direction) {
+                case "up":
+                    if (spriteNum == 1)
+                        image = up1;
+                    if (spriteNum == 2)
+                        image = up2;
+                    break;
+                case "down":
+                    if (spriteNum == 1)
+                        image = down1;
+                    if (spriteNum == 2)
+                        image = down2;
+                    break;
+                case "right":
+                    if (spriteNum == 1)
+                        image = right1;
+                    if (spriteNum == 2)
+                        image = right2;
+                    break;
+                case "left":
+                    if (spriteNum == 1)
+                        image = left1;
+                    if (spriteNum == 2)
+                        image = left2;
+            }
+
+        if (isInvicible == true)
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }

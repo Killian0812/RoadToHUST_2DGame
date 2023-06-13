@@ -44,8 +44,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     /// ENTITY AND OBJECT
     public SuperObject obj[] = new SuperObject[10];
-    public Player player = new Player(this, keyH);
-    public int playerGender = 0;
+    public Player player = new Player(this, keyH, 0);
+    public Entity monster[] = new Entity[20];
     public Entity npc[] = new Entity[10];
 
     /// GAME STATE
@@ -73,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         aSetter.setObj();
         aSetter.setNPC();
+        aSetter.setMonster();
         ui.isDead = false;
         player.isDead = 0;
         ui.gameFinished = false;
@@ -116,27 +117,15 @@ public class GamePanel extends JPanel implements Runnable {
 
             for (int i = 0; i < npc.length; i++) {
                 if (npc[i] != null) {
-                    if (i == 4 && player.hasID == true) {
-                        String text44[] = { "Nhanh đi học đi" };
-                        npc[i].setDialogue(text44, text44);
-                        npc[i].dialogueIndex = 0;
-                    }
                     npc[i].update();
-                    if (i == 7 && npc[i].hitPlayer == true) {
-                        if (npc[i].direction == "left") {
-                            player.worldX -= tileSize / 2;
-                            player.isDead = 1;
-                        }
-                        if (npc[i].direction == "right") {
-                            player.worldX += tileSize / 2;
-                            player.isDead = 2;
-                        }
-                        gameState = gameOverState;
-                        ui.isDead = true;
-                        playSE(6);
-                    }
                 }
             }
+
+            for (int i = 0; i < monster.length; i++) {
+                if (monster[i] != null)
+                    monster[i].update();
+            }
+
             if (gameState == pauseState) {
 
             }
@@ -170,6 +159,13 @@ public class GamePanel extends JPanel implements Runnable {
                 npc[i].draw(g2);
             }
 
+            // MONSTER
+            for (int i = 0; i < monster.length; i++) {
+                if (monster[i] == null)
+                    continue;
+                monster[i].draw(g2);
+            }
+
             /// PLAYER
             player.draw(g2);
 
@@ -182,12 +178,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void playMusic(int i) {
         music.setFile(i);
-        // music.play();
-        // music.loop();
+        music.play();
+        music.loop();
     }
 
     public void stopMusic() {
-        music.stop();
+        if (music.clip != null)
+            music.stop();
     }
 
     public void playSE(int i) {

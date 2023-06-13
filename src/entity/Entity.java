@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -17,6 +18,7 @@ public class Entity {
     public int worldX, worldY;
 
     public int speed;
+    public String name;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, dead1, dead2;
     public String direction;
@@ -33,24 +35,28 @@ public class Entity {
 
     public int actionLockCounter = 0;
 
+    public boolean isInvicible = false;
+    public int invincibleCounter = 0;
+
     public String dialogues0[] = new String[20];
     public String dialogues1[] = new String[20];
     public int dialogueIndex = 0;
 
-    public boolean hitPlayer = false;    
+    public boolean hitPlayer = false;
 
     // Character status
     public int maxLife;
-    public int life; 
+    public int life;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
         this.solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
+        this.name = "";
     }
 
     public void speak() {
 
-        if (gp.playerGender == 0) {
+        if (gp.player.gender == 0) {
             gp.ui.currentDialogue = dialogues0[dialogueIndex];
             if (dialogueIndex + 1 < dialogues0.length)
                 dialogueIndex++;
@@ -92,10 +98,34 @@ public class Entity {
         gp.cChecker.checkTile(this, false);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
+        gp.cChecker.checkEntity(this, gp.monster);
         hitPlayer = gp.cChecker.checkPlayer(this);
-        if (hitPlayer == true)
-        {
-            
+
+        if (hitPlayer == true) {
+            if (name.equals("Guider1") && gp.player.hasID == true) {
+                String text44[] = { "Nhanh đi học đi" };
+                setDialogue(text44, text44);
+                dialogueIndex = 0;
+            }
+            if (name.equals("Car")) {
+                if (direction == "left") {
+                    gp.player.worldX -= gp.tileSize / 2;
+                    gp.player.isDead = 1;
+                }
+                if (direction == "right") {
+                    gp.player.worldX += gp.tileSize / 2;
+                    gp.player.isDead = 2;
+                }
+                gp.gameState = gp.gameOverState;
+                gp.ui.isDead = true;
+                gp.playSE(6);
+            }
+            if (name.equals("Slime")) {
+                if (gp.player.isInvicible == false) {
+                    gp.player.life -= 1;
+                    gp.player.isInvicible = true;
+                }
+            }
         }
 
         if (collisionOn == false)
@@ -113,7 +143,7 @@ public class Entity {
                     worldX += speed;
                     break;
             }
-        
+
         spriteCounter++;
         if (spriteCounter > 13) {
             spriteNum = 3 - spriteNum;
@@ -173,10 +203,16 @@ public class Entity {
                     if (spriteNum == 2)
                         image = left2;
             }
+
+        if (isInvicible == true)
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+
         if (isCar == false)
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         else
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize + 20, null);
+
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
     }
 

@@ -1,6 +1,7 @@
 package main;
 
 import entity.*;
+import monster.MON_Slime;
 import object.*;
 
 public class AssetSetter {
@@ -88,6 +89,7 @@ public class AssetSetter {
         gp.npc[4] = new NPC_HustBoy(gp);
         gp.npc[4].worldX = gp.tileSize * 25;
         gp.npc[4].worldY = gp.tileSize * 29;
+        gp.npc[4].name = "Guider1";
         // gp.npc[4] = new NPC_HustGirl(gp);
         // gp.npc[4].worldX = gp.tileSize * 25;
         // gp.npc[4].worldY = gp.tileSize * 29;
@@ -112,6 +114,16 @@ public class AssetSetter {
         gp.npc[7].direction = "left";
         gp.npc[7].worldX = gp.tileSize * 72;
         gp.npc[7].worldY = gp.tileSize * 22;
-        
+        gp.npc[7].name = "Car";
+
+    }
+
+    public void setMonster() {
+
+        gp.monster[0] = new MON_Slime(gp);
+        gp.monster[0].worldX = gp.tileSize * 52;
+        gp.monster[0].worldY = gp.tileSize * 10;
+        gp.monster[0].direction = "left";
+        gp.monster[0].name = "Slime";
     }
 }
