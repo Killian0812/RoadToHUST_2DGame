@@ -12,6 +12,7 @@ public class MON_Slime extends Entity {
 
         name = "Slime";
         speed = 1;
+        defaultSpeed = speed;
         maxLife = 4;
         life = maxLife;
 

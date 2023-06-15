@@ -292,17 +292,23 @@ public class UI {
 
             g2.setFont(cambria_80);
             g2.setFont(g2.getFont().deriveFont(35f));
-            text = "WASD - Movement";
             x = gp.screenWidth / 2;
             y = gp.screenHeight / 2 + gp.tileSize;
-            g2.drawString(text, x, y);
-            text = "ENTER - Interact";
-            y += gp.tileSize;
+            
+            text = "WASD - Movement";
             g2.drawString(text, x, y);
 
-            text = "BACK";
-            x = gp.screenWidth / 2 + gp.tileSize;
+            y += gp.tileSize;
+            text = "ENTER - Interact";
+            g2.drawString(text, x, y);
+
+            y += gp.tileSize;
+            text = "SPACE - Attack";
+            g2.drawString(text, x, y);
+
             y += gp.tileSize * 2;
+            x = gp.screenWidth / 2 + gp.tileSize;
+            text = "BACK";
             g2.drawString(text, x, y);
             g2.drawImage(gp.player.right1, x - gp.tileSize - 10, y - gp.tileSize + 20, gp.tileSize - 10,
                     gp.tileSize - 15, null);

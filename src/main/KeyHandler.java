@@ -7,7 +7,9 @@ import entity.Player;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean upPressed, downPressed, rightPressed, leftPressed, enterPressed;
+    public boolean upPressed, downPressed, rightPressed, leftPressed;
+    public boolean enterPressed, spacePressed;
+    public boolean spaceTyped;
     GamePanel gp;
 
     public KeyHandler(GamePanel gp) {
@@ -84,6 +86,8 @@ public class KeyHandler implements KeyListener {
                 leftPressed = true;
             if (code == KeyEvent.VK_ENTER)
                 enterPressed = true;
+            if (code == KeyEvent.VK_SPACE)
+                spacePressed = true;
             if (code == KeyEvent.VK_P)
                 gp.gameState = gp.pauseState;
         }
@@ -163,10 +167,18 @@ public class KeyHandler implements KeyListener {
             leftPressed = false;
         if (code == KeyEvent.VK_ENTER)
             enterPressed = false;
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = false;
+            spaceTyped = false;
+        }
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
+
+        char code = e.getKeyChar();
+        if (code == ' ')
+            spaceTyped = true;
     }
 
 }

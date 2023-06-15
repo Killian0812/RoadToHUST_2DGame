@@ -20,6 +20,8 @@ public class Sound {
         soundFile[4] = new File("./res/sound/unlock.wav");
         soundFile[5] = new File("./res/sound/won.wav");
         soundFile[6] = new File("./res/sound/dead.wav");
+        soundFile[7] = new File("./res/sound/hurt.wav");
+        soundFile[8] = new File("./res/sound/punching.wav");
 
     }
 

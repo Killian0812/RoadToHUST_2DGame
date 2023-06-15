@@ -34,9 +34,10 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 if (isPlayer == true)
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        if (gp.player.hasID == true)
+                        if (gp.player.hasID == true) {
                             gp.gameState = gp.gameOverState;
-                        else {
+                            gp.playSE(5);
+                        } else {
                             gp.ui.showMsg("You don't have a student ID");
                             gp.player.worldY += gp.player.speed;
                         }
@@ -49,9 +50,10 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 if (isPlayer == true)
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        if (gp.player.hasID == true)
+                        if (gp.player.hasID == true) {
                             gp.gameState = gp.gameOverState;
-                        else {
+                            gp.playSE(5);
+                        } else {
                             gp.ui.showMsg("You don't have a student ID");
                             gp.player.worldY -= gp.player.speed;
                         }
@@ -64,9 +66,10 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 if (isPlayer == true)
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        if (gp.player.hasID == true)
+                        if (gp.player.hasID == true) {
                             gp.gameState = gp.gameOverState;
-                        else {
+                            gp.playSE(5);
+                        } else {
                             gp.ui.showMsg("You don't have a student ID");
                             gp.player.worldX += gp.player.speed;
                         }
@@ -81,6 +84,7 @@ public class CollisionChecker {
                     if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
                         if (gp.player.hasID == true) {
                             gp.gameState = gp.gameOverState;
+                            gp.playSE(5);
                         } else {
                             gp.ui.showMsg("You don't have a student ID");
                             gp.player.worldX -= gp.player.speed;
