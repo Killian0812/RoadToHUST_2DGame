@@ -344,16 +344,18 @@ public class Player extends Entity {
     public void damageMonster(int index) {
         if (index != 999) {
             // System.out.println("Hit");
-            gp.playSE(8);
             if (gp.monster[index].isInvicible == false) {
                 gp.monster[index].isInvicible = true;
                 gp.monster[index].life -= 1;
+                gp.playSE(8);
                 knockbackMonster(gp.monster[index]);
                 if (gp.monster[index].life <= 0) {
                     gp.monster[index].isDead = true;
                     gp.monster[index] = null;
                 }
             }
+            // }
+
         } else {
             // System.out.println("Miss");
         }

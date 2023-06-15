@@ -41,6 +41,7 @@ public class Entity {
 
     // Attack and vulnerable status
     public boolean attacking = false;
+    public int atkCounter = 0;
     public Rectangle atkArea = new Rectangle(0, 0, 0, 0);
     public boolean isInvicible = false;
     public int invincibleCounter = 0;
