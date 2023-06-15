@@ -65,8 +65,8 @@ public class Player extends Entity {
 
         worldX = gp.tileSize * 50;
         worldY = gp.tileSize * 8;
-        // worldX = gp.tileSize * 50;
-        // worldY = gp.tileSize * 26;
+        worldX = gp.tileSize * 50;
+        worldY = gp.tileSize * 26;
         // worldX = gp.tileSize * 25;
         // worldY = gp.tileSize * 25;
         deadScene = 0;

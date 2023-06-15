@@ -8,6 +8,7 @@ import main.GamePanel;
 public class MON_Slime extends Entity {
 
     public MON_Slime(GamePanel gp) {
+
         super(gp);
 
         name = "Slime";
@@ -28,14 +29,14 @@ public class MON_Slime extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("./res/monster/greenslime_down_1");
-        up2 = setup("./res/monster/greenslime_down_2");
-        down1 = setup("./res/monster/greenslime_down_1");
-        down2 = setup("./res/monster/greenslime_down_2");
-        left1 = setup("./res/monster/greenslime_down_1");
-        left2 = setup("./res/monster/greenslime_down_2");
-        right1 = setup("./res/monster/greenslime_down_1");
-        right2 = setup("./res/monster/greenslime_down_2");
+        up1 = setup("./res/monster/greenslime_down_1", 48, 48);
+        up2 = setup("./res/monster/greenslime_down_2", 48, 48);
+        down1 = setup("./res/monster/greenslime_down_1", 48, 48);
+        down2 = setup("./res/monster/greenslime_down_2", 48, 48);
+        left1 = setup("./res/monster/greenslime_down_1", 48, 48);
+        left2 = setup("./res/monster/greenslime_down_2", 48, 48);
+        right1 = setup("./res/monster/greenslime_down_1", 48, 48);
+        right2 = setup("./res/monster/greenslime_down_2", 48, 48);
     }
 
     public void setAction() {

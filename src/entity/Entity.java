@@ -59,7 +59,7 @@ public class Entity {
     public int dialogueIndex = 0;
 
     // Extra
-    public boolean isCar = false;
+    public boolean isVehicle = false;
     public boolean hitPlayer = false;
     public boolean displayHP = false;
     public int displayHPCounter = 0;
@@ -155,13 +155,15 @@ public class Entity {
                     setDialogue(text44, text44);
                     dialogueIndex = 0;
                 }
-                if (name.equals("Car")) {
+                if (name.equals("Car") || name.equals("NinjaLead")) {
                     if (direction == "left") {
                         gp.player.worldX -= gp.tileSize / 2;
+                        gp.player.life = 0;
                         gp.player.deadScene = 1;
                     }
                     if (direction == "right") {
                         gp.player.worldX += gp.tileSize / 2;
+                        gp.player.life = 0;
                         gp.player.deadScene = 2;
                     }
                     gp.gameState = gp.gameOverState;
@@ -208,14 +210,14 @@ public class Entity {
         }
     }
 
-    public BufferedImage setup(String imageName) {
+    public BufferedImage setup(String imageName, int width, int height) {
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
         try {
             File f = new File(imageName + ".png");
             image = ImageIO.read(f);
-            image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
+            image = uTool.scaledImage(image, width, height);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -290,7 +292,7 @@ public class Entity {
         if (isDead == true) {
             dyingAnimation();
         }
-        if (isCar == false)
+        if (isVehicle == false)
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         else
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize + 20, null);
