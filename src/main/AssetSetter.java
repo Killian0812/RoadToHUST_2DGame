@@ -117,7 +117,7 @@ public class AssetSetter {
         gp.npc[7].name = "Car";
 
         gp.npc[8] = new NPC_NinjaLead(gp);
-        gp.npc[8].direction = "left";
+        gp.npc[8].direction = "right";
         gp.npc[8].worldX = gp.tileSize * 72;
         gp.npc[8].worldY = gp.tileSize * 24;
         gp.npc[8].name = "NinjaLead";

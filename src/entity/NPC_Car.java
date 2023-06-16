@@ -11,7 +11,7 @@ public class NPC_Car extends Entity {
         super(gp);
         speed = 6;
         direction = "";
-        solidArea = new Rectangle(0, 0, gp.tileSize * 2, gp.tileSize + gp.tileSize / 2);
+        solidArea = new Rectangle(0, 10, gp.tileSize * 2, gp.tileSize / 2 + 8);
         isVehicle = true;
         getImage();
     }
@@ -32,8 +32,8 @@ public class NPC_Car extends Entity {
     public void setAction() {
 
         actionLockCounter++;
-        /// change direction after 2s
-        if (actionLockCounter == 120) {
+        /// change direction after 4s
+        if (actionLockCounter == 240) {
 
             Random random = new Random();
             int i = random.nextInt(100);

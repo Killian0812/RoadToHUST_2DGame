@@ -66,7 +66,9 @@ public class Entity {
 
     public Entity(GamePanel gp) {
         this.gp = gp;
-        this.solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
+        this.solidArea = new Rectangle(8, 24, gp.tileSize / 2, gp.tileSize / 2);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         this.name = "";
     }
 

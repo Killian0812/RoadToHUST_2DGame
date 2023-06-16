@@ -293,7 +293,7 @@ public class UI {
             g2.setFont(cambria_80);
             g2.setFont(g2.getFont().deriveFont(35f));
             x = gp.screenWidth / 2;
-            y = gp.screenHeight / 2 + gp.tileSize;
+            y = gp.screenHeight / 2;
             
             text = "WASD - Movement";
             g2.drawString(text, x, y);
@@ -304,6 +304,10 @@ public class UI {
 
             y += gp.tileSize;
             text = "SPACE - Attack";
+            g2.drawString(text, x, y);
+
+            y += gp.tileSize;
+            text = "P - Pause";
             g2.drawString(text, x, y);
 
             y += gp.tileSize * 2;

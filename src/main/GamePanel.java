@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JPanel;
 
@@ -47,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH, 0);
     public Entity monster[] = new Entity[20];
     public Entity npc[] = new Entity[10];
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     /// GAME STATE
     public int gameState;
@@ -152,22 +156,45 @@ public class GamePanel extends JPanel implements Runnable {
                 obj[i].draw(g2, this);
             }
 
-            /// NPC
-            for (int i = 0; i < npc.length; i++) {
-                if (npc[i] == null)
-                    continue;
-                npc[i].draw(g2);
-            }
+            // /// NPC
+            // for (int i = 0; i < npc.length; i++) {
+            // if (npc[i] == null)
+            // continue;
+            // npc[i].draw(g2);
+            // }
 
-            // MONSTER
-            for (int i = 0; i < monster.length; i++) {
-                if (monster[i] == null)
-                    continue;
-                monster[i].draw(g2);
-            }
+            // // MONSTER
+            // for (int i = 0; i < monster.length; i++) {
+            // if (monster[i] == null)
+            // continue;
+            // monster[i].draw(g2);
+            // }
 
-            /// PLAYER
-            player.draw(g2);
+            // /// PLAYER
+            // player.draw(g2);
+
+            // Add all entity to entityList
+            entityList.add(player);
+            for (int i = 0; i < npc.length; i++)
+                if (npc[i] != null)
+                    entityList.add(npc[i]);
+            for (int i = 0; i < monster.length; i++)
+                if (monster[i] != null)
+                    entityList.add(monster[i]);
+
+            // Entity sort by render order
+            Collections.sort(entityList, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+                    return Integer.compare(e1.worldY, e2.worldY);
+                }
+            });
+
+            // Draw all entities
+            for (int i = 0; i < entityList.size(); i++)
+                entityList.get(i).draw(g2);
+            // Reset entityList for next render
+            entityList.clear();
 
             /// UI
             ui.draw(g2);
@@ -178,8 +205,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void playMusic(int i) {
         music.setFile(i);
-        music.play();
-        music.loop();
+        // music.play();
+        // music.loop();
     }
 
     public void stopMusic() {
