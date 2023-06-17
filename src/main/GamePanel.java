@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
     Sound music = new Sound();
     Sound se = new Sound();
     public UI ui = new UI(this);
+    public EventHandler eHandler = new EventHandler (this);
 
     /// ENTITY AND OBJECT
     public SuperObject obj[] = new SuperObject[10];
@@ -115,6 +116,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
+        System.out.println("X: " + player.worldX/tileSize + " Y: " + player.worldY/tileSize);
         if (gameState == playState) {
 
             if (ui.gameFinished == false)
