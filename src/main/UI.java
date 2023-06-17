@@ -130,8 +130,6 @@ public class UI {
 
     public void drawPlayerLife() {
 
-        // gp.player.life = 0;
-
         int x = 12 * gp.tileSize;
         int y = gp.tileSize - 32;
         int i = 0;
