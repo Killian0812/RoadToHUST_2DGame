@@ -108,13 +108,20 @@ public class Entity {
         dialogues1 = textForGirl;
     }
 
+    public void checkCollision() {
+        collisionOn = false;
+        gp.cChecker.checkTile(this, false);
+        gp.cChecker.checkObject(this, false);
+        gp.cChecker.checkEntity(this, gp.npc);
+        gp.cChecker.checkEntity(this, gp.monster);
+        hitPlayer = gp.cChecker.checkPlayer(this);
+    }
+
     public void update() {
 
         if (knockBack == true) {
-            gp.cChecker.checkTile(this, false);
-            gp.cChecker.checkEntity(this, gp.npc);
-            gp.cChecker.checkEntity(this, gp.monster);
-            hitPlayer = gp.cChecker.checkPlayer(this);
+
+            checkCollision();
             if (collisionOn == true) {
                 knockBackCounter = 0;
                 knockBack = false;
@@ -144,12 +151,7 @@ public class Entity {
         } else {
             setAction();
 
-            collisionOn = false;
-            gp.cChecker.checkTile(this, false);
-            gp.cChecker.checkObject(this, false);
-            gp.cChecker.checkEntity(this, gp.npc);
-            gp.cChecker.checkEntity(this, gp.monster);
-            hitPlayer = gp.cChecker.checkPlayer(this);
+            checkCollision();
 
             if (hitPlayer == true) {
                 if (name.equals("Guider1") && gp.player.hasID == true) {

@@ -294,7 +294,7 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(35f));
             x = gp.screenWidth / 2;
             y = gp.screenHeight / 2;
-            
+
             text = "WASD - Movement";
             g2.drawString(text, x, y);
 
@@ -320,6 +320,9 @@ public class UI {
     }
 
     public void drawPauseScreen() {
+
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         g2.setFont(arial_80B);
         g2.setColor(Color.white);
@@ -348,6 +351,9 @@ public class UI {
     }
 
     public void drawGameOverScreen() {
+
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         String text;
         int x, y, txtLength;
