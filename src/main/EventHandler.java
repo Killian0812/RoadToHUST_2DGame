@@ -45,9 +45,9 @@ public class EventHandler {
 
 		if (canTouchEvent == true) {
 			// add event here
-			if (hit(26, 50, "any") == true) {
-				damagePit(26, 50, gp.dialogueState);
-			}
+			// if (hit(26, 50, "any") == true) {
+			// 	damagePit(26, 50, gp.dialogueState);
+			// }
 		}
 
 	}
