@@ -141,6 +141,9 @@ public class Player extends Entity {
         } else
             attacking = false;
 
+        if (life <= 0)
+            dead();
+
         if (keyH.downPressed == true || keyH.upPressed == true || keyH.leftPressed == true
                 || keyH.rightPressed == true || keyH.enterPressed == true) {
 
@@ -176,6 +179,8 @@ public class Player extends Entity {
             /// Check monster collision
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
+
+            gp.eHandler.checkEvent();
 
             if (collisionOn == false && keyH.enterPressed == false)
                 switch (direction) {
@@ -281,19 +286,23 @@ public class Player extends Entity {
             if (isInvicible == false) {
                 life -= 1;
                 if (life <= 0) {
-                    if (direction == "up" || direction == "right")
-                        deadScene = 1;
-                    else
-                        deadScene = 2;
-                    gp.gameState = gp.gameOverState;
-                    gp.ui.isDead = true;
-                    gp.playSE(7);
+                    dead();
                 } else {
                     isInvicible = true;
                     gp.playSE(7);
                 }
             }
         }
+    }
+
+    public void dead() {
+        if (direction == "up" || direction == "right")
+            deadScene = 1;
+        else
+            deadScene = 2;
+        gp.gameState = gp.gameOverState;
+        gp.ui.isDead = true;
+        gp.playSE(7);
     }
 
     public void attack() {

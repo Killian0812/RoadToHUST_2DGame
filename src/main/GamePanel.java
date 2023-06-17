@@ -41,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileM = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public EventHandler eHandler = new EventHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public UI ui = new UI(this);
