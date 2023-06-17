@@ -38,5 +38,6 @@ public class MyGame {
 
         gamePanel.setupGame();
         gamePanel.startGameThread();
+
     }
 }

@@ -177,6 +177,8 @@ public class Player extends Entity {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
 
+            gp.eHandler.checkEvent();
+
             if (collisionOn == false && keyH.enterPressed == false)
                 switch (direction) {
                     case "up":

@@ -115,6 +115,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
+        System.out.println("X: " + player.worldX/tileSize + " Y: " + player.worldY/tileSize);
         if (gameState == playState) {
 
             if (ui.gameFinished == false)
