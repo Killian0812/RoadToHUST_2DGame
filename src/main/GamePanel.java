@@ -10,6 +10,7 @@ import java.util.Comparator;
 
 import javax.swing.JPanel;
 
+import ai.PathFinder;
 import entity.Entity;
 import entity.Player;
 import object.SuperObject;
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public EventHandler eHandler = new EventHandler(this);
+    public PathFinder pFinder = new PathFinder(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public UI ui = new UI(this);
@@ -115,7 +117,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        System.out.println("X: " + player.worldX/tileSize + " Y: " + player.worldY/tileSize);
+        System.out.println("X: " + player.worldX / tileSize + " Y: " + player.worldY / tileSize);
         if (gameState == playState) {
 
             if (ui.gameFinished == false)

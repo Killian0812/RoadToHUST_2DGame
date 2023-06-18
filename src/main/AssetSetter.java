@@ -1,7 +1,6 @@
 package main;
 
 import entity.*;
-import monster.MON_Slime;
 import object.*;
 
 public class AssetSetter {

@@ -52,6 +52,7 @@ public class Entity {
     public int maxLife;
     public int life;
     public boolean isDead = false;
+    public boolean onPath = false;
 
     // Character speaking
     public String dialogues0[] = new String[20];
@@ -226,6 +227,62 @@ public class Entity {
             e.printStackTrace();
         }
         return image;
+    }
+
+    public void searchPath(int goalRow, int goalCol) {
+        int startRow = (worldY + solidArea.y) / gp.tileSize;
+        int startCol = (worldX + solidArea.x) / gp.tileSize;
+
+        gp.pFinder.setNodes(startRow, startCol, goalRow, goalCol);
+        if (gp.pFinder.search() == true) {
+
+            // next worldX, worldY
+            int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
+            int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
+
+            // entity's solidArea position
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = enLeftX + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = enTopY + solidArea.height;
+
+            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) {
+                direction = "up";
+            } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) {
+                direction = "down";
+            } else if (enTopY >= nextY && enBottomY < nextY + gp.tileSize) {
+                if (enLeftX > nextX)
+                    direction = "left";
+                if (enLeftX < nextX)
+                    direction = "right";
+            } else if (enTopY > nextY && enLeftX > nextX) {
+                direction = "up";
+                checkCollision();
+                if (collisionOn == true)
+                    direction = "left";
+            } else if (enTopY > nextY && enLeftX < nextX) {
+                direction = "up";
+                checkCollision();
+                if (collisionOn == true)
+                    direction = "right";
+            } else if (enTopY < nextY && enLeftX > nextX) {
+                direction = "down";
+                checkCollision();
+                if (collisionOn == true)
+                    direction = "left";
+            } else if (enTopY < nextY && enLeftX < nextX) {
+                direction = "down";
+                checkCollision();
+                if (collisionOn == true)
+                    direction = "right";
+            }
+
+            // int nextCol = gp.pFinder.pathList.get(0).col;
+            // int nextRow = gp.pFinder.pathList.get(0).row;
+            // if (nextCol == goalCol && nextRow == goalRow)
+            //     onPath = false;
+
+        }
     }
 
     public void dyingAnimation() {

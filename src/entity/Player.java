@@ -65,8 +65,8 @@ public class Player extends Entity {
 
         worldX = gp.tileSize * 50;
         worldY = gp.tileSize * 8;
-        worldX = gp.tileSize * 50;
-        worldY = gp.tileSize * 26;
+        // worldX = gp.tileSize * 50;
+        // worldY = gp.tileSize * 26;
         // worldX = gp.tileSize * 25;
         // worldY = gp.tileSize * 25;
         deadScene = 0;
@@ -357,6 +357,7 @@ public class Player extends Entity {
                 gp.monster[index].isInvicible = true;
                 gp.monster[index].life -= 1;
                 gp.playSE(8);
+                gp.monster[index].onPath = true;
                 knockbackMonster(gp.monster[index]);
                 if (gp.monster[index].life <= 0) {
                     gp.monster[index].isDead = true;
@@ -445,7 +446,7 @@ public class Player extends Entity {
                 }
             }
 
-        if (isInvicible == true)
+        if (isInvicible == true && isDead == false)
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
 
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
