@@ -48,9 +48,9 @@ public class EventHandler {
 			// if (hit(26, 50, "any") == true) {
 			// 	damagePit(26, 50, gp.dialogueState);
 			// }
-			if (hit(26,50,"any")==true) {
-				gp.player.life--;
-			}
+//			if (hit(26,50,"any")==true) {
+//				gp.player.life--;
+//			}
 		}
 
 	}
