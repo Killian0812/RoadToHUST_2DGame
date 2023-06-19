@@ -4,16 +4,16 @@ import java.util.Random;
 
 import main.GamePanel;
 
-public class MON_Slime extends Entity {
+public class MON_Orc extends Entity {
 
-    public MON_Slime(GamePanel gp) {
+    public MON_Orc(GamePanel gp) {
 
         super(gp);
 
-        name = "Slime";
-        speed = 1;
+        name = "Orc";
+        speed = 2;
         defaultSpeed = speed;
-        maxLife = 4;
+        maxLife = 6;
         life = maxLife;
 
         solidArea.x = 3;
@@ -24,18 +24,30 @@ public class MON_Slime extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         getImage();
+        getAttackImage();
 
     }
 
     public void getImage() {
-        up1 = setup("./res/monster/slime/greenslime_down_1", 48, 48);
-        up2 = setup("./res/monster/slime/greenslime_down_2", 48, 48);
-        down1 = setup("./res/monster/slime/greenslime_down_1", 48, 48);
-        down2 = setup("./res/monster/slime/greenslime_down_2", 48, 48);
-        left1 = setup("./res/monster/slime/greenslime_down_1", 48, 48);
-        left2 = setup("./res/monster/slime/greenslime_down_2", 48, 48);
-        right1 = setup("./res/monster/slime/greenslime_down_1", 48, 48);
-        right2 = setup("./res/monster/slime/greenslime_down_2", 48, 48);
+        up1 = setup("./res/monster/orc/orc_up_1", 48, 48);
+        up2 = setup("./res/monster/orc/orc_up_2", 48, 48);
+        down1 = setup("./res/monster/orc/orc_down_1", 48, 48);
+        down2 = setup("./res/monster/orc/orc_down_2", 48, 48);
+        left1 = setup("./res/monster/orc/orc_left_1", 48, 48);
+        left2 = setup("./res/monster/orc/orc_left_2", 48, 48);
+        right1 = setup("./res/monster/orc/orc_right_1", 48, 48);
+        right2 = setup("./res/monster/orc/orc_right_2", 48, 48);
+    }
+
+    public void getAttackImage() {
+        atkUp1 = setup("./res/monster/orc/orc_attack_up_1", 48, 96);
+        atkUp2 = setup("./res/monster/orc/orc_attack_up_2", 48, 96);
+        atkDown1 = setup("./res/monster/orc/orc_attack_down_1", 48, 96);
+        atkDown2 = setup("./res/monster/orc/orc_attack_down_2", 48, 96);
+        atkLeft1 = setup("./res/monster/orc/orc_attack_left_1", 96, 48);
+        atkLeft2 = setup("./res/monster/orc/orc_attack_left_2", 96, 48);
+        atkRight1 = setup("./res/monster/orc/orc_attack_right_1", 96, 48);
+        atkRight2 = setup("./res/monster/orc/orc_attack_right_2", 96, 48);
     }
 
     public void update() {
@@ -51,12 +63,18 @@ public class MON_Slime extends Entity {
         if (onPath == true && tileDistance > 10) {
             onPath = false;
         }
+        if (attacking == true) {
+            if (tileDistance <= 3)
+                attack();
+            else
+                attacking = false;
+        }
     }
 
     public void setAction() {
 
         super.setAction();
-        
+
         if (onPath == true) {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;

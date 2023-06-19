@@ -321,6 +321,9 @@ public class UI {
 
     public void drawPauseScreen() {
 
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
         g2.setFont(arial_80B);
         g2.setColor(Color.white);
         String text = "PAUSED";
@@ -348,6 +351,9 @@ public class UI {
     }
 
     public void drawGameOverScreen() {
+
+        g2.setColor(new Color(0, 0, 0, 150));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         String text;
         int x, y, txtLength;

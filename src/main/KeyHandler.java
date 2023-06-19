@@ -56,8 +56,7 @@ public class KeyHandler implements KeyListener {
                 }
                 if (code == KeyEvent.VK_ENTER) {
                     if (gp.ui.commandNum == 0 || gp.ui.commandNum == 1) {
-                        gp.aSetter.setObj();
-                        gp.aSetter.setNPC();
+                        gp.setupGame();
                         gp.stopMusic();
                         gp.playMusic(0);
                         gp.ui.playTime = 0.0;
@@ -130,9 +129,9 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (gp.ui.commandNum == 0) {
-                    gp.ui.playTime = 0.0;
                     gp.setupGame();
-                    gp.player.setDefaultValues();
+                    gp.stopMusic();
+                    gp.playMusic(0);
                     gp.gameState = gp.playState;
                 }
                 if (gp.ui.commandNum == 1) {

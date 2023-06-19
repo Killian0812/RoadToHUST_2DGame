@@ -81,8 +81,9 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setObj();
         aSetter.setNPC();
         aSetter.setMonster();
+        player.setDefaultValues();
+        ui.playTime = 0.0;
         ui.isDead = false;
-        player.deadScene = 0;
         ui.gameFinished = false;
         // playMusic(0);
         gameState = titleState;
@@ -117,7 +118,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        System.out.println("X: " + player.worldX / tileSize + " Y: " + player.worldY / tileSize);
+        // System.out.println("X: " + player.worldX / tileSize + " Y: " + player.worldY
+        // / tileSize);
         if (gameState == playState) {
 
             if (ui.gameFinished == false)
@@ -209,8 +211,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void playMusic(int i) {
         music.setFile(i);
-        // music.play();
-        // music.loop();
+        music.play();
+        music.loop();
     }
 
     public void stopMusic() {

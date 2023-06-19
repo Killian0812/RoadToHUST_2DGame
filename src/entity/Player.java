@@ -47,8 +47,8 @@ public class Player extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        atkArea.width = gp.tileSize;
-        atkArea.height = gp.tileSize;
+        atkArea.width = 36;
+        atkArea.height = 36;
 
         tmp = new Rectangle(8, 20, gp.tileSize / 2, gp.tileSize / 2);
 
@@ -70,6 +70,7 @@ public class Player extends Entity {
         // worldX = gp.tileSize * 25;
         // worldY = gp.tileSize * 25;
         deadScene = 0;
+        isDead = false;
         speed = 4;
         defaultSpeed = speed;
         direction = "down1";
@@ -285,12 +286,10 @@ public class Player extends Entity {
         if (index != 999) {
             if (isInvicible == false) {
                 life -= 1;
-                if (life <= 0) {
+                if (life <= 0)
                     dead();
-                } else {
+                else
                     isInvicible = true;
-                    gp.playSE(7);
-                }
             }
         }
     }
@@ -315,27 +314,27 @@ public class Player extends Entity {
         int currentWorldX = worldX;
         int currentWorldY = worldY;
 
-        // Adjust player's worldX/Y for attack
+        // Adjust worldX/Y for attack
         switch (direction) {
             case "up": {
-                solidArea.y = -gp.tileSize / 2;
-                solidArea.height += gp.tileSize;
+                worldY -= atkArea.height;
                 break;
             }
             case "down": {
-                solidArea.height += gp.tileSize / 2;
+                worldY += atkArea.height;
                 break;
             }
             case "left": {
-                solidArea.x = -10;
-                solidArea.width += gp.tileSize;
+                worldX -= atkArea.width;
                 break;
             }
             case "right": {
-                solidArea.width += gp.tileSize / 2 - 8;
+                worldX += atkArea.width;
                 break;
             }
         }
+        solidArea.width = atkArea.width;
+        solidArea.height = atkArea.height;
 
         // Check monster collison with adjusted worldX,Y and solidArea
         int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
@@ -356,6 +355,8 @@ public class Player extends Entity {
             if (gp.monster[index].isInvicible == false) {
                 gp.monster[index].isInvicible = true;
                 gp.monster[index].life -= 1;
+                if (gp.monster[index].name == "Orc")
+                    gp.monster[index].attacking = true;
                 gp.playSE(8);
                 gp.monster[index].onPath = true;
                 knockbackMonster(gp.monster[index]);
@@ -372,9 +373,23 @@ public class Player extends Entity {
     }
 
     public void knockbackMonster(Entity entity) {
-        entity.direction = direction;
-        entity.speed += 5;
-        entity.knockBack = true;
+        if (entity.knockBack == false) {
+            entity.direction = direction;
+            entity.speed += 5;
+            entity.knockBack = true;
+        } else {
+            if (entity.direction.equals(direction) == false) {
+                if (direction.equals("up"))
+                    entity.direction = "down";
+                if (direction.equals("down"))
+                    entity.direction = "up";
+                if (direction.equals("left"))
+                    entity.direction = "right";
+                if (direction.equals("right"))
+                    entity.direction = "up";
+            }
+            entity.speed += 5;
+        }
     }
 
     public void draw(Graphics2D g2) {
