@@ -125,24 +125,20 @@ public class AssetSetter {
 
     public void setMonster() {
 
+        System.out.println("Monsters generated");
         gp.monster[0] = new MON_Slime(gp);
-        gp.monster[0].worldX = gp.tileSize * 52;
-        gp.monster[0].worldY = gp.tileSize * 10;
+        gp.monster[0].worldX = gp.tileSize * 35;
+        gp.monster[0].worldY = gp.tileSize * 63;
         gp.monster[0].direction = "left";
 
         gp.monster[1] = new MON_Orc(gp);
-        gp.monster[1].worldX = gp.tileSize * 55;
-        gp.monster[1].worldY = gp.tileSize * 10;
+        gp.monster[1].worldX = gp.tileSize * 32;
+        gp.monster[1].worldY = gp.tileSize * 63;
         gp.monster[1].direction = "left";
 
         gp.monster[2] = new MON_Orc(gp);
-        gp.monster[2].worldX = gp.tileSize * 58;
-        gp.monster[2].worldY = gp.tileSize * 10;
+        gp.monster[2].worldX = gp.tileSize * 35;
+        gp.monster[2].worldY = gp.tileSize * 61;
         gp.monster[2].direction = "right";
-
-        gp.monster[3] = new MON_Orc(gp);
-        gp.monster[3].worldX = gp.tileSize * 61;
-        gp.monster[3].worldY = gp.tileSize * 10;
-        gp.monster[3].direction = "right";
     }
 }

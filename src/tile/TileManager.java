@@ -28,7 +28,7 @@ public class TileManager {
         }
 
         try {
-            loadMap("./res/maps/world01.txt");
+            loadMap("./res/maps/world02.txt");
         } catch (Exception e) {
             System.out.println("Can not load map data!");
         }

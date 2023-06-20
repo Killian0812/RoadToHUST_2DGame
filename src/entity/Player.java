@@ -20,6 +20,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
+    public int moneyCount = 0;
     public int keyCount = 0;
     public boolean hasPencil = false;
     public boolean hasID = false;
@@ -69,6 +70,9 @@ public class Player extends Entity {
         // worldY = gp.tileSize * 26;
         // worldX = gp.tileSize * 25;
         // worldY = gp.tileSize * 25;
+        // worldX = gp.tileSize * 33;
+        // worldY = gp.tileSize * 61;
+
         deadScene = 0;
         isDead = false;
         speed = 4;

@@ -1,12 +1,14 @@
 package main;
 
 public class EventHandler {
-
+	
 	GamePanel gp;
 	EventRect eventRect[][];
-
+	
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
+	
+	public boolean requesting = false; 
 
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
@@ -44,7 +46,10 @@ public class EventHandler {
 		}
 
 		if (canTouchEvent == true) {
-
+			if (hit(10, 62, "any") == true) {
+				teleport(61, 32, gp.dialogueState);
+				canTouchEvent = false;
+			}
 		}
 
 	}
@@ -88,6 +93,11 @@ public class EventHandler {
 			gp.ui.currentDialogue = "You drink the water.\nYour life has been recovered.";
 			gp.player.life = gp.player.maxLife;
 		}
+	}
 
+	public void teleport(int row, int col, int gameState) {
+		gp.gameState = gameState;
+		gp.ui.currentDialogue = "Do you want to jump in VR World?";
+		requesting = true;
 	}
 }

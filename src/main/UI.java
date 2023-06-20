@@ -22,7 +22,8 @@ public class UI {
 
     Font arial_25, arial_80B, cambria_80;
 
-    BufferedImage keyImage, studentIDImage, bookImage, pencilImage;
+    BufferedImage keyImage, moneyImage;
+    BufferedImage studentIDImage, bookImage, pencilImage;
     BufferedImage heart_full, heart_half, heart_blank;
     public boolean messageOn = false;
     public String message = "";
@@ -51,6 +52,8 @@ public class UI {
         bookImage = book.image;
         OBJ_Pencil pencil = new OBJ_Pencil(gp);
         pencilImage = pencil.image;
+        OBJ_Money money = new OBJ_Money(gp);
+        moneyImage = money.image;
 
         SuperObject heart = new OBJ_Heart(gp);
         heart_full = heart.image;
@@ -96,18 +99,23 @@ public class UI {
 
         // display items
         g2.setFont(arial_25);
+        g2.setColor(Color.green);
+        g2.drawImage(moneyImage, 20, 15, 30, 30, null);
+        g2.drawString(" x " + gp.player.moneyCount, 45, 40);
+
+        g2.setFont(arial_25);
         g2.setColor(Color.white);
-        g2.drawImage(keyImage, 20, 15, 30, 30, null);
-        g2.drawString(" x " + gp.player.keyCount, 45, 40);
+        g2.drawImage(keyImage, 20, 50, 30, 30, null);
+        g2.drawString(" x " + gp.player.keyCount, 45, 75);
 
         if (gp.player.hasBook == true)
-            g2.drawImage(bookImage, 20, 55, 30, 30, null);
+            g2.drawImage(bookImage, 20, 85, 30, 30, null);
 
         if (gp.player.hasPencil == true)
-            g2.drawImage(pencilImage, 60, 55, 20, 30, null);
+            g2.drawImage(pencilImage, 60, 85, 20, 30, null);
 
         if (gp.player.hasID == true)
-            g2.drawImage(studentIDImage, 20, 90, 30, 30, null);
+            g2.drawImage(studentIDImage, 20, 120, 30, 30, null);
 
         // message
         if (messageOn == true) {
@@ -294,7 +302,7 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(35f));
             x = gp.screenWidth / 2;
             y = gp.screenHeight / 2;
-            
+
             text = "WASD - Movement";
             g2.drawString(text, x, y);
 

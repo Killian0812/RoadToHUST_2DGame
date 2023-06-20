@@ -8,7 +8,7 @@ import entity.Player;
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, rightPressed, leftPressed;
-    public boolean enterPressed, spacePressed;
+    public boolean enterPressed, spacePressed, yesPressed, noPressed;
     public boolean spaceTyped;
     GamePanel gp;
 
@@ -148,6 +148,21 @@ public class KeyHandler implements KeyListener {
         else if (gp.gameState == gp.dialogueState) {
             if (code == KeyEvent.VK_ENTER)
                 gp.gameState = gp.playState;
+            if (code == KeyEvent.VK_Y) {
+                yesPressed = true;
+                if (gp.eHandler.requesting == true) {
+                    gp.aSetter.setMonster();
+                    gp.player.worldX = gp.tileSize * 32;
+                    gp.player.worldY = gp.tileSize * 61;
+                    gp.eHandler.requesting = false;
+                    gp.gameState = gp.playState;
+                }
+            }
+            if (code == KeyEvent.VK_N) {
+                noPressed = true;
+                gp.eHandler.requesting = false;
+                gp.gameState = gp.playState;
+            }
         }
 
     }
@@ -170,6 +185,11 @@ public class KeyHandler implements KeyListener {
             spacePressed = false;
             spaceTyped = false;
         }
+        if (code == KeyEvent.VK_Y)
+            yesPressed = false;
+        if (code == KeyEvent.VK_N)
+            noPressed = false;
+
     }
 
     @Override
