@@ -6,7 +6,9 @@ import main.GamePanel;
 
 public class MON_Slime extends Entity {
 
-    public MON_Slime(GamePanel gp) {
+    int color = 0;
+
+    public MON_Slime(GamePanel gp, int color) {
 
         super(gp);
 
@@ -15,6 +17,7 @@ public class MON_Slime extends Entity {
         defaultSpeed = speed;
         maxLife = 4;
         life = maxLife;
+        this.color = color;
 
         solidArea.x = 3;
         solidArea.y = 18;
@@ -28,14 +31,25 @@ public class MON_Slime extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("./res/monster/slime/greenslime_down_1", 48, 48);
-        up2 = setup("./res/monster/slime/greenslime_down_2", 48, 48);
-        down1 = setup("./res/monster/slime/greenslime_down_1", 48, 48);
-        down2 = setup("./res/monster/slime/greenslime_down_2", 48, 48);
-        left1 = setup("./res/monster/slime/greenslime_down_1", 48, 48);
-        left2 = setup("./res/monster/slime/greenslime_down_2", 48, 48);
-        right1 = setup("./res/monster/slime/greenslime_down_1", 48, 48);
-        right2 = setup("./res/monster/slime/greenslime_down_2", 48, 48);
+        if (color == 0) {
+            up1 = setup("./res/monster/slime/redslime_down_1", 48, 48);
+            up2 = setup("./res/monster/slime/redslime_down_2", 48, 48);
+            down1 = setup("./res/monster/slime/redslime_down_1", 48, 48);
+            down2 = setup("./res/monster/slime/redslime_down_2", 48, 48);
+            left1 = setup("./res/monster/slime/redslime_down_1", 48, 48);
+            left2 = setup("./res/monster/slime/redslime_down_2", 48, 48);
+            right1 = setup("./res/monster/slime/redslime_down_1", 48, 48);
+            right2 = setup("./res/monster/slime/redslime_down_2", 48, 48);
+        } else {
+            up1 = setup("./res/monster/slime/blueslime_down_1", 48, 48);
+            up2 = setup("./res/monster/slime/blueslime_down_2", 48, 48);
+            down1 = setup("./res/monster/slime/blueslime_down_1", 48, 48);
+            down2 = setup("./res/monster/slime/blueslime_down_2", 48, 48);
+            left1 = setup("./res/monster/slime/blueslime_down_1", 48, 48);
+            left2 = setup("./res/monster/slime/blueslime_down_2", 48, 48);
+            right1 = setup("./res/monster/slime/blueslime_down_1", 48, 48);
+            right2 = setup("./res/monster/slime/blueslime_down_2", 48, 48);
+        }
     }
 
     public void update() {
@@ -56,7 +70,7 @@ public class MON_Slime extends Entity {
     public void setAction() {
 
         super.setAction();
-        
+
         if (onPath == true) {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;

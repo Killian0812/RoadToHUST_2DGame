@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Money;
 
 public class Player extends Entity {
 
@@ -366,6 +367,15 @@ public class Player extends Entity {
                 knockbackMonster(gp.monster[index]);
                 if (gp.monster[index].life <= 0) {
                     gp.monster[index].isDead = true;
+                    
+                    // Monster item drop
+                    if (gp.monster[index].isCarrying == true) {
+                        if (gp.monster[index].objCarry == "Money") {
+                            gp.obj[++gp.aSetter.objNum] = new OBJ_Money(gp);
+                            gp.obj[gp.aSetter.objNum].worldX = gp.monster[index].worldX;
+                            gp.obj[gp.aSetter.objNum].worldY = gp.monster[index].worldY;
+                        }
+                    }
                     gp.monster[index] = null;
                 }
             }

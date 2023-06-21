@@ -28,8 +28,8 @@ public class CollisionChecker {
 
             case "up":
                 entityTopRow = (entityTopY - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityLeftCol];
-                tileNum2 = gp.tileM.mapTileNum[entityTopRow][entityRightCol];
+                tileNum1 = gp.tileM.mapTileNum[0][entityTopRow][entityLeftCol];
+                tileNum2 = gp.tileM.mapTileNum[0][entityTopRow][entityRightCol];
                 if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
                     entity.collisionOn = true;
                 if (isPlayer == true)
@@ -44,8 +44,8 @@ public class CollisionChecker {
                 break;
             case "down":
                 entityBottomRow = (entityBottomY + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityBottomRow][entityLeftCol];
-                tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];
+                tileNum1 = gp.tileM.mapTileNum[0][entityBottomRow][entityLeftCol];
+                tileNum2 = gp.tileM.mapTileNum[0][entityBottomRow][entityRightCol];
                 if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
                     entity.collisionOn = true;
                 if (isPlayer == true)
@@ -60,8 +60,8 @@ public class CollisionChecker {
                 break;
             case "left":
                 entityLeftCol = (entityLeftX - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityLeftCol];
-                tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityLeftCol];
+                tileNum1 = gp.tileM.mapTileNum[0][entityTopRow][entityLeftCol];
+                tileNum2 = gp.tileM.mapTileNum[0][entityBottomRow][entityLeftCol];
                 if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
                     entity.collisionOn = true;
                 if (isPlayer == true)
@@ -76,8 +76,8 @@ public class CollisionChecker {
                 break;
             case "right":
                 entityRightCol = (entityRightX + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityRightCol];
-                tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];
+                tileNum1 = gp.tileM.mapTileNum[0][entityTopRow][entityRightCol];
+                tileNum2 = gp.tileM.mapTileNum[0][entityBottomRow][entityRightCol];
                 if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
                     entity.collisionOn = true;
                 if (isPlayer == true)

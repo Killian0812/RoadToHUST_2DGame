@@ -7,6 +7,8 @@ public class AssetSetter {
 
     GamePanel gp;
 
+    public int objNum = 8;
+
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
     }
@@ -126,7 +128,7 @@ public class AssetSetter {
     public void setMonster() {
 
         System.out.println("Monsters generated");
-        gp.monster[0] = new MON_Slime(gp);
+        gp.monster[0] = new MON_Slime(gp, 0);
         gp.monster[0].worldX = gp.tileSize * 35;
         gp.monster[0].worldY = gp.tileSize * 63;
         gp.monster[0].direction = "left";
@@ -140,5 +142,12 @@ public class AssetSetter {
         gp.monster[2].worldX = gp.tileSize * 35;
         gp.monster[2].worldY = gp.tileSize * 61;
         gp.monster[2].direction = "right";
+
+        gp.monster[3] = new MON_Slime(gp, 1);
+        gp.monster[3].worldX = gp.tileSize * 37;
+        gp.monster[3].worldY = gp.tileSize * 63;
+        gp.monster[3].direction = "left";
+        gp.monster[3].isCarrying = true;
+        gp.monster[3].objCarry = "Money";
     }
 }

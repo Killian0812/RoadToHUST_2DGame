@@ -66,6 +66,8 @@ public class Entity {
     public int displayHPCounter = 0;
     public int verticalScale = 1;
     public int horizontalScale = 1;
+    public boolean isCarrying = false;
+    public String objCarry;
 
     public Entity(GamePanel gp) {
         this.gp = gp;

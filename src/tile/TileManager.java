@@ -13,13 +13,13 @@ public class TileManager {
 
     GamePanel gp;
     public Tile[] tile;
-    public int mapTileNum[][];
+    public int mapTileNum[][][];
 
     public TileManager(GamePanel gp) {
 
         this.gp = gp;
         tile = new Tile[20];
-        mapTileNum = new int[gp.maxWorldRow][gp.maxWorldCol];
+        mapTileNum = new int[2][gp.maxWorldRow][gp.maxWorldCol];
 
         try {
             getTileImage();
@@ -38,16 +38,16 @@ public class TileManager {
         try {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
-
             int i = 0, j;
             while (sc.hasNextLine() && i < gp.maxWorldRow) {
                 String line = sc.nextLine();
                 // System.out.println(line);
                 String numbers[] = line.split(" ");
                 for (j = 0; j < gp.maxWorldCol; j++) {
-                    mapTileNum[i][j] = Integer.parseInt(numbers[j]);
+                    mapTileNum[0][i][j] = Integer.parseInt(numbers[j]);
                 }
                 i++;
+
             }
             sc.close();
 
@@ -104,7 +104,7 @@ public class TileManager {
 
         while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 
-            int tileType = mapTileNum[worldRow][worldCol];
+            int tileType = mapTileNum[0][worldRow][worldCol];
 
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
