@@ -128,6 +128,7 @@ public class Entity {
         gp.cChecker.checkTile(this, false);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
+        gp.cChecker.checkEntity(this, gp.aggroNPC);
         gp.cChecker.checkEntity(this, gp.monster);
         hitPlayer = gp.cChecker.checkPlayer(this);
     }
@@ -448,16 +449,27 @@ public class Entity {
                 }
             }
 
-        // Monster HP bar
-        if ((name.equals("Slime") || name.equals("Orc")) && displayHP == true) {
+        // Display HP bar
+        if (displayHP == true) {
 
             double oneUnit = (double) gp.tileSize / maxLife;
             double hpBarLength = oneUnit * life;
 
-            g2.setColor(new Color(0, 0, 0, 150));
-            g2.fillRect(screenX - 1, screenY - 11, gp.tileSize + 2, 7);
-            g2.setColor(new Color(255, 0, 30));
-            g2.fillRect(screenX, screenY - 10, (int) hpBarLength, 5);
+            if (name.equals("Slime")) {
+                g2.setColor(new Color(0, 0, 0, 150));
+                g2.fillRect(screenX - 1, screenY - 11, gp.tileSize + 2, 7);
+                g2.setColor(new Color(255, 0, 30));
+                g2.fillRect(screenX, screenY - 10, (int) hpBarLength, 5);
+            }
+            if (name.equals("Gangster") || name.equals("Orc")) {
+                int tmpRange = 0;
+                if (direction == "left" && attacking == true)
+                    tmpRange = gp.tileSize;
+                g2.setColor(new Color(0, 0, 0, 150));
+                g2.fillRect(screenX - 1 + tmpRange, screenY - 11, gp.tileSize + 2, 7);
+                g2.setColor(new Color(255, 0, 30));
+                g2.fillRect(screenX + tmpRange, screenY - 10, (int) hpBarLength, 5);
+            }
 
             displayHPCounter++;
             if (displayHPCounter > 400) {

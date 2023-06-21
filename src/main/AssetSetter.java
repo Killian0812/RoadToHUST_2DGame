@@ -125,6 +125,15 @@ public class AssetSetter {
 
     }
 
+    public void setAggroNPC() {
+        String text1[] = { "Đi đứng cẩn thận vào!", "Mày thích như nào đấy?" };
+        gp.aggroNPC[0] = new MON_Gangster(gp);
+        gp.aggroNPC[0].direction = "up";
+        gp.aggroNPC[0].worldX = gp.tileSize * 60;
+        gp.aggroNPC[0].worldY = gp.tileSize * 8;
+        gp.aggroNPC[0].setDialogue(text1, text1);
+    }
+
     public void setMonster() {
 
         System.out.println("Monsters generated");
@@ -149,5 +158,6 @@ public class AssetSetter {
         gp.monster[3].direction = "left";
         gp.monster[3].isCarrying = true;
         gp.monster[3].objCarry = "Money";
+
     }
 }

@@ -182,6 +182,10 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             npcInteraction(npcIndex);
 
+            /// Check aggro npc collision & interact
+            int aggroNPCIndex = gp.cChecker.checkEntity(this, gp.aggroNPC);
+            aggroNPCInteraction(aggroNPCIndex);
+
             /// Check monster collision
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
@@ -287,6 +291,15 @@ public class Player extends Entity {
         }
     }
 
+    public void aggroNPCInteraction(int index) {
+        if (index != 999) {
+            if (gp.keyH.enterPressed == true) {
+                gp.gameState = gp.dialogueState;
+                gp.aggroNPC[index].speak();
+            }
+        }
+    }
+
     public void contactMonster(int index) {
         if (index != 999) {
             if (isInvicible == false) {
@@ -345,6 +358,10 @@ public class Player extends Entity {
         int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
         damageMonster(monsterIndex);
 
+        // Check aggro npc collison with adjusted worldX,Y and solidArea
+        int aggroNPCIndex = gp.cChecker.checkEntity(this, gp.aggroNPC);
+        damageAggroNPC(aggroNPCIndex);
+
         // Reset
         worldX = currentWorldX;
         worldY = currentWorldY;
@@ -379,8 +396,36 @@ public class Player extends Entity {
                     gp.monster[index] = null;
                 }
             }
-            // }
+        } else {
+            // System.out.println("Miss");
+        }
+    }
 
+    public void damageAggroNPC(int index) {
+        if (index != 999) {
+            // System.out.println("Hit");
+            if (gp.aggroNPC[index].isInvicible == false) {
+                gp.aggroNPC[index].isInvicible = true;
+                gp.aggroNPC[index].life -= 1;
+                if (gp.aggroNPC[index].name == "Gangster")
+                    gp.aggroNPC[index].attacking = true;
+                gp.playSE(8);
+                gp.aggroNPC[index].onPath = true;
+                knockbackMonster(gp.aggroNPC[index]);
+                if (gp.aggroNPC[index].life <= 0) {
+                    gp.aggroNPC[index].isDead = true;
+                    
+                    // Monster item drop
+                    if (gp.aggroNPC[index].isCarrying == true) {
+                        if (gp.aggroNPC[index].objCarry == "Money") {
+                            gp.obj[++gp.aSetter.objNum] = new OBJ_Money(gp);
+                            gp.obj[gp.aSetter.objNum].worldX = gp.aggroNPC[index].worldX;
+                            gp.obj[gp.aSetter.objNum].worldY = gp.aggroNPC[index].worldY;
+                        }
+                    }
+                    gp.aggroNPC[index] = null;
+                }
+            }
         } else {
             // System.out.println("Miss");
         }
