@@ -132,6 +132,8 @@ public class AssetSetter {
         gp.aggroNPC[0].worldX = gp.tileSize * 60;
         gp.aggroNPC[0].worldY = gp.tileSize * 8;
         gp.aggroNPC[0].setDialogue(text1, text1);
+        gp.aggroNPC[0].isCarrying = true;
+        gp.aggroNPC[0].objCarry = "Money";
     }
 
     public void setMonster() {
@@ -156,8 +158,6 @@ public class AssetSetter {
         gp.monster[3].worldX = gp.tileSize * 37;
         gp.monster[3].worldY = gp.tileSize * 63;
         gp.monster[3].direction = "left";
-        gp.monster[3].isCarrying = true;
-        gp.monster[3].objCarry = "Money";
 
     }
 }

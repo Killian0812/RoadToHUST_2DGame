@@ -388,11 +388,15 @@ public class Entity {
         int screenX = gp.player.screenX + playerToNPCX;
         int screenY = gp.player.screenY + playerToNPCY;
 
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
+
         if (Math.abs(playerToNPCX) < gp.player.screenX + gp.tileSize &&
                 Math.abs(playerToNPCY) < gp.player.screenY + gp.tileSize)
             switch (direction) {
                 case "up": {
                     if (attacking == true) {
+                        tempScreenY = screenY - gp.tileSize;
                         if (spriteNum == 1)
                             image = atkUp1;
                         else
@@ -435,6 +439,7 @@ public class Entity {
                 }
                 case "left": {
                     if (attacking == true) {
+                        tempScreenX = screenX - gp.tileSize;
                         if (spriteNum == 1)
                             image = atkLeft1;
                         else
@@ -455,20 +460,11 @@ public class Entity {
             double oneUnit = (double) gp.tileSize / maxLife;
             double hpBarLength = oneUnit * life;
 
-            if (name.equals("Slime")) {
+            if (name.equals("Slime") || name.equals("Gangster") || name.equals("Orc")) {
                 g2.setColor(new Color(0, 0, 0, 150));
                 g2.fillRect(screenX - 1, screenY - 11, gp.tileSize + 2, 7);
                 g2.setColor(new Color(255, 0, 30));
                 g2.fillRect(screenX, screenY - 10, (int) hpBarLength, 5);
-            }
-            if (name.equals("Gangster") || name.equals("Orc")) {
-                int tmpRange = 0;
-                if (direction == "left" && attacking == true)
-                    tmpRange = gp.tileSize;
-                g2.setColor(new Color(0, 0, 0, 150));
-                g2.fillRect(screenX - 1 + tmpRange, screenY - 11, gp.tileSize + 2, 7);
-                g2.setColor(new Color(255, 0, 30));
-                g2.fillRect(screenX + tmpRange, screenY - 10, (int) hpBarLength, 5);
             }
 
             displayHPCounter++;
@@ -494,9 +490,10 @@ public class Entity {
                     verticalScale = 2;
                 else
                     horizontalScale = 2;
-                g2.drawImage(image, screenX, screenY, gp.tileSize * horizontalScale, gp.tileSize * verticalScale, null);
+                g2.drawImage(image, tempScreenX, tempScreenY, gp.tileSize * horizontalScale,
+                        gp.tileSize * verticalScale, null);
             } else
-                g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                g2.drawImage(image, tempScreenX, tempScreenY, gp.tileSize, gp.tileSize, null);
         } else
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize + 20, null);
 

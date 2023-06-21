@@ -12,7 +12,7 @@ public class OBJ_Money extends SuperObject {
 
     public OBJ_Money(GamePanel gp) {
         this.gp = gp;
-        name = "Key";
+        name = "Money";
         try {
 
             File f = new File("./res/objects/key.png");

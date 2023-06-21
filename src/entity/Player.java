@@ -223,6 +223,12 @@ public class Player extends Entity {
         if (index != 999) {
             String objectName = gp.obj[index].name;
             switch (objectName) {
+                case "Money":
+                    gp.obj[index] = null;
+                    moneyCount++;
+                    gp.playSE(1);
+                    gp.ui.showMsg("You've got a dollar!");
+                    break;
                 case "Key":
                     gp.obj[index] = null;
                     keyCount++;
