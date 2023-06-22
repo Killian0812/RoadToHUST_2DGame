@@ -46,10 +46,10 @@ public class EventHandler {
 		}
 
 		if (canTouchEvent == true) {
-			if (hit(10, 62, "any") == true) {
-				teleport(61, 32, gp.dialogueState);
-				canTouchEvent = false;
-			}
+			// if (hit(10, 62, "any") == true) {
+			// 	teleport(61, 32, gp.dialogueState);
+			// 	canTouchEvent = false;
+			// }
 		}
 
 	}

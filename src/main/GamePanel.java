@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
 
     /// ENTITY AND OBJECT
-    public SuperObject obj[] = new SuperObject[10];
+    public SuperObject obj[] = new SuperObject[40];
     public Player player = new Player(this, keyH, 0);
     public Entity monster[] = new Entity[20];
     public Entity npc[] = new Entity[10];
@@ -129,13 +129,14 @@ public class GamePanel extends JPanel implements Runnable {
                 player.update();
 
             for (int i = 0; i < npc.length; i++) {
-                if (npc[i] != null) 
+                if (npc[i] != null)
                     npc[i].update();
             }
 
             for (int i = 0; i < aggroNPC.length; i++) {
-                if (aggroNPC[i] != null) 
-                    aggroNPC[i].update();
+                if (aggroNPC[i] != null)
+                    if (aggroNPC[i].isDead == false)
+                        aggroNPC[i].update();
             }
 
             for (int i = 0; i < monster.length; i++) {
@@ -162,13 +163,6 @@ public class GamePanel extends JPanel implements Runnable {
             /// TILE
             tileM.draw(g2);
 
-            /// OBJECT
-            for (int i = 0; i < obj.length; i++) {
-                if (obj[i] == null)
-                    continue;
-                obj[i].draw(g2, this);
-            }
-
             // /// NPC
             // for (int i = 0; i < npc.length; i++) {
             // if (npc[i] == null)
@@ -191,8 +185,8 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < npc.length; i++)
                 if (npc[i] != null)
                     entityList.add(npc[i]);
-            for (int i = 0; i < aggroNPC.length; i++) 
-                if (aggroNPC[i] != null) 
+            for (int i = 0; i < aggroNPC.length; i++)
+                if (aggroNPC[i] != null)
                     entityList.add(aggroNPC[i]);
             for (int i = 0; i < monster.length; i++)
                 if (monster[i] != null)
@@ -206,9 +200,23 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             });
 
-            // Draw all entities
+            // Draw all dead entities
             for (int i = 0; i < entityList.size(); i++)
-                entityList.get(i).draw(g2);
+                if (entityList.get(i).isDead == true)
+                    entityList.get(i).draw(g2);
+
+            /// OBJECT
+            for (int i = 0; i < obj.length; i++) {
+                if (obj[i] == null)
+                    continue;
+                obj[i].draw(g2, this);
+            }
+
+            // Draw all alive entities
+            for (int i = 0; i < entityList.size(); i++)
+                if (entityList.get(i).isDead == false)
+                    entityList.get(i).draw(g2);
+
             // Reset entityList for next render
             entityList.clear();
 

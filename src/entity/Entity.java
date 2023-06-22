@@ -139,6 +139,9 @@ public class Entity {
 
     public void update() {
 
+        if (isDead == true)
+            return;
+
         if (knockBack == true) {
 
             checkCollision();
@@ -392,67 +395,77 @@ public class Entity {
         int tempScreenY = screenY;
 
         if (Math.abs(playerToNPCX) < gp.player.screenX + gp.tileSize &&
-                Math.abs(playerToNPCY) < gp.player.screenY + gp.tileSize)
-            switch (direction) {
-                case "up": {
-                    if (attacking == true) {
-                        tempScreenY = screenY - gp.tileSize;
-                        if (spriteNum == 1)
-                            image = atkUp1;
-                        else
-                            image = atkUp2;
-                    } else {
-                        if (spriteNum == 1)
-                            image = up1;
-                        if (spriteNum == 2)
-                            image = up2;
+                Math.abs(playerToNPCY) < gp.player.screenY + gp.tileSize) {
+            if (isDead == true) {
+                if (direction.equals("right") || direction.equals("up"))
+                    image = dead2;
+                else
+                    image = dead1;
+                displayHP = false;
+                isInvicible = false;
+                attacking = false;
+            } else
+                switch (direction) {
+                    case "up": {
+                        if (attacking == true) {
+                            tempScreenY = screenY - gp.tileSize;
+                            if (spriteNum == 1)
+                                image = atkUp1;
+                            else
+                                image = atkUp2;
+                        } else {
+                            if (spriteNum == 1)
+                                image = up1;
+                            if (spriteNum == 2)
+                                image = up2;
+                        }
+                        break;
                     }
-                    break;
-                }
-                case "down": {
-                    if (attacking == true) {
-                        if (spriteNum == 1)
-                            image = atkDown1;
-                        else
-                            image = atkDown2;
-                    } else {
-                        if (spriteNum == 1)
-                            image = down1;
-                        if (spriteNum == 2)
-                            image = down2;
+                    case "down": {
+                        if (attacking == true) {
+                            if (spriteNum == 1)
+                                image = atkDown1;
+                            else
+                                image = atkDown2;
+                        } else {
+                            if (spriteNum == 1)
+                                image = down1;
+                            if (spriteNum == 2)
+                                image = down2;
+                        }
+                        break;
                     }
-                    break;
-                }
-                case "right": {
-                    if (attacking == true) {
-                        if (spriteNum == 1)
-                            image = atkRight1;
-                        else
-                            image = atkRight2;
-                    } else {
-                        if (spriteNum == 1)
-                            image = right1;
-                        if (spriteNum == 2)
-                            image = right2;
+                    case "right": {
+                        if (attacking == true) {
+                            if (spriteNum == 1)
+                                image = atkRight1;
+                            else
+                                image = atkRight2;
+                        } else {
+                            if (spriteNum == 1)
+                                image = right1;
+                            if (spriteNum == 2)
+                                image = right2;
+                        }
+                        break;
                     }
-                    break;
-                }
-                case "left": {
-                    if (attacking == true) {
-                        tempScreenX = screenX - gp.tileSize;
-                        if (spriteNum == 1)
-                            image = atkLeft1;
-                        else
-                            image = atkLeft2;
-                    } else {
-                        if (spriteNum == 1)
-                            image = left1;
-                        if (spriteNum == 2)
-                            image = left2;
+                    case "left": {
+                        if (attacking == true) {
+                            tempScreenX = screenX - gp.tileSize;
+                            if (spriteNum == 1)
+                                image = atkLeft1;
+                            else
+                                image = atkLeft2;
+                        } else {
+                            if (spriteNum == 1)
+                                image = left1;
+                            if (spriteNum == 2)
+                                image = left2;
+                        }
+                        break;
                     }
-                    break;
                 }
-            }
+        }
 
         // Display HP bar
         if (displayHP == true) {

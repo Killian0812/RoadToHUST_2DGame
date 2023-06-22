@@ -37,6 +37,8 @@ public class MON_Gangster extends Entity {
         left2 = setup("./res/npc/gangster/gangster_left_2", 48, 48);
         right1 = setup("./res/npc/gangster/gangster_right_1", 48, 48);
         right2 = setup("./res/npc/gangster/gangster_right_2", 48, 48);
+        dead1 = setup("./res/npc/gangster/gangster_dead_1", 48, 48);
+        dead2 = setup("./res/npc/gangster/gangster_dead_2", 48, 48);
     }
 
     public void getAttackImage() {

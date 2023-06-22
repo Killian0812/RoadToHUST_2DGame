@@ -419,17 +419,18 @@ public class Player extends Entity {
                 gp.aggroNPC[index].onPath = true;
                 knockbackMonster(gp.aggroNPC[index]);
                 if (gp.aggroNPC[index].life <= 0) {
+
                     gp.aggroNPC[index].isDead = true;
-                    
-                    // Monster item drop
+                    // NPC item drop
                     if (gp.aggroNPC[index].isCarrying == true) {
                         if (gp.aggroNPC[index].objCarry == "Money") {
                             gp.obj[++gp.aSetter.objNum] = new OBJ_Money(gp);
                             gp.obj[gp.aSetter.objNum].worldX = gp.aggroNPC[index].worldX;
                             gp.obj[gp.aSetter.objNum].worldY = gp.aggroNPC[index].worldY;
                         }
+                        gp.aggroNPC[index].isCarrying = false;
                     }
-                    gp.aggroNPC[index] = null;
+                    // gp.aggroNPC[index] = null;
                 }
             }
         } else {
