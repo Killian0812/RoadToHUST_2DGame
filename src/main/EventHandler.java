@@ -43,15 +43,19 @@ public class EventHandler {
 			canTouchEvent = true;
 		}
 
-		if (canTouchEvent == true) {
+//		if (canTouchEvent == true) {
 			// add event here
 			// if (hit(26, 50, "any") == true) {
 			// 	damagePit(26, 50, gp.dialogueState);
+//<<<<<<< HEAD
 			// }
 //			if (hit(26,50,"any")==true) {
 //				gp.player.life--;
 //			}
-		}
+//=======
+			// }}
+//>>>>>>> c4f4fd454aa675cf4ef0e379c7925eff8b2c3bf5
+//		}
 
 	}
 
