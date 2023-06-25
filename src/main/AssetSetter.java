@@ -61,6 +61,10 @@ public class AssetSetter {
         gp.obj[11] = new OBJ_Trashcan(gp);
         gp.obj[11].worldX = gp.tileSize * 59;
         gp.obj[11].worldY = gp.tileSize * 9;
+
+        gp.obj[12] = new OBJ_Coffee(gp);
+        gp.obj[12].worldX = gp.tileSize * 72;
+        gp.obj[12].worldY = gp.tileSize * 7;
     }
 
     public void setNPC() {
@@ -127,13 +131,15 @@ public class AssetSetter {
         gp.npc[7].direction = "left";
         gp.npc[7].worldX = gp.tileSize * 72;
         gp.npc[7].worldY = gp.tileSize * 22;
-        gp.npc[7].name = "Car";
 
         gp.npc[8] = new NPC_NinjaLead(gp);
         gp.npc[8].direction = "right";
         gp.npc[8].worldX = gp.tileSize * 72;
         gp.npc[8].worldY = gp.tileSize * 24;
-        gp.npc[8].name = "NinjaLead";
+
+        gp.npc[9] = new NPC_Guest3(gp);
+        gp.npc[9].worldX = gp.tileSize * 74;
+        gp.npc[9].worldY = gp.tileSize * 7;
 
     }
 

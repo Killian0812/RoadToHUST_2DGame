@@ -53,6 +53,7 @@ public class Entity {
     public int life;
     public boolean isDead = false;
     public boolean onPath = false;
+    public boolean isMoving = true;
 
     // Character speaking
     public String dialogues0[] = new String[20];
@@ -172,6 +173,9 @@ public class Entity {
                 speed = defaultSpeed;
             }
         } else {
+
+            if (isMoving == false)
+                return;
 
             setAction();
             checkCollision();

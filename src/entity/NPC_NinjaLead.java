@@ -11,6 +11,7 @@ public class NPC_NinjaLead extends Entity {
         super(gp);
         speed = 6;
         direction = "";
+        name = "NinjaLead";
         solidArea = new Rectangle(8, 16, 72, gp.tileSize);
         isVehicle = true;
         getImage();

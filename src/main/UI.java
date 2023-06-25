@@ -101,7 +101,7 @@ public class UI {
         g2.setFont(arial_25);
         g2.setColor(Color.green);
         g2.drawImage(moneyImage, 20, 15, 30, 30, null);
-        g2.drawString(" x " + gp.player.moneyCount, 45, 40);
+        g2.drawString(" x " + gp.player.moneyCount, 45, 38);
 
         g2.setFont(arial_25);
         g2.setColor(Color.white);

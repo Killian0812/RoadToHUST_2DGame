@@ -28,6 +28,7 @@ public class Player extends Entity {
     public boolean hasBook = false;
     public boolean hasBackpack = false;
     public boolean carryingTrash = false;
+    public boolean carryingCoffee = false;
 
     final public Rectangle tmp;
 
@@ -248,6 +249,7 @@ public class Player extends Entity {
                     break;
                 case "Boots":
                     speed += 2;
+                    // defaultSpeed = speed;
                     gp.obj[index] = null;
                     gp.playSE(3);
                     gp.ui.showMsg("Speed up!");
@@ -289,6 +291,7 @@ public class Player extends Entity {
                     if (carryingTrash == false) {
                         gp.obj[index] = null;
                         carryingTrash = true;
+                        speed -= 2;
                         gp.playSE(1);
                         gp.ui.showMsg("You've picked up a trashbag!");
                     } else {
@@ -300,9 +303,21 @@ public class Player extends Entity {
                         gp.obj[index].useCount++;
                         carryingTrash = false;
                         gp.playSE(1);
+                        speed += 2;
                         gp.ui.showMsg("You've thrown a trashbag in trashcan!");
                         if (gp.obj[index].useCount == 2)
                             gp.player.moneyCount++;
+                    }
+                    break;
+                case "Coffee":
+                    if (carryingCoffee == false) {
+                        gp.obj[index] = null;
+                        carryingCoffee = true;
+                        speed -= 1;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've picked up a cup of coffee!");
+                    } else {
+                        gp.ui.showMsg("You already carrying a cup of coffee");
                     }
                     break;
             }
@@ -312,6 +327,17 @@ public class Player extends Entity {
     public void npcInteraction(int index) {
         if (index != 999) {
             if (gp.keyH.enterPressed == true) {
+                if (gp.npc[index].name == "Guest") {
+                    if (carryingCoffee == true) {
+                        gp.npc[index].isMoving = true;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've brought coffee for a guest!");
+                        carryingCoffee = false;
+                        speed++;
+                        moneyCount++;
+                    }
+                    return;
+                }
                 gp.gameState = gp.dialogueState;
                 gp.npc[index].speak();
             }

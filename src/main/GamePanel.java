@@ -121,8 +121,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        // System.out.println("X: " + player.worldX / tileSize + " Y: " + player.worldY
-        // / tileSize);
+        System.out.println("X: " + player.worldX / tileSize + " Y: " + player.worldY
+        / tileSize);
         if (gameState == playState) {
 
             if (ui.gameFinished == false)
@@ -229,8 +229,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void playMusic(int i) {
         music.setFile(i);
-        music.play();
-        music.loop();
+        // music.play();
+        // music.loop();
     }
 
     public void stopMusic() {
