@@ -27,6 +27,7 @@ public class Player extends Entity {
     public boolean hasID = false;
     public boolean hasBook = false;
     public boolean hasBackpack = false;
+    public boolean carryingTrash = false;
 
     final public Rectangle tmp;
 
@@ -284,6 +285,26 @@ public class Player extends Entity {
                     } else
                         gp.ui.showMsg("You need a backpack!");
                     break;
+                case "Rubbish":
+                    if (carryingTrash == false) {
+                        gp.obj[index] = null;
+                        carryingTrash = true;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've picked up a rubbish!");
+                    } else {
+                        gp.ui.showMsg("You already carrying a rubbish");
+                    }
+                    break;
+                case "Trashcan":
+                    if (carryingTrash == true) {
+                        gp.obj[index].useCount++;
+                        carryingTrash = false;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've thrown a rubbish in trashcan!");
+                        if (gp.obj[index].useCount == 2)
+                            gp.player.moneyCount++;
+                    }
+                    break;
             }
         }
     }
@@ -390,7 +411,7 @@ public class Player extends Entity {
                 knockbackMonster(gp.monster[index]);
                 if (gp.monster[index].life <= 0) {
                     gp.monster[index].isDead = true;
-                    
+
                     // Monster item drop
                     if (gp.monster[index].isCarrying == true) {
                         if (gp.monster[index].objCarry == "Money") {

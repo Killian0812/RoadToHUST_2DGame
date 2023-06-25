@@ -49,6 +49,18 @@ public class AssetSetter {
         gp.obj[8] = new OBJ_Door(gp);
         gp.obj[8].worldX = gp.tileSize * 97;
         gp.obj[8].worldY = gp.tileSize * 21;
+
+        gp.obj[9] = new OBJ_Rubbish(gp);
+        gp.obj[9].worldX = gp.tileSize * 65;
+        gp.obj[9].worldY = gp.tileSize * 9;
+
+        gp.obj[10] = new OBJ_Rubbish(gp);
+        gp.obj[10].worldX = gp.tileSize * 62;
+        gp.obj[10].worldY = gp.tileSize * 9;
+
+        gp.obj[11] = new OBJ_Trashcan(gp);
+        gp.obj[11].worldX = gp.tileSize * 59;
+        gp.obj[11].worldY = gp.tileSize * 9;
     }
 
     public void setNPC() {

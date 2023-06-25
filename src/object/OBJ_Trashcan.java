@@ -6,16 +6,16 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
-public class OBJ_Door extends SuperObject {
+public class OBJ_Trashcan extends SuperObject {
 
     GamePanel gp;
 
-    public OBJ_Door(GamePanel gp) {
+    public OBJ_Trashcan(GamePanel gp) {
         this.gp = gp;
-        name = "Door";
+        name = "Trashcan";
         try {
 
-            File f = new File("./res/objects/door.png");
+            File f = new File("./res/objects/trashcan.png");
             image = ImageIO.read(f);
             uTool.scaledImage(image, gp.tileSize, gp.tileSize);
 

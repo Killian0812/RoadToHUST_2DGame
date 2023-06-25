@@ -17,6 +17,8 @@ public class SuperObject {
     public int solidAreaDefaultX = 0;
     public int solidAreaDefaultY = 0;
 
+    public int useCount = 0;
+
     UtilityTool uTool = new UtilityTool();
 
     public void draw(Graphics2D g2, GamePanel gp) {
@@ -28,7 +30,7 @@ public class SuperObject {
         int screenY = gp.player.screenY + playerToObjY;
 
         int drawSize = gp.tileSize / 2;
-        if (name == "Door" || name == "Chest")
+        if (name == "Door" || name == "Chest" || name == "Trashcan")
             drawSize *= 2;
         if (name == "Backpack")
             drawSize += 15;
