@@ -6,16 +6,16 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
-public class OBJ_Rubbish extends SuperObject {
+public class OBJ_Trashbag extends SuperObject {
 
     GamePanel gp;
 
-    public OBJ_Rubbish(GamePanel gp) {
+    public OBJ_Trashbag(GamePanel gp) {
         this.gp = gp;
-        name = "Rubbish";
+        name = "Trashbag";
         try {
 
-            File f = new File("./res/objects/rubbish.png");
+            File f = new File("./res/objects/trashbag.png");
             image = ImageIO.read(f);
             uTool.scaledImage(image, gp.tileSize, gp.tileSize);
 

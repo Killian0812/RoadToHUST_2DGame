@@ -7,7 +7,7 @@ public class AssetSetter {
 
     GamePanel gp;
 
-    public int objNum = 8;
+    public int objNum = 20;
 
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
@@ -50,11 +50,11 @@ public class AssetSetter {
         gp.obj[8].worldX = gp.tileSize * 97;
         gp.obj[8].worldY = gp.tileSize * 21;
 
-        gp.obj[9] = new OBJ_Rubbish(gp);
+        gp.obj[9] = new OBJ_Trashbag(gp);
         gp.obj[9].worldX = gp.tileSize * 65;
         gp.obj[9].worldY = gp.tileSize * 9;
 
-        gp.obj[10] = new OBJ_Rubbish(gp);
+        gp.obj[10] = new OBJ_Trashbag(gp);
         gp.obj[10].worldX = gp.tileSize * 62;
         gp.obj[10].worldY = gp.tileSize * 9;
 

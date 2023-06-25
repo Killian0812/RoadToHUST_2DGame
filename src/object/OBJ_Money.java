@@ -15,7 +15,7 @@ public class OBJ_Money extends SuperObject {
         name = "Money";
         try {
 
-            File f = new File("./res/objects/key.png");
+            File f = new File("./res/objects/money.png");
             image = ImageIO.read(f);
             uTool.scaledImage(image, gp.tileSize, gp.tileSize);
 

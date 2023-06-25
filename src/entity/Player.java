@@ -285,14 +285,14 @@ public class Player extends Entity {
                     } else
                         gp.ui.showMsg("You need a backpack!");
                     break;
-                case "Rubbish":
+                case "Trashbag":
                     if (carryingTrash == false) {
                         gp.obj[index] = null;
                         carryingTrash = true;
                         gp.playSE(1);
-                        gp.ui.showMsg("You've picked up a rubbish!");
+                        gp.ui.showMsg("You've picked up a trashbag!");
                     } else {
-                        gp.ui.showMsg("You already carrying a rubbish");
+                        gp.ui.showMsg("You already carrying a trashbag");
                     }
                     break;
                 case "Trashcan":
@@ -300,7 +300,7 @@ public class Player extends Entity {
                         gp.obj[index].useCount++;
                         carryingTrash = false;
                         gp.playSE(1);
-                        gp.ui.showMsg("You've thrown a rubbish in trashcan!");
+                        gp.ui.showMsg("You've thrown a trashbag in trashcan!");
                         if (gp.obj[index].useCount == 2)
                             gp.player.moneyCount++;
                     }

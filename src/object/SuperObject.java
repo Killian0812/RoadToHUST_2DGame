@@ -30,7 +30,8 @@ public class SuperObject {
         int screenY = gp.player.screenY + playerToObjY;
 
         int drawSize = gp.tileSize / 2;
-        if (name == "Door" || name == "Chest" || name == "Trashcan")
+        if (name == "Door" || name == "Chest"
+                || name == "Trashcan" || name == "Trashbag")
             drawSize *= 2;
         if (name == "Backpack")
             drawSize += 15;
