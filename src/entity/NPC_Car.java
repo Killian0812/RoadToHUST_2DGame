@@ -11,7 +11,10 @@ public class NPC_Car extends Entity {
         super(gp);
         speed = 6;
         direction = "";
+        name = "Car";
         solidArea = new Rectangle(0, 10, gp.tileSize * 2, gp.tileSize / 2 + 8);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         isVehicle = true;
         getImage();
     }

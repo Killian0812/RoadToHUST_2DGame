@@ -8,7 +8,8 @@ import entity.Player;
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, rightPressed, leftPressed;
-    public boolean enterPressed, spacePressed;
+    public boolean dropPressed;
+    public boolean enterPressed, spacePressed, yesPressed, noPressed;
     public boolean spaceTyped;
     GamePanel gp;
 
@@ -56,8 +57,7 @@ public class KeyHandler implements KeyListener {
                 }
                 if (code == KeyEvent.VK_ENTER) {
                     if (gp.ui.commandNum == 0 || gp.ui.commandNum == 1) {
-                        gp.aSetter.setObj();
-                        gp.aSetter.setNPC();
+                        gp.setupGame();
                         gp.stopMusic();
                         gp.playMusic(0);
                         gp.ui.playTime = 0.0;
@@ -84,6 +84,8 @@ public class KeyHandler implements KeyListener {
                 downPressed = true;
             if (code == KeyEvent.VK_A)
                 leftPressed = true;
+            if (code == KeyEvent.VK_G)
+                dropPressed = true;
             if (code == KeyEvent.VK_ENTER)
                 enterPressed = true;
             if (code == KeyEvent.VK_SPACE)
@@ -130,9 +132,9 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (gp.ui.commandNum == 0) {
-                    gp.ui.playTime = 0.0;
                     gp.setupGame();
-                    gp.player.setDefaultValues();
+                    gp.stopMusic();
+                    gp.playMusic(0);
                     gp.gameState = gp.playState;
                 }
                 if (gp.ui.commandNum == 1) {
@@ -149,8 +151,59 @@ public class KeyHandler implements KeyListener {
         else if (gp.gameState == gp.dialogueState) {
             if (code == KeyEvent.VK_ENTER)
                 gp.gameState = gp.playState;
+            if (code == KeyEvent.VK_Y) {
+                yesPressed = true;
+                if (gp.eHandler.requesting == 1) { // VR ROOM
+                    if (gp.ui.playTime <= 5.0 || gp.ui.VRWorldCoolDown >= 5.0) {
+                        gp.player.isInVRWorld = true;
+                        gp.player.hpBeforeVR = gp.player.life;
+                        gp.player.life = 6;
+                        gp.aSetter.setMonster();
+                        gp.player.worldX = gp.tileSize * 19;
+                        gp.player.worldY = gp.tileSize * 111;
+                        gp.eHandler.requesting = 0;
+                        gp.gameState = gp.playState;
+                    } else {
+                        gp.ui.currentDialogue = "You can't play again for 60 seconds";
+                    }
+                } else if (gp.eHandler.requesting == 2) { // HOSPITAL
+                    if (gp.player.moneyCount >= 1) {
+                        gp.player.moneyCount--;
+                        gp.player.life = 6;
+                        gp.playSE(1);
+                        gp.eHandler.requesting = 0;
+                        gp.gameState = gp.playState;
+                    } else {
+                        gp.ui.currentDialogue = "You don't have enough money";
+                    }
+                } else if (gp.eHandler.requesting == 3) { // BREAD SELLER
+                    if (gp.player.moneyCount >= 2) {
+                        gp.player.moneyCount -= 2;
+                        gp.player.hasBread = true;
+                        gp.playSE(1);
+                        gp.eHandler.requesting = 0;
+                        gp.gameState = gp.playState;
+                    } else {
+                        gp.ui.currentDialogue = "You don't have enough money";
+                    }
+                } else if (gp.eHandler.requesting == 4) { // BOOK SELLER
+                    if (gp.player.moneyCount >= 3) {
+                        gp.player.moneyCount -= 3;
+                        gp.player.hasBook = true;
+                        gp.playSE(1);
+                        gp.eHandler.requesting = 0;
+                        gp.gameState = gp.playState;
+                    } else {
+                        gp.ui.currentDialogue = "You don't have enough money";
+                    }
+                }
+            }
         }
-
+        if (code == KeyEvent.VK_N) {
+            noPressed = true;
+            gp.eHandler.requesting = 0;
+            gp.gameState = gp.playState;
+        }
     }
 
     @Override
@@ -165,12 +218,19 @@ public class KeyHandler implements KeyListener {
             downPressed = false;
         if (code == KeyEvent.VK_A)
             leftPressed = false;
+        if (code == KeyEvent.VK_G)
+            dropPressed = false;
         if (code == KeyEvent.VK_ENTER)
             enterPressed = false;
         if (code == KeyEvent.VK_SPACE) {
             spacePressed = false;
             spaceTyped = false;
         }
+        if (code == KeyEvent.VK_Y)
+            yesPressed = false;
+        if (code == KeyEvent.VK_N)
+            noPressed = false;
+
     }
 
     @Override

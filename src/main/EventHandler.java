@@ -8,6 +8,8 @@ public class EventHandler {
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
 
+	public int requesting = 0;
+
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
 
@@ -43,19 +45,25 @@ public class EventHandler {
 			canTouchEvent = true;
 		}
 
-//		if (canTouchEvent == true) {
-			// add event here
-			// if (hit(26, 50, "any") == true) {
-			// 	damagePit(26, 50, gp.dialogueState);
-//<<<<<<< HEAD
-			// }
-//			if (hit(26,50,"any")==true) {
-//				gp.player.life--;
-//			}
-//=======
-			// }}
-//>>>>>>> c4f4fd454aa675cf4ef0e379c7925eff8b2c3bf5
-//		}
+		if (canTouchEvent == true) {
+
+			// VR ROOM
+			if (hit(14, 21, "any") == true
+					|| hit(14, 20, "any") == true
+					|| hit(14, 19, "any") == true
+					|| hit(14, 18, "any") == true) {
+				teleport(112, 32, gp.dialogueState);
+				canTouchEvent = false;
+			}
+
+			// HOSPITAL
+			if (hit(65, 62, "any") == true
+					|| hit(65, 61, "any") == true
+					|| hit(65, 60, "any") == true) {
+				healing(65, 62, gp.dialogueState);
+				canTouchEvent = false;
+			}
+		}
 
 	}
 
@@ -84,7 +92,7 @@ public class EventHandler {
 		return hit;
 	}
 
-	public void damagePit(int col, int row, int gameState) {
+	public void damage(int row, int col, int gameState) {
 		gp.gameState = gameState;
 		gp.ui.currentDialogue = "You fall into a pit";
 		gp.player.life -= 1;
@@ -92,12 +100,17 @@ public class EventHandler {
 		canTouchEvent = false;
 	}
 
-	public void healingPool(int col, int row, int gameState) {
-		if (gp.keyH.enterPressed == true) {
-			gp.gameState = gameState;
-			gp.ui.currentDialogue = "You drink the water.\nYour life has been recovered.";
-			gp.player.life = gp.player.maxLife;
-		}
+	public void healing(int row, int col, int gameState) {
+		gp.gameState = gameState;
+		gp.ui.currentDialogue = "Pay 1 dollar to fully recover HP? /n/n Y: Yes           N: No";
+		// eventRect[row][col].eventDone = true;
+		requesting = 2;
+	}
 
+	public void teleport(int row, int col, int gameState) {
+		gp.gameState = gameState;
+		gp.ui.currentDialogue = "Play in VR World? /n/n Y: Yes           N: No";
+		// eventRect[row][col].eventDone = true;
+		requesting = 1;
 	}
 }

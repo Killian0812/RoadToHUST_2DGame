@@ -3,6 +3,7 @@ package main;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,15 +15,19 @@ import object.*;
 
 public class UI {
 
-    double playTime;
+    public double playTime;
+    public double VRWorldCoolDown;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
     Graphics2D g2;
     GamePanel gp;
 
     Font arial_25, arial_80B, cambria_80;
+    Font joystixMonospace;
 
-    BufferedImage keyImage, studentIDImage, bookImage, pencilImage;
+    BufferedImage keyImage, moneyImage;
+    BufferedImage studentIDImage, bookImage, pencilImage;
+    BufferedImage breadImage;
     BufferedImage heart_full, heart_half, heart_blank;
     public boolean messageOn = false;
     public String message = "";
@@ -38,19 +43,34 @@ public class UI {
 
     public UI(GamePanel gp) {
         this.gp = gp;
+
         arial_25 = new Font("Arial", Font.PLAIN, 25);
         arial_80B = new Font("Arial", Font.BOLD, 80);
         cambria_80 = new Font("Cambria", Font.BOLD, 80);
-
+        try {
+            File f = new File("./res/font/joystix monospace.otf");
+            joystixMonospace = Font.createFont(Font.TRUETYPE_FONT, f);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // HUD
+        OBJ_Money money = new OBJ_Money(gp);
+        moneyImage = money.image;
+
         OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
+
         OBJ_StudentID studentID = new OBJ_StudentID(gp);
         studentIDImage = studentID.image;
         OBJ_Book book = new OBJ_Book(gp);
         bookImage = book.image;
         OBJ_Pencil pencil = new OBJ_Pencil(gp);
         pencilImage = pencil.image;
+
+        OBJ_Bread bread = new OBJ_Bread(gp);
+        breadImage = bread.image;
 
         SuperObject heart = new OBJ_Heart(gp);
         heart_full = heart.image;
@@ -96,18 +116,26 @@ public class UI {
 
         // display items
         g2.setFont(arial_25);
-        g2.setColor(Color.white);
-        g2.drawImage(keyImage, 20, 15, 30, 30, null);
-        g2.drawString(" x " + gp.player.keyCount, 45, 40);
+        g2.setColor(Color.green);
+        g2.drawImage(moneyImage, 20, 15, 30, 30, null);
+        g2.drawString(" x " + gp.player.moneyCount, 45, 38);
 
-        if (gp.player.hasBook == true)
-            g2.drawImage(bookImage, 20, 55, 30, 30, null);
+        g2.setFont(arial_25);
+        g2.setColor(Color.white);
+        g2.drawImage(keyImage, 20, 50, 30, 30, null);
+        g2.drawString(" x " + gp.player.keyCount, 45, 75);
 
         if (gp.player.hasPencil == true)
-            g2.drawImage(pencilImage, 60, 55, 20, 30, null);
+            g2.drawImage(pencilImage, 20, 90, 20, 25, null);
+
+        if (gp.player.hasBook == true)
+            g2.drawImage(bookImage, 60, 85, 30, 30, null);
 
         if (gp.player.hasID == true)
-            g2.drawImage(studentIDImage, 20, 90, 30, 30, null);
+            g2.drawImage(studentIDImage, 20, 120, 30, 30, null);
+
+        if (gp.player.hasBread == true)
+            g2.drawImage(breadImage, 20, 155, 30, 30, null);
 
         // message
         if (messageOn == true) {
@@ -124,7 +152,8 @@ public class UI {
 
         // playtime
         playTime += (double) 1 / 60;
-        g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 12, 80);
+        VRWorldCoolDown += (double) 1 / 60;
+        g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 16, 80);
 
     }
 
@@ -132,7 +161,7 @@ public class UI {
 
         // gp.player.life = 0;
 
-        int x = 12 * gp.tileSize;
+        int x = 16 * gp.tileSize;
         int y = gp.tileSize - 32;
         int i = 0;
         while (i < gp.player.maxLife / 2) {
@@ -140,7 +169,7 @@ public class UI {
             i++;
             x += gp.tileSize - 16;
         }
-        x = 12 * gp.tileSize;
+        x = 16 * gp.tileSize;
         for (i = 1; i <= gp.player.life - 2; i += 2) {
             g2.drawImage(heart_full, null, x, y);
             x += gp.tileSize - 16;
@@ -153,6 +182,8 @@ public class UI {
 
     public void drawDialogue() {
 
+        if (currentDialogue == null)
+            return;
         int x = gp.tileSize * 2;
         int y = gp.tileSize / 2;
         int width = gp.screenWidth - gp.tileSize * 4;
@@ -205,11 +236,11 @@ public class UI {
             BufferedImage image11 = ImageIO.read(f11);
 
             if (gp.tCount <= 20) {
-                g2.drawImage(image00, 30, 300, gp.tileSize * 4, gp.tileSize * 4, null);
-                g2.drawImage(image10, 100, 350, gp.tileSize * 4, gp.tileSize * 4, null);
+                g2.drawImage(image00, 40, 400, gp.tileSize * 5, gp.tileSize * 5, null);
+                g2.drawImage(image10, 140, 450, gp.tileSize * 5, gp.tileSize * 5, null);
             } else {
-                g2.drawImage(image01, 30, 300, gp.tileSize * 4, gp.tileSize * 4, null);
-                g2.drawImage(image11, 100, 350, gp.tileSize * 4, gp.tileSize * 4, null);
+                g2.drawImage(image01, 40, 400, gp.tileSize * 5, gp.tileSize * 5, null);
+                g2.drawImage(image11, 140, 450, gp.tileSize * 5, gp.tileSize * 5, null);
                 if (gp.tCount == 40)
                     gp.tCount = 0;
             }
@@ -217,9 +248,9 @@ public class UI {
             e.printStackTrace();
         }
 
-        g2.setFont(cambria_80);
-        g2.setColor(Color.red);
-        g2.setFont(g2.getFont().deriveFont(48f));
+        g2.setFont(joystixMonospace);
+        g2.setColor(new Color(204,0,0));
+        g2.setFont(g2.getFont().deriveFont(40f));
 
         String text;
         int x, y;
@@ -256,7 +287,7 @@ public class UI {
             }
         } else if (titleScreenState == 1) {
 
-            g2.setFont(cambria_80);
+            g2.setFont(joystixMonospace);
             g2.setFont(g2.getFont().deriveFont(30f));
             text = "CHOOSE YOUR GENDER: ";
             x = gp.screenWidth / 2 - gp.tileSize / 2;
@@ -290,16 +321,20 @@ public class UI {
             }
         } else if (titleScreenState == 2) {
 
-            g2.setFont(cambria_80);
+            g2.setFont(joystixMonospace);
             g2.setFont(g2.getFont().deriveFont(35f));
             x = gp.screenWidth / 2;
             y = gp.screenHeight / 2;
-            
+
             text = "WASD - Movement";
             g2.drawString(text, x, y);
 
             y += gp.tileSize;
             text = "ENTER - Interact";
+            g2.drawString(text, x, y);
+
+            y += gp.tileSize;
+            text = "G - Drop item";
             g2.drawString(text, x, y);
 
             y += gp.tileSize;
