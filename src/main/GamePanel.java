@@ -25,15 +25,15 @@ public class GamePanel extends JPanel implements Runnable {
     /// SCREEN SETTINGS
     public final int tileSize = 16 * 3;
 
-    public final int maxScreenCol = 16;
-    public final int maxScreenRow = 12;
+    public final int maxScreenCol = 20;
+    public final int maxScreenRow = 17;
 
     public final int screenWidth = maxScreenCol * tileSize;
     public final int screenHeight = maxScreenRow * tileSize;
 
     /// WORLD SETTINGS
-    public final int maxWorldCol = 113;
-    public final int maxWorldRow = 84;
+    public final int maxWorldCol = 200;
+    public final int maxWorldRow = 130;
     public final int worldWidth = maxWorldCol * tileSize;
     public final int worldHeight = maxWorldRow * tileSize;
 
@@ -49,10 +49,10 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
 
     /// ENTITY AND OBJECT
-    public SuperObject obj[] = new SuperObject[40];
+    public SuperObject obj[] = new SuperObject[100];
     public Player player = new Player(this, keyH, 0);
     public Entity monster[] = new Entity[20];
-    public Entity npc[] = new Entity[10];
+    public Entity npc[] = new Entity[50];
     public Entity aggroNPC[] = new Entity[10];
     ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -229,8 +229,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void playMusic(int i) {
         music.setFile(i);
-        // music.play();
-        // music.loop();
+        music.play();
+        music.loop();
     }
 
     public void stopMusic() {

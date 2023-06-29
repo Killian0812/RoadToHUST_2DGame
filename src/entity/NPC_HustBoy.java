@@ -10,6 +10,7 @@ public class NPC_HustBoy extends Entity {
 
         super(gp);
         direction = "down";
+        name = "HustBoy";
         speed = 1;
         getImage();
 

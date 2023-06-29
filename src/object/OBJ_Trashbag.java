@@ -22,6 +22,7 @@ public class OBJ_Trashbag extends SuperObject {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        collision = true;
     }
 
 }

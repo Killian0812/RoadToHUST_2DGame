@@ -13,6 +13,8 @@ public class NPC_NinjaLead extends Entity {
         direction = "";
         name = "NinjaLead";
         solidArea = new Rectangle(8, 16, 72, gp.tileSize);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         isVehicle = true;
         getImage();
     }

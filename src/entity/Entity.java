@@ -94,6 +94,18 @@ public class Entity {
 
     public void speak() {
 
+        if (name == "BreadSeller") {
+            gp.ui.currentDialogue = "Pay 2 dollar for a Bánh Mì /nXá Xíu Siêu Cấp Đặc Ruột? /n/n Y: Yes           N: No";
+            gp.eHandler.requesting = 3;
+            gp.gameState = gp.dialogueState;
+            return;
+        }
+        if (name == "BookSeller") {
+            gp.ui.currentDialogue = "Pay 3 dollar for OOP lecture book? /n/n Y: Yes           N: No";
+            gp.eHandler.requesting = 4;
+            gp.gameState = gp.dialogueState;
+            return;
+        }
         if (gp.player.gender == 0) {
             gp.ui.currentDialogue = dialogues0[dialogueIndex];
             if (dialogueIndex + 1 < dialogues0.length)
@@ -103,7 +115,6 @@ public class Entity {
             if (dialogueIndex + 1 < dialogues1.length)
                 dialogueIndex++;
         }
-
         switch (gp.player.direction) {
             case "up":
                 direction = "down";
@@ -509,13 +520,18 @@ public class Entity {
                     horizontalScale = 2;
                 g2.drawImage(image, tempScreenX, tempScreenY, gp.tileSize * horizontalScale,
                         gp.tileSize * verticalScale, null);
-            } else
-                g2.drawImage(image, tempScreenX, tempScreenY, gp.tileSize, gp.tileSize, null);
+            } else {
+                if (name == "ToiletBoy" || name == "BreadSeller")
+                    g2.drawImage(image, screenX, screenY, 2 * gp.tileSize, 2 * gp.tileSize, null);
+                else if (name == "BookSeller")
+                    g2.drawImage(image, screenX, screenY, 3 * gp.tileSize, 3 * gp.tileSize, null);
+                else
+                    g2.drawImage(image, tempScreenX, tempScreenY, gp.tileSize, gp.tileSize, null);
+            }
         } else
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize + 20, null);
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
     }
 
 }

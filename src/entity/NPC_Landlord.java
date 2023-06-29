@@ -10,6 +10,7 @@ public class NPC_Landlord extends Entity {
 
         super(gp);
         direction = "down";
+        name = "Landlord";
         speed = 1;
         getImage();
 

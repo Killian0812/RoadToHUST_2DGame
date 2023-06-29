@@ -13,7 +13,7 @@ public class Sound {
 
     public Sound() {
 
-        soundFile[0] = new File("./res/sound/adventure.wav");
+        soundFile[0] = new File("./res/sound/bgmusic.wav");
         soundFile[1] = new File("./res/sound/coin.wav");
         soundFile[2] = new File("./res/sound/fanfare.wav");
         soundFile[3] = new File("./res/sound/powerup.wav");

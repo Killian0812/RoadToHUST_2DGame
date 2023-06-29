@@ -9,7 +9,7 @@ public class NPC_Guest3 extends Entity {
     public NPC_Guest3(GamePanel gp) {
 
         super(gp);
-        direction = "left";
+        direction = "";
         name = "Guest";
         isMoving = false;
         speed = 1;

@@ -11,7 +11,10 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Heart;
 import object.OBJ_Money;
+import object.OBJ_Shoes;
+import object.OBJ_Trashbag;
 
 public class Player extends Entity {
 
@@ -23,12 +26,23 @@ public class Player extends Entity {
 
     public int moneyCount = 0;
     public int keyCount = 0;
+    public int coffeeCarried = 0;
     public boolean hasPencil = false;
     public boolean hasID = false;
     public boolean hasBook = false;
     public boolean hasBackpack = false;
-    public boolean carryingTrash = false;
+    public int carryingTrash = 0;
     public boolean carryingCoffee = false;
+    public boolean hasBread = false;
+    public int shoesWearing = 0;
+
+    public int hpBeforeVR = 6;
+    public boolean isInVRWorld = false;
+    public int killCount = 0;
+
+    public int tmpX = 0;
+    public int tmpY = 0;
+    public int prevID = 0;
 
     final public Rectangle tmp;
 
@@ -67,29 +81,49 @@ public class Player extends Entity {
 
     public void setDefaultValues() {
 
-        worldX = gp.tileSize * 50;
-        worldY = gp.tileSize * 8;
-        // worldX = gp.tileSize * 50;
-        // worldY = gp.tileSize * 26;
-        // worldX = gp.tileSize * 25;
-        // worldY = gp.tileSize * 25;
-        // worldX = gp.tileSize * 33;
+        // HOME SPAWN
+        worldX = gp.tileSize * 68;
+        worldY = gp.tileSize * 12;
+
+        // NET SPAWN
+        // worldX = gp.tileSize * 26;
+        // worldY = gp.tileSize * 21;
+
+        // CAFE SPAWN
+        // worldX = gp.tileSize * 184;
+        // worldY = gp.tileSize * 19;
+
+        // LIB SPAWN
+        // worldX = gp.tileSize * 130;
+        // worldY = gp.tileSize * 72;
+
+        // HOSPITAL SPAWN
+        // worldX = gp.tileSize * 61;
         // worldY = gp.tileSize * 61;
 
         deadScene = 0;
         isDead = false;
         speed = 4;
         defaultSpeed = speed;
-        direction = "down1";
+        direction = "down";
 
+        moneyCount = 0;
         keyCount = 0;
+        coffeeCarried = 0;
         hasPencil = false;
         hasID = false;
         hasBook = false;
         hasBackpack = false;
+        carryingTrash = 0;
+        carryingCoffee = false;
+        hasBread = false;
+        shoesWearing = 0;
 
         maxLife = 6;
         life = maxLife;
+
+        isInVRWorld = false;
+        killCount = 0;
     }
 
     public void getPlayerImage() {
@@ -212,6 +246,9 @@ public class Player extends Entity {
 
         }
 
+        if (gp.keyH.dropPressed == true)
+            objectDrop();
+
         if (isInvicible == true) {
             invincibleCounter++;
             if (invincibleCounter > 60) {
@@ -231,6 +268,14 @@ public class Player extends Entity {
                     gp.playSE(1);
                     gp.ui.showMsg("You've got a dollar!");
                     break;
+                case "Heart":
+                    gp.obj[index] = null;
+                    life += 2;
+                    if (life > 6)
+                        life = 6;
+                    gp.playSE(1);
+                    gp.ui.showMsg("You've picked up a HP!");
+                    break;
                 case "Key":
                     gp.obj[index] = null;
                     keyCount++;
@@ -238,8 +283,19 @@ public class Player extends Entity {
                     gp.ui.showMsg("You've got a key!");
                     break;
                 case "Door":
-                    if (keyCount > 0) {
-                        keyCount--;
+                    gp.obj[index] = null;
+                    gp.playSE(4);
+                    gp.ui.showMsg("You've opened the door!");
+                    break;
+                case "BathroomDoor":
+                    gp.obj[index] = null;
+                    gp.playSE(4);
+                    gp.ui.showMsg("You've opened the door!");
+                    break;
+                case "HouseDoor":
+                    if (keyCount > 0 || gp.obj[index].needKey == false) {
+                        if (keyCount > 0 && gp.obj[index].needKey == true)
+                            keyCount--;
                         gp.obj[index] = null;
                         gp.playSE(4);
                         gp.ui.showMsg("You've opened the door!");
@@ -247,12 +303,53 @@ public class Player extends Entity {
                         gp.ui.showMsg("You need a key!");
                     }
                     break;
-                case "Boots":
-                    speed += 2;
-                    // defaultSpeed = speed;
-                    gp.obj[index] = null;
+                case "Converse":
+                    speed = 6;
+                    defaultSpeed = speed;
                     gp.playSE(3);
-                    gp.ui.showMsg("Speed up!");
+                    gp.ui.showMsg("You wearing Converse Chuck Taylor AllStar Classic!");
+                    if (shoesWearing != 0) {
+                        gp.obj[prevID] = new OBJ_Shoes(gp, shoesWearing);
+                        gp.obj[prevID].worldX = tmpX;
+                        gp.obj[prevID].worldY = tmpY;
+                    }
+                    tmpX = gp.obj[index].worldX;
+                    tmpY = gp.obj[index].worldY;
+                    prevID = index;
+                    gp.obj[index] = null;
+                    shoesWearing = 1;
+                    break;
+                case "Jordan":
+                    speed = 6;
+                    defaultSpeed = speed;
+                    gp.playSE(3);
+                    gp.ui.showMsg("You wearing Jordan 1 Retro High OG!");
+                    if (shoesWearing != 0) {
+                        gp.obj[prevID] = new OBJ_Shoes(gp, shoesWearing);
+                        gp.obj[prevID].worldX = tmpX;
+                        gp.obj[prevID].worldY = tmpY;
+                    }
+                    tmpX = gp.obj[index].worldX;
+                    tmpY = gp.obj[index].worldY;
+                    prevID = index;
+                    gp.obj[index] = null;
+                    shoesWearing = 2;
+                    break;
+                case "Adidas":
+                    speed = 6;
+                    defaultSpeed = speed;
+                    gp.playSE(3);
+                    gp.ui.showMsg("You wearing Adidas Ultra Boost 6.0 Light Grey!");
+                    if (shoesWearing != 0) {
+                        gp.obj[prevID] = new OBJ_Shoes(gp, shoesWearing);
+                        gp.obj[prevID].worldX = tmpX;
+                        gp.obj[prevID].worldY = tmpY;
+                    }
+                    tmpX = gp.obj[index].worldX;
+                    tmpY = gp.obj[index].worldY;
+                    prevID = index;
+                    gp.obj[index] = null;
+                    shoesWearing = 3;
                     break;
                 case "Backpack":
                     gp.obj[index] = null;
@@ -288,25 +385,27 @@ public class Player extends Entity {
                         gp.ui.showMsg("You need a backpack!");
                     break;
                 case "Trashbag":
-                    if (carryingTrash == false) {
+                    if (carryingTrash == 0) {
                         gp.obj[index] = null;
-                        carryingTrash = true;
+                        carryingTrash = index;
                         speed -= 2;
                         gp.playSE(1);
                         gp.ui.showMsg("You've picked up a trashbag!");
                     } else {
-                        gp.ui.showMsg("You already carrying a trashbag");
+                        gp.ui.showMsg("You carrying a trashbag already");
                     }
                     break;
                 case "Trashcan":
-                    if (carryingTrash == true) {
+                    if (carryingTrash != 0) {
                         gp.obj[index].useCount++;
-                        carryingTrash = false;
+                        carryingTrash = 0;
                         gp.playSE(1);
                         speed += 2;
                         gp.ui.showMsg("You've thrown a trashbag in trashcan!");
-                        if (gp.obj[index].useCount == 2)
+                        if (gp.obj[index].useCount == 5) {
                             gp.player.moneyCount++;
+                            gp.ui.showMsg("You've got 1 dollar reward for cleaning the street!");
+                        }
                     }
                     break;
                 case "Coffee":
@@ -324,19 +423,80 @@ public class Player extends Entity {
         }
     }
 
+    public void objectDrop() {
+        if (carryingTrash != 0) {
+            gp.obj[carryingTrash] = new OBJ_Trashbag(gp);
+            tmpX = worldX;
+            tmpY = worldY;
+            gp.obj[carryingTrash].worldX = gp.player.worldX;
+            gp.obj[carryingTrash].worldY = gp.player.worldY;
+            switch (direction) {
+                case "up":
+                    worldY -= gp.tileSize;
+                    gp.cChecker.checkTile(this, true);
+                    if (collisionOn == false)
+                        gp.obj[carryingTrash].worldY = worldY;
+                    worldY += gp.tileSize;
+                    break;
+                case "down":
+                    worldY += gp.tileSize;
+                    gp.cChecker.checkTile(this, true);
+                    if (collisionOn == false)
+                        gp.obj[carryingTrash].worldY = worldY;
+                    worldY -= gp.tileSize;
+                    break;
+                case "left":
+                    worldX -= gp.tileSize;
+                    gp.cChecker.checkTile(this, true);
+                    if (collisionOn == false)
+                        gp.obj[carryingTrash].worldX = worldX;
+                    worldX += gp.tileSize;
+                    break;
+                case "right":
+                    worldX += gp.tileSize;
+                    gp.cChecker.checkTile(this, true);
+                    if (collisionOn == false)
+                        gp.obj[carryingTrash].worldX = worldX;
+                    worldX -= gp.tileSize;
+                    break;
+            }
+            // gp.obj[carryingTrash].worldX = gp.player.worldX;
+            // gp.obj[carryingTrash].worldY = gp.player.worldY;
+            carryingTrash = 0;
+            speed += 2;
+        }
+    }
+
     public void npcInteraction(int index) {
         if (index != 999) {
             if (gp.keyH.enterPressed == true) {
                 if (gp.npc[index].name == "Guest") {
                     if (carryingCoffee == true) {
                         gp.npc[index].isMoving = true;
+                        gp.npc[index].direction = "left";
                         gp.playSE(1);
                         gp.ui.showMsg("You've brought coffee for a guest!");
                         carryingCoffee = false;
                         speed++;
-                        moneyCount++;
+                        coffeeCarried++;
+                        if (coffeeCarried == 3) {
+                            moneyCount++;
+                            gp.playSE(1);
+                            gp.ui.showMsg("You've received a dollar for tip!");
+                        }
                     }
                     return;
+                }
+                if (gp.npc[index].name == "Helper") {
+                    if (hasBread == true) {
+                        hasBread = false;
+                        hasBook = true;
+                        gp.playSE(1);
+                        gp.ui.showMsg("You've got OOP lecture book!");
+                        gp.npc[index].isMoving = true;
+                        return;
+                    } else if (hasBook == true)
+                        return;
                 }
                 gp.gameState = gp.dialogueState;
                 gp.npc[index].speak();
@@ -357,15 +517,27 @@ public class Player extends Entity {
         if (index != 999) {
             if (isInvicible == false) {
                 life -= 1;
+                gp.playSE(7);
                 if (life <= 0)
                     dead();
-                else
+                else {
+                    invincibleCounter = 0;
                     isInvicible = true;
+                }
             }
         }
     }
 
     public void dead() {
+        if (isInVRWorld == true) {
+            gp.ui.VRWorldCoolDown = 0.0;
+            life = hpBeforeVR;
+            worldX = 19 * gp.tileSize;
+            worldY = 15 * gp.tileSize;
+            gp.ui.currentDialogue = "You've died in VR World";
+            gp.gameState = gp.dialogueState;
+            return;
+        }
         if (direction == "up" || direction == "right")
             deadScene = 1;
         else
@@ -418,6 +590,14 @@ public class Player extends Entity {
         // Reset
         worldX = currentWorldX;
         worldY = currentWorldY;
+        if (killCount == 4) {
+            gp.ui.VRWorldCoolDown = 0.0;
+            gp.player.killCount = 0;
+            life = hpBeforeVR;
+            moneyCount++;
+            worldX = 19 * gp.tileSize;
+            worldY = 15 * gp.tileSize;
+        }
         solidArea.x = 8;
         solidArea.y = 20;
         solidArea.width = gp.tileSize / 2;
@@ -437,11 +617,17 @@ public class Player extends Entity {
                 knockbackMonster(gp.monster[index]);
                 if (gp.monster[index].life <= 0) {
                     gp.monster[index].isDead = true;
-
+                    gp.player.killCount++;
+                    if (gp.player.killCount == 4) {
+                        gp.ui.currentDialogue = "You've won a VR Game! Get one dollar prize!";
+                        gp.gameState = gp.dialogueState;
+                        gp.playSE(1);
+                        return;
+                    }
                     // Monster item drop
                     if (gp.monster[index].isCarrying == true) {
-                        if (gp.monster[index].objCarry == "Money") {
-                            gp.obj[++gp.aSetter.objNum] = new OBJ_Money(gp);
+                        if (gp.monster[index].objCarry == "Heart") {
+                            gp.obj[++gp.aSetter.objNum] = new OBJ_Heart(gp);
                             gp.obj[gp.aSetter.objNum].worldX = gp.monster[index].worldX;
                             gp.obj[gp.aSetter.objNum].worldY = gp.monster[index].worldY;
                         }
@@ -488,7 +674,6 @@ public class Player extends Entity {
     public void knockbackMonster(Entity entity) {
         if (entity.knockBack == false) {
             entity.direction = direction;
-            entity.speed += 5;
             entity.knockBack = true;
         } else {
             if (entity.direction.equals(direction) == false) {
@@ -501,8 +686,8 @@ public class Player extends Entity {
                 if (direction.equals("right"))
                     entity.direction = "up";
             }
-            entity.speed += 5;
         }
+        entity.speed += 5;
     }
 
     public void draw(Graphics2D g2) {

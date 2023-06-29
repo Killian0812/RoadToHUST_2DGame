@@ -1,14 +1,14 @@
 package main;
 
 public class EventHandler {
-	
+
 	GamePanel gp;
 	EventRect eventRect[][];
-	
+
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
-	
-	public boolean requesting = false; 
+
+	public int requesting = 0;
 
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
@@ -46,10 +46,23 @@ public class EventHandler {
 		}
 
 		if (canTouchEvent == true) {
-			// if (hit(10, 62, "any") == true) {
-			// 	teleport(61, 32, gp.dialogueState);
-			// 	canTouchEvent = false;
-			// }
+
+			// VR ROOM
+			if (hit(14, 21, "any") == true
+					|| hit(14, 20, "any") == true
+					|| hit(14, 19, "any") == true
+					|| hit(14, 18, "any") == true) {
+				teleport(112, 32, gp.dialogueState);
+				canTouchEvent = false;
+			}
+
+			// HOSPITAL
+			if (hit(65, 62, "any") == true
+					|| hit(65, 61, "any") == true
+					|| hit(65, 60, "any") == true) {
+				healing(65, 62, gp.dialogueState);
+				canTouchEvent = false;
+			}
 		}
 
 	}
@@ -79,7 +92,7 @@ public class EventHandler {
 		return hit;
 	}
 
-	public void damagePit(int row, int col, int gameState) {
+	public void damage(int row, int col, int gameState) {
 		gp.gameState = gameState;
 		gp.ui.currentDialogue = "You fall into a pit";
 		gp.player.life -= 1;
@@ -87,17 +100,17 @@ public class EventHandler {
 		canTouchEvent = false;
 	}
 
-	public void healingPool(int row, int col, int gameState) {
-		if (gp.keyH.enterPressed == true) {
-			gp.gameState = gameState;
-			gp.ui.currentDialogue = "You drink the water.\nYour life has been recovered.";
-			gp.player.life = gp.player.maxLife;
-		}
+	public void healing(int row, int col, int gameState) {
+		gp.gameState = gameState;
+		gp.ui.currentDialogue = "Pay 1 dollar to fully recover HP? /n/n Y: Yes           N: No";
+		// eventRect[row][col].eventDone = true;
+		requesting = 2;
 	}
 
 	public void teleport(int row, int col, int gameState) {
 		gp.gameState = gameState;
-		gp.ui.currentDialogue = "Do you want to jump in VR World?";
-		requesting = true;
+		gp.ui.currentDialogue = "Play in VR World? /n/n Y: Yes           N: No";
+		// eventRect[row][col].eventDone = true;
+		requesting = 1;
 	}
 }
