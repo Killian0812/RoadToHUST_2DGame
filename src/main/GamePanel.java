@@ -79,7 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
 
-        System.out.println("Setup game");
+        // System.out.println("Setup game");
         aSetter.setObj();
         aSetter.setNPC();
         aSetter.setAggroNPC();
@@ -88,7 +88,6 @@ public class GamePanel extends JPanel implements Runnable {
         ui.playTime = 0.0;
         ui.isDead = false;
         ui.gameFinished = false;
-        // playMusic(0);
         gameState = titleState;
 
     }
@@ -96,6 +95,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+        playMusic(0);
     }
 
     @Override
@@ -121,8 +121,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        System.out.println("X: " + player.worldX / tileSize + " Y: " + player.worldY
-        / tileSize);
         if (gameState == playState) {
 
             if (ui.gameFinished == false)
