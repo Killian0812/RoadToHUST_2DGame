@@ -214,10 +214,18 @@ public class UI {
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         try {
-            File f = new File("./res/title/title.png");
+            File f = new File("./res/title/hustbg.png");
             BufferedImage image = null;
             image = ImageIO.read(f);
+            g2.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
+
+            g2.setColor(new Color(255, 255, 255, 200));
+            g2.fillRoundRect(400, 370, 550, 400, 35, 35);
+
+            f = new File("./res/title/title.png");
+            image = ImageIO.read(f);
             g2.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight / 2 - 50, null);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -249,7 +257,7 @@ public class UI {
         }
 
         g2.setFont(joystixMonospace);
-        g2.setColor(new Color(204,0,0));
+        g2.setColor(new Color(204, 0, 0));
         g2.setFont(g2.getFont().deriveFont(40f));
 
         String text;
