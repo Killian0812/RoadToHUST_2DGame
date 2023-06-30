@@ -20,6 +20,7 @@ public class MyGame {
         window.setTitle("Road to HUST");
 
         GamePanel gamePanel = new GamePanel();
+
         window.add(gamePanel);
         window.pack();
 
@@ -37,5 +38,6 @@ public class MyGame {
 
         gamePanel.setupGame();
         gamePanel.startGameThread();
+
     }
 }

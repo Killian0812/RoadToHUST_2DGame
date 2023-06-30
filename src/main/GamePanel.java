@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JPanel;
 
+import ai.PathFinder;
 import entity.Entity;
 import entity.Player;
 import object.SuperObject;
@@ -21,15 +25,15 @@ public class GamePanel extends JPanel implements Runnable {
     /// SCREEN SETTINGS
     public final int tileSize = 16 * 3;
 
-    public final int maxScreenCol = 16;
-    public final int maxScreenRow = 12;
+    public final int maxScreenCol = 20;
+    public final int maxScreenRow = 17;
 
     public final int screenWidth = maxScreenCol * tileSize;
     public final int screenHeight = maxScreenRow * tileSize;
 
     /// WORLD SETTINGS
-    public final int maxWorldCol = 113;
-    public final int maxWorldRow = 56;
+    public final int maxWorldCol = 200;
+    public final int maxWorldRow = 130;
     public final int worldWidth = maxWorldCol * tileSize;
     public final int worldHeight = maxWorldRow * tileSize;
 
@@ -38,15 +42,19 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileM = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public EventHandler eHandler = new EventHandler(this);
+    public PathFinder pFinder = new PathFinder(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public UI ui = new UI(this);
 
     /// ENTITY AND OBJECT
-    public SuperObject obj[] = new SuperObject[10];
-    public Player player = new Player(this, keyH);
-    public int playerGender = 0;
-    public Entity npc[] = new Entity[10];
+    public SuperObject obj[] = new SuperObject[100];
+    public Player player = new Player(this, keyH, 0);
+    public Entity monster[] = new Entity[20];
+    public Entity npc[] = new Entity[50];
+    public Entity aggroNPC[] = new Entity[10];
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     /// GAME STATE
     public int gameState;
@@ -54,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
+    public final int gameOverState = 4;
     public int tCount = 0;
 
     Thread gameThread;
@@ -70,9 +79,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
 
+        // System.out.println("Setup game");
         aSetter.setObj();
         aSetter.setNPC();
-        playMusic(0);
+        aSetter.setAggroNPC();
+        // aSetter.setMonster();
+        player.setDefaultValues();
+        ui.playTime = 0.0;
+        ui.isDead = false;
+        ui.gameFinished = false;
         gameState = titleState;
 
     }
@@ -80,6 +95,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+        playMusic(0);
     }
 
     @Override
@@ -107,21 +123,28 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (gameState == playState) {
 
-            player.update();
+            if (ui.gameFinished == false)
+                player.update();
 
             for (int i = 0; i < npc.length; i++) {
-                if (npc[i] != null) {
-                    if (i == 4 && player.hasID == true) {
-                        String text44[] = { "Nhanh đi học đi" };
-                        npc[i].setDialogue(text44, text44);
-                        npc[i].dialogueIndex = 0;
-                    }
+                if (npc[i] != null)
                     npc[i].update();
-                }
             }
-        }
-        if (gameState == pauseState) {
 
+            for (int i = 0; i < aggroNPC.length; i++) {
+                if (aggroNPC[i] != null)
+                    if (aggroNPC[i].isDead == false)
+                        aggroNPC[i].update();
+            }
+
+            for (int i = 0; i < monster.length; i++) {
+                if (monster[i] != null)
+                    monster[i].update();
+            }
+
+            if (gameState == pauseState) {
+
+            }
         }
     }
 
@@ -138,6 +161,48 @@ public class GamePanel extends JPanel implements Runnable {
             /// TILE
             tileM.draw(g2);
 
+            // /// NPC
+            // for (int i = 0; i < npc.length; i++) {
+            // if (npc[i] == null)
+            // continue;
+            // npc[i].draw(g2);
+            // }
+
+            // // MONSTER
+            // for (int i = 0; i < monster.length; i++) {
+            // if (monster[i] == null)
+            // continue;
+            // monster[i].draw(g2);
+            // }
+
+            // /// PLAYER
+            // player.draw(g2);
+
+            // Add all entity to entityList
+            entityList.add(player);
+            for (int i = 0; i < npc.length; i++)
+                if (npc[i] != null)
+                    entityList.add(npc[i]);
+            for (int i = 0; i < aggroNPC.length; i++)
+                if (aggroNPC[i] != null)
+                    entityList.add(aggroNPC[i]);
+            for (int i = 0; i < monster.length; i++)
+                if (monster[i] != null)
+                    entityList.add(monster[i]);
+
+            // Entity sort by render order
+            Collections.sort(entityList, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+                    return Integer.compare(e1.worldY, e2.worldY);
+                }
+            });
+
+            // Draw all dead entities
+            for (int i = 0; i < entityList.size(); i++)
+                if (entityList.get(i).isDead == true)
+                    entityList.get(i).draw(g2);
+
             /// OBJECT
             for (int i = 0; i < obj.length; i++) {
                 if (obj[i] == null)
@@ -145,15 +210,13 @@ public class GamePanel extends JPanel implements Runnable {
                 obj[i].draw(g2, this);
             }
 
-            /// NPC
-            for (int i = 0; i < npc.length; i++) {
-                if (npc[i] == null)
-                    continue;
-                npc[i].draw(g2);
-            }
+            // Draw all alive entities
+            for (int i = 0; i < entityList.size(); i++)
+                if (entityList.get(i).isDead == false)
+                    entityList.get(i).draw(g2);
 
-            /// PLAYER
-            player.draw(g2);
+            // Reset entityList for next render
+            entityList.clear();
 
             /// UI
             ui.draw(g2);
@@ -169,7 +232,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void stopMusic() {
-        music.stop();
+        if (music.clip != null)
+            music.stop();
     }
 
     public void playSE(int i) {

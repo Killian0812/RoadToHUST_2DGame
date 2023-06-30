@@ -22,69 +22,137 @@ public class CollisionChecker {
         int entityTopRow = entityTopY / gp.tileSize;
         int entityBottomRow = entityBottomY / gp.tileSize;
 
-        int tileNum1, tileNum2;
+        int tileNum1, tileNum2, tileNum3, tileNum4;
 
         switch (entity.direction) {
 
             case "up":
                 entityTopRow = (entityTopY - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityLeftCol];
-                tileNum2 = gp.tileM.mapTileNum[entityTopRow][entityRightCol];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
+                if (entityTopRow < 0)
                     entity.collisionOn = true;
-                if (isPlayer == true)
-                    if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        if (gp.player.hasID == true)
-                            gp.ui.gameFinished = true;
-                        else {
-                            gp.ui.showMsg("You don't have a student ID");
-                            gp.player.worldY += gp.player.speed;
-                        }
+                else {
+                    tileNum1 = gp.tileM.mapTileNum[0][entityTopRow][entityLeftCol];
+                    tileNum2 = gp.tileM.mapTileNum[0][entityTopRow][entityRightCol];
+                    tileNum3 = gp.tileM.mapTileNum[1][entityTopRow][entityLeftCol];
+                    tileNum4 = gp.tileM.mapTileNum[1][entityTopRow][entityRightCol];
+                    if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true
+                            || gp.tileM.tile[tileNum3].collision == true || gp.tileM.tile[tileNum4].collision == true)
+                        entity.collisionOn = true;
+                    if (isPlayer == true)
+                        if (gp.tileM.tile[tileNum1].isFinishLine == true
+                                || gp.tileM.tile[tileNum2].isFinishLine == true)
+                            if (gp.player.hasID == true && gp.player.hasBook == true
+                                    && gp.player.hasPencil == true) {
+                                gp.gameState = gp.gameOverState;
+                                gp.playSE(5);
+                            } else {
+                                if (gp.player.hasID == false)
+                                    gp.ui.showMsg("You don't have a student ID");
+                                else {
+                                    if (gp.player.hasBook == false)
+                                        gp.ui.showMsg("You don't have OOP lecture book");
+                                    else if (gp.player.hasPencil == false)
+                                        gp.ui.showMsg("You don't have a pencil");
+                                }
+                                gp.player.worldY += gp.player.speed;
+                            }
+                }
                 break;
             case "down":
                 entityBottomRow = (entityBottomY + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityBottomRow][entityLeftCol];
-                tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
+                if (entityBottomRow > gp.maxWorldRow) {
                     entity.collisionOn = true;
-                if (isPlayer == true)
-                    if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        if (gp.player.hasID == true)
-                            gp.ui.gameFinished = true;
-                        else {
-                            gp.ui.showMsg("You don't have a student ID");
-                            gp.player.worldY -= gp.player.speed;
-                        }
+                } else {
+                    tileNum1 = gp.tileM.mapTileNum[0][entityBottomRow][entityLeftCol];
+                    tileNum2 = gp.tileM.mapTileNum[0][entityBottomRow][entityRightCol];
+                    tileNum3 = gp.tileM.mapTileNum[1][entityBottomRow][entityLeftCol];
+                    tileNum4 = gp.tileM.mapTileNum[1][entityBottomRow][entityRightCol];
+                    if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true
+                            || gp.tileM.tile[tileNum3].collision == true || gp.tileM.tile[tileNum4].collision == true)
+                        entity.collisionOn = true;
+                    if (isPlayer == true)
+                        if (gp.tileM.tile[tileNum1].isFinishLine == true
+                                || gp.tileM.tile[tileNum2].isFinishLine == true)
+                            if (gp.player.hasID == true && gp.player.hasBook == true
+                                    && gp.player.hasPencil == true) {
+                                gp.gameState = gp.gameOverState;
+                                gp.playSE(5);
+                            } else {
+                                if (gp.player.hasID == false)
+                                    gp.ui.showMsg("You don't have a student ID");
+                                else {
+                                    if (gp.player.hasBook == false)
+                                        gp.ui.showMsg("You don't have OOP lecture book");
+                                    else if (gp.player.hasPencil == false)
+                                        gp.ui.showMsg("You don't have a pencil");
+                                }
+                                gp.player.worldY -= gp.player.speed;
+                            }
+                }
                 break;
             case "left":
                 entityLeftCol = (entityLeftX - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityLeftCol];
-                tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityLeftCol];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
+                if (entityLeftCol < 0) {
                     entity.collisionOn = true;
-                if (isPlayer == true)
-                    if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        if (gp.player.hasID == true)
-                            gp.ui.gameFinished = true;
-                        else {
-                            gp.ui.showMsg("You don't have a student ID");
-                            gp.player.worldX += gp.player.speed;
-                        }
-                break;
+                } else {
+                    tileNum1 = gp.tileM.mapTileNum[0][entityTopRow][entityLeftCol];
+                    tileNum2 = gp.tileM.mapTileNum[0][entityBottomRow][entityLeftCol];
+                    tileNum3 = gp.tileM.mapTileNum[1][entityTopRow][entityLeftCol];
+                    tileNum4 = gp.tileM.mapTileNum[1][entityBottomRow][entityLeftCol];
+                    if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true
+                            || gp.tileM.tile[tileNum3].collision == true || gp.tileM.tile[tileNum4].collision == true)
+                        entity.collisionOn = true;
+                    if (isPlayer == true)
+                        if (gp.tileM.tile[tileNum1].isFinishLine == true
+                                || gp.tileM.tile[tileNum2].isFinishLine == true)
+                            if (gp.player.hasID == true && gp.player.hasBook == true
+                                    && gp.player.hasPencil == true) {
+                                gp.gameState = gp.gameOverState;
+                                gp.playSE(5);
+                            } else {
+                                if (gp.player.hasID == false)
+                                    gp.ui.showMsg("You don't have a student ID");
+                                else {
+                                    if (gp.player.hasBook == false)
+                                        gp.ui.showMsg("You don't have OOP lecture book");
+                                    else if (gp.player.hasPencil == false)
+                                        gp.ui.showMsg("You don't have a pencil");
+                                }
+                                gp.player.worldX += gp.player.speed;
+                            }
+                    break;
+                }
             case "right":
                 entityRightCol = (entityRightX + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityTopRow][entityRightCol];
-                tileNum2 = gp.tileM.mapTileNum[entityBottomRow][entityRightCol];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true)
+                if (entityRightCol > gp.maxWorldCol) {
                     entity.collisionOn = true;
-                if (isPlayer == true)
-                    if (gp.tileM.tile[tileNum1].isFinishLine == true || gp.tileM.tile[tileNum2].isFinishLine == true)
-                        if (gp.player.hasID == true)
-                            gp.ui.gameFinished = true;
-                        else {
-                            gp.ui.showMsg("You don't have a student ID");
-                            gp.player.worldX -= gp.player.speed;
-                        }
+                } else {
+                    tileNum1 = gp.tileM.mapTileNum[0][entityTopRow][entityRightCol];
+                    tileNum2 = gp.tileM.mapTileNum[0][entityBottomRow][entityRightCol];
+                    tileNum3 = gp.tileM.mapTileNum[1][entityTopRow][entityRightCol];
+                    tileNum4 = gp.tileM.mapTileNum[1][entityBottomRow][entityRightCol];
+                    if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true
+                            || gp.tileM.tile[tileNum3].collision == true || gp.tileM.tile[tileNum4].collision == true)
+                        entity.collisionOn = true;
+                    if (isPlayer == true)
+                        if (gp.tileM.tile[tileNum1].isFinishLine == true
+                                || gp.tileM.tile[tileNum2].isFinishLine == true)
+                            if (gp.player.hasID == true && gp.player.hasBook == true
+                                    && gp.player.hasPencil == true) {
+                                gp.gameState = gp.gameOverState;
+                                gp.playSE(5);
+                            } else {
+                                if (gp.player.hasID == false)
+                                    gp.ui.showMsg("You don't have a student ID");
+                                else {
+                                    if (gp.player.hasBook == false)
+                                        gp.ui.showMsg("You don't have OOP lecture book");
+                                    else if (gp.player.hasPencil == false)
+                                        gp.ui.showMsg("You don't have a pencil");
+                                }
+                                gp.player.worldX -= gp.player.speed;
+                            }
+                }
         }
 
     }
@@ -158,7 +226,7 @@ public class CollisionChecker {
 
         int index = 999;
         for (int i = 0; i < target.length; i++) {
-            if (target[i] == null || target[i] == entity)
+            if (target[i] == null || target[i] == entity || target[i].isDead == true)
                 continue;
 
             entity.solidArea.x = entity.worldX + entity.solidArea.x;
@@ -170,84 +238,75 @@ public class CollisionChecker {
             switch (entity.direction) {
                 case "up": {
                     entity.solidArea.y -= entity.speed;
-                    if (entity.solidArea.intersects(target[i].solidArea)) {
-                        entity.collisionOn = true;
-                        index = i;
-                    }
                     break;
                 }
                 case "down": {
                     entity.solidArea.y += entity.speed;
-                    if (entity.solidArea.intersects(target[i].solidArea)) {
-                        entity.collisionOn = true;
-                        index = i;
-                    }
                     break;
                 }
                 case "left": {
                     entity.solidArea.x -= entity.speed;
-                    if (entity.solidArea.intersects(target[i].solidArea)) {
-                        entity.collisionOn = true;
-                        index = i;
-                    }
                     break;
                 }
 
                 case "right": {
                     entity.solidArea.x += entity.speed;
-                    if (entity.solidArea.intersects(target[i].solidArea)) {
-                        entity.collisionOn = true;
-                        index = i;
-                    }
                     break;
                 }
+            }
+
+            if (entity.solidArea.intersects(target[i].solidArea)) {
+                entity.collisionOn = true;
+                index = i;
             }
 
             entity.solidArea.x = entity.solidAreaDefaultX;
             entity.solidArea.y = entity.solidAreaDefaultY;
             target[i].solidArea.x = target[i].solidAreaDefaultX;
             target[i].solidArea.y = target[i].solidAreaDefaultY;
+
         }
         return index;
     }
 
-    public void checkPlayer(Entity entity) {
+    public boolean checkPlayer(Entity entity) {
         entity.solidArea.x = entity.worldX + entity.solidArea.x;
         entity.solidArea.y = entity.worldY + entity.solidArea.y;
 
         gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
         gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
 
+        boolean flag = false;
         switch (entity.direction) {
             case "up": {
                 entity.solidArea.y -= entity.speed;
-                if (entity.solidArea.intersects(gp.player.solidArea)) {
-                    entity.collisionOn = true;
-                }
                 break;
             }
             case "down": {
                 entity.solidArea.y += entity.speed;
-                if (entity.solidArea.intersects(gp.player.solidArea)) {
-                    entity.collisionOn = true;
-                }
                 break;
             }
             case "left": {
                 entity.solidArea.x -= entity.speed;
-                if (entity.solidArea.intersects(gp.player.solidArea)) {
-                    entity.collisionOn = true;
-                }
                 break;
             }
 
             case "right": {
                 entity.solidArea.x += entity.speed;
-                if (entity.solidArea.intersects(gp.player.solidArea)) {
-                    entity.collisionOn = true;
-                }
                 break;
             }
+        }
+
+        if (entity.solidArea.intersects(gp.player.solidArea)) {
+            entity.collisionOn = true;
+            if (entity.name == "Orc" || entity.name == "Slime")
+                if (gp.player.isInvicible == false) {
+                    gp.player.invincibleCounter = 0;
+                    gp.player.isInvicible = true;
+                    gp.player.life--;
+                    gp.playSE(7);
+                }
+            flag = true;
         }
 
         entity.solidArea.x = entity.solidAreaDefaultX;
@@ -255,5 +314,6 @@ public class CollisionChecker {
         gp.player.solidArea.x = gp.player.solidAreaDefaultX;
         gp.player.solidArea.y = gp.player.solidAreaDefaultY;
 
+        return flag;
     }
 }
