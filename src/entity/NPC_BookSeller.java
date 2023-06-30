@@ -11,7 +11,7 @@ public class NPC_BookSeller extends Entity {
         super(gp);
         name = "BookSeller";
         direction = "down";
-        solidArea = new Rectangle(0, 0, gp.tileSize * 3, gp.tileSize * 3);
+        solidArea = new Rectangle(-10, 0, gp.tileSize * 3 + 10, gp.tileSize * 3);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         isMoving = false;
