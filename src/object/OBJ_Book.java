@@ -1,6 +1,6 @@
 package object;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -12,16 +12,16 @@ public class OBJ_Book extends SuperObject {
 
     public OBJ_Book(GamePanel gp) {
         this.gp = gp;
-            name = "Book";
-            try {
-    
-                File f = new File("./res/objects/book.png");
-                image = ImageIO.read(f);
-                uTool.scaledImage(image, gp.tileSize, gp.tileSize);
-    
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        name = "Book";
+        try {
+
+            InputStream is = OBJ_Book.class.getResourceAsStream("/objects/book.png");
+            image = ImageIO.read(is);
+            uTool.scaledImage(image, gp.tileSize, gp.tileSize);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
 }

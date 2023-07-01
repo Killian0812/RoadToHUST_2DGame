@@ -4,7 +4,7 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -161,11 +161,10 @@ public class Player extends Entity {
 
         try {
 
-            File f = null;
-            f = new File("./res/player/hust_boy/hust_boy_" + imageName + ".png");
+            InputStream is = Player.class.getResourceAsStream("/player/hust_boy/hust_boy_" + imageName + ".png");
             if (gender == 1)
-                f = new File("./res/player/hust_girl/hust_girl_" + imageName + ".png");
-            image = ImageIO.read(f);
+                is = Player.class.getResourceAsStream("/player/hust_girl/hust_girl_" + imageName + ".png");
+            image = ImageIO.read(is);
             image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
 
         } catch (Exception e) {

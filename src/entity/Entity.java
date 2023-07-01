@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -83,8 +83,8 @@ public class Entity {
         BufferedImage image = null;
 
         try {
-            File f = new File(imageName + ".png");
-            image = ImageIO.read(f);
+            InputStream is = Entity.class.getResourceAsStream(imageName + ".png");
+            image = ImageIO.read(is);
             image = uTool.scaledImage(image, width, height);
         } catch (Exception e) {
             e.printStackTrace();

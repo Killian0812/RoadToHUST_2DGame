@@ -29,27 +29,27 @@ public class MON_Gangster extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("./res/npc/gangster/gangster_up_1", 48, 48);
-        up2 = setup("./res/npc/gangster/gangster_up_2", 48, 48);
-        down1 = setup("./res/npc/gangster/gangster_down_1", 48, 48);
-        down2 = setup("./res/npc/gangster/gangster_down_2", 48, 48);
-        left1 = setup("./res/npc/gangster/gangster_left_1", 48, 48);
-        left2 = setup("./res/npc/gangster/gangster_left_2", 48, 48);
-        right1 = setup("./res/npc/gangster/gangster_right_1", 48, 48);
-        right2 = setup("./res/npc/gangster/gangster_right_2", 48, 48);
-        dead1 = setup("./res/npc/gangster/gangster_dead_1", 48, 48);
-        dead2 = setup("./res/npc/gangster/gangster_dead_2", 48, 48);
+        up1 = setup("/npc/gangster/gangster_up_1", 48, 48);
+        up2 = setup("/npc/gangster/gangster_up_2", 48, 48);
+        down1 = setup("/npc/gangster/gangster_down_1", 48, 48);
+        down2 = setup("/npc/gangster/gangster_down_2", 48, 48);
+        left1 = setup("/npc/gangster/gangster_left_1", 48, 48);
+        left2 = setup("/npc/gangster/gangster_left_2", 48, 48);
+        right1 = setup("/npc/gangster/gangster_right_1", 48, 48);
+        right2 = setup("/npc/gangster/gangster_right_2", 48, 48);
+        dead1 = setup("/npc/gangster/gangster_dead_1", 48, 48);
+        dead2 = setup("/npc/gangster/gangster_dead_2", 48, 48);
     }
 
     public void getAttackImage() {
-        atkUp1 = setup("./res/npc/gangster/gangster_attack_up_1", 48, 96);
-        atkUp2 = setup("./res/npc/gangster/gangster_attack_up_2", 48, 96);
-        atkDown1 = setup("./res/npc/gangster/gangster_attack_down_1", 48, 96);
-        atkDown2 = setup("./res/npc/gangster/gangster_attack_down_2", 48, 96);
-        atkLeft1 = setup("./res/npc/gangster/gangster_attack_left_1", 96, 48);
-        atkLeft2 = setup("./res/npc/gangster/gangster_attack_left_2", 96, 48);
-        atkRight1 = setup("./res/npc/gangster/gangster_attack_right_1", 96, 48);
-        atkRight2 = setup("./res/npc/gangster/gangster_attack_right_2", 96, 48);
+        atkUp1 = setup("/npc/gangster/gangster_attack_up_1", 48, 96);
+        atkUp2 = setup("/npc/gangster/gangster_attack_up_2", 48, 96);
+        atkDown1 = setup("/npc/gangster/gangster_attack_down_1", 48, 96);
+        atkDown2 = setup("/npc/gangster/gangster_attack_down_2", 48, 96);
+        atkLeft1 = setup("/npc/gangster/gangster_attack_left_1", 96, 48);
+        atkLeft2 = setup("/npc/gangster/gangster_attack_left_2", 96, 48);
+        atkRight1 = setup("/npc/gangster/gangster_attack_right_1", 96, 48);
+        atkRight2 = setup("/npc/gangster/gangster_attack_right_2", 96, 48);
     }
 
     public void update() {

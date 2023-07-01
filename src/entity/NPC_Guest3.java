@@ -19,14 +19,14 @@ public class NPC_Guest3 extends Entity {
 
     public void getImage() {
 
-        up1 = setup("./res/npc/guest3/guest3_up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("./res/npc/guest3/guest3_up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("./res/npc/guest3/guest3_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("./res/npc/guest3/guest3_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("./res/npc/guest3/guest3_left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("./res/npc/guest3/guest3_left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("./res/npc/guest3/guest3_right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("./res/npc/guest3/guest3_right_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/npc/guest3/guest3_up_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/npc/guest3/guest3_up_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/npc/guest3/guest3_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/npc/guest3/guest3_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/npc/guest3/guest3_left_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/npc/guest3/guest3_left_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/npc/guest3/guest3_right_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/npc/guest3/guest3_right_2", gp.tileSize, gp.tileSize);
 
     }
 

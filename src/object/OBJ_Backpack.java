@@ -1,6 +1,6 @@
 package object;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -16,8 +16,8 @@ public class OBJ_Backpack extends SuperObject {
         name = "Backpack";
         try {
 
-            File f = new File("./res/objects/backpack.png");
-            image = ImageIO.read(f);
+            InputStream is = OBJ_Backpack.class.getResourceAsStream("/objects/backpack.png");
+            image = ImageIO.read(is);
             uTool.scaledImage(image, gp.tileSize, gp.tileSize);
 
         } catch (Exception e) {

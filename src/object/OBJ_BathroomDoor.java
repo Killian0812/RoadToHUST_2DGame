@@ -1,6 +1,6 @@
 package object;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -16,8 +16,8 @@ public class OBJ_BathroomDoor extends SuperObject {
         solidArea.height = 96;
         try {
 
-            File f = new File("./res/objects/bathroomdoor.png");
-            image = ImageIO.read(f);
+            InputStream is = OBJ_BathroomDoor.class.getResourceAsStream("/objects/bathroomdoor.png");
+            image = ImageIO.read(is);
             uTool.scaledImage(image, gp.tileSize, 2 * gp.tileSize);
 
         } catch (Exception e) {

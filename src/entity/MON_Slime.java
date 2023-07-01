@@ -32,23 +32,23 @@ public class MON_Slime extends Entity {
 
     public void getImage() {
         if (color == 0) {
-            up1 = setup("./res/monster/slime/redslime_down_1", 48, 48);
-            up2 = setup("./res/monster/slime/redslime_down_2", 48, 48);
-            down1 = setup("./res/monster/slime/redslime_down_1", 48, 48);
-            down2 = setup("./res/monster/slime/redslime_down_2", 48, 48);
-            left1 = setup("./res/monster/slime/redslime_down_1", 48, 48);
-            left2 = setup("./res/monster/slime/redslime_down_2", 48, 48);
-            right1 = setup("./res/monster/slime/redslime_down_1", 48, 48);
-            right2 = setup("./res/monster/slime/redslime_down_2", 48, 48);
+            up1 = setup("/monster/slime/redslime_down_1", 48, 48);
+            up2 = setup("/monster/slime/redslime_down_2", 48, 48);
+            down1 = setup("/monster/slime/redslime_down_1", 48, 48);
+            down2 = setup("/monster/slime/redslime_down_2", 48, 48);
+            left1 = setup("/monster/slime/redslime_down_1", 48, 48);
+            left2 = setup("/monster/slime/redslime_down_2", 48, 48);
+            right1 = setup("/monster/slime/redslime_down_1", 48, 48);
+            right2 = setup("/monster/slime/redslime_down_2", 48, 48);
         } else {
-            up1 = setup("./res/monster/slime/blueslime_down_1", 48, 48);
-            up2 = setup("./res/monster/slime/blueslime_down_2", 48, 48);
-            down1 = setup("./res/monster/slime/blueslime_down_1", 48, 48);
-            down2 = setup("./res/monster/slime/blueslime_down_2", 48, 48);
-            left1 = setup("./res/monster/slime/blueslime_down_1", 48, 48);
-            left2 = setup("./res/monster/slime/blueslime_down_2", 48, 48);
-            right1 = setup("./res/monster/slime/blueslime_down_1", 48, 48);
-            right2 = setup("./res/monster/slime/blueslime_down_2", 48, 48);
+            up1 = setup("/monster/slime/blueslime_down_1", 48, 48);
+            up2 = setup("/monster/slime/blueslime_down_2", 48, 48);
+            down1 = setup("/monster/slime/blueslime_down_1", 48, 48);
+            down2 = setup("/monster/slime/blueslime_down_2", 48, 48);
+            left1 = setup("/monster/slime/blueslime_down_1", 48, 48);
+            left2 = setup("/monster/slime/blueslime_down_2", 48, 48);
+            right1 = setup("/monster/slime/blueslime_down_1", 48, 48);
+            right2 = setup("/monster/slime/blueslime_down_2", 48, 48);
         }
     }
 

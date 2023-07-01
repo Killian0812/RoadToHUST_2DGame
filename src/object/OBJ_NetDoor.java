@@ -1,6 +1,6 @@
 package object;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -17,8 +17,8 @@ public class OBJ_NetDoor extends SuperObject {
         solidArea.height = 96;
         try {
 
-            File f = new File("./res/objects/netdoor.png");
-            image = ImageIO.read(f);
+            InputStream is = OBJ_NetDoor.class.getResourceAsStream("/objects/netdoor.png");
+            image = ImageIO.read(is);
             uTool.scaledImage(image, 2 * gp.tileSize, 2 * gp.tileSize);
 
         } catch (Exception e) {

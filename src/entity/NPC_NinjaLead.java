@@ -21,10 +21,10 @@ public class NPC_NinjaLead extends Entity {
 
     public void getImage() {
 
-        left1 = setup("./res/npc/ninjalead/ninjalead_left_1", gp.tileSize * 2, gp.tileSize);
-        left2 = setup("./res/npc/ninjalead/ninjalead_left_2", gp.tileSize * 2, gp.tileSize);
-        right1 = setup("./res/npc/ninjalead/ninjalead_right_1", gp.tileSize * 2, gp.tileSize);
-        right2 = setup("./res/npc/ninjalead/ninjalead_right_2", gp.tileSize * 2, gp.tileSize);
+        left1 = setup("/npc/ninjalead/ninjalead_left_1", gp.tileSize * 2, gp.tileSize);
+        left2 = setup("/npc/ninjalead/ninjalead_left_2", gp.tileSize * 2, gp.tileSize);
+        right1 = setup("/npc/ninjalead/ninjalead_right_1", gp.tileSize * 2, gp.tileSize);
+        right2 = setup("/npc/ninjalead/ninjalead_right_2", gp.tileSize * 2, gp.tileSize);
 
     }
 

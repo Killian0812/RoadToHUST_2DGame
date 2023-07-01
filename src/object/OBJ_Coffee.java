@@ -1,6 +1,6 @@
 package object;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -16,8 +16,8 @@ public class OBJ_Coffee extends SuperObject {
         name = "Coffee";
         try {
 
-            File f = new File("./res/objects/coffee.png");
-            image = ImageIO.read(f);
+            InputStream is = OBJ_Coffee.class.getResourceAsStream("/objects/coffee.png");
+            image = ImageIO.read(is);
             uTool.scaledImage(image, gp.tileSize, gp.tileSize);
 
         } catch (Exception e) {

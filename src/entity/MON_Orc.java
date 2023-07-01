@@ -29,25 +29,25 @@ public class MON_Orc extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("./res/monster/orc/orc_up_1", 48, 48);
-        up2 = setup("./res/monster/orc/orc_up_2", 48, 48);
-        down1 = setup("./res/monster/orc/orc_down_1", 48, 48);
-        down2 = setup("./res/monster/orc/orc_down_2", 48, 48);
-        left1 = setup("./res/monster/orc/orc_left_1", 48, 48);
-        left2 = setup("./res/monster/orc/orc_left_2", 48, 48);
-        right1 = setup("./res/monster/orc/orc_right_1", 48, 48);
-        right2 = setup("./res/monster/orc/orc_right_2", 48, 48);
+        up1 = setup("/monster/orc/orc_up_1", 48, 48);
+        up2 = setup("/monster/orc/orc_up_2", 48, 48);
+        down1 = setup("/monster/orc/orc_down_1", 48, 48);
+        down2 = setup("/monster/orc/orc_down_2", 48, 48);
+        left1 = setup("/monster/orc/orc_left_1", 48, 48);
+        left2 = setup("/monster/orc/orc_left_2", 48, 48);
+        right1 = setup("/monster/orc/orc_right_1", 48, 48);
+        right2 = setup("/monster/orc/orc_right_2", 48, 48);
     }
 
     public void getAttackImage() {
-        atkUp1 = setup("./res/monster/orc/orc_attack_up_1", 48, 96);
-        atkUp2 = setup("./res/monster/orc/orc_attack_up_2", 48, 96);
-        atkDown1 = setup("./res/monster/orc/orc_attack_down_1", 48, 96);
-        atkDown2 = setup("./res/monster/orc/orc_attack_down_2", 48, 96);
-        atkLeft1 = setup("./res/monster/orc/orc_attack_left_1", 96, 48);
-        atkLeft2 = setup("./res/monster/orc/orc_attack_left_2", 96, 48);
-        atkRight1 = setup("./res/monster/orc/orc_attack_right_1", 96, 48);
-        atkRight2 = setup("./res/monster/orc/orc_attack_right_2", 96, 48);
+        atkUp1 = setup("/monster/orc/orc_attack_up_1", 48, 96);
+        atkUp2 = setup("/monster/orc/orc_attack_up_2", 48, 96);
+        atkDown1 = setup("/monster/orc/orc_attack_down_1", 48, 96);
+        atkDown2 = setup("/monster/orc/orc_attack_down_2", 48, 96);
+        atkLeft1 = setup("/monster/orc/orc_attack_left_1", 96, 48);
+        atkLeft2 = setup("/monster/orc/orc_attack_left_2", 96, 48);
+        atkRight1 = setup("/monster/orc/orc_attack_right_1", 96, 48);
+        atkRight2 = setup("/monster/orc/orc_attack_right_2", 96, 48);
     }
 
     public void update() {

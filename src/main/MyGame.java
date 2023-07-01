@@ -1,6 +1,6 @@
 package main;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 public class MyGame {
 
     public static JFrame window;
+
+    public static BufferedImage image;
 
     public static void main(String[] args) {
 
@@ -28,8 +30,10 @@ public class MyGame {
         window.setVisible(true);
 
         try {
-            File f = new File("./res/player/hust_boy/hust_boy_down_1.png");
-            BufferedImage image = ImageIO.read(f);
+            // File f = new File("./res/player/hust_boy/hust_boy_down_1.png");
+            // BufferedImage image = ImageIO.read(f);
+            InputStream is = MyGame.class.getResourceAsStream("/player/hust_boy/hust_boy_down_1.png");
+            image = ImageIO.read(is);
             ImageIcon icon = new ImageIcon(image);
             window.setIconImage(icon.getImage());
         } catch (Exception e) {

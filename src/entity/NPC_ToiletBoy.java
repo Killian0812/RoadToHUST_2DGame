@@ -22,14 +22,14 @@ public class NPC_ToiletBoy extends Entity {
 
     public void getImage() {
 
-        up1 = setup("./res/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
-        up2 = setup("./res/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
-        down1 = setup("./res/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
-        down2 = setup("./res/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
-        left1 = setup("./res/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
-        left2 = setup("./res/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
-        right1 = setup("./res/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
-        right2 = setup("./res/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
+        up1 = setup("/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
+        up2 = setup("/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
+        down1 = setup("/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
+        down2 = setup("/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
+        left1 = setup("/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
+        left2 = setup("/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
+        right1 = setup("/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
+        right2 = setup("/npc/toilethust", 2 * gp.tileSize, 2 * gp.tileSize);
 
     }
 

@@ -21,14 +21,14 @@ public class NPC_Car extends Entity {
 
     public void getImage() {
 
-        // down1 = setup("./res/npc/car/car_down_1");
-        // down2 = setup("./res/npc/car/car_down_2");
-        // up1 = setup("./res/npc/car/car_up_1");
-        // up2 = setup("./res/npc/car/car_up_2");
-        left1 = setup("./res/npc/car/car_left_1", gp.tileSize * 2, gp.tileSize);
-        left2 = setup("./res/npc/car/car_left_2", gp.tileSize * 2, gp.tileSize);
-        right1 = setup("./res/npc/car/car_right_1", gp.tileSize * 2, gp.tileSize);
-        right2 = setup("./res/npc/car/car_right_2", gp.tileSize * 2, gp.tileSize);
+        // down1 = setup("/npc/car/car_down_1");
+        // down2 = setup("/npc/car/car_down_2");
+        // up1 = setup("/npc/car/car_up_1");
+        // up2 = setup("/npc/car/car_up_2");
+        left1 = setup("/npc/car/car_left_1", gp.tileSize * 2, gp.tileSize);
+        left2 = setup("/npc/car/car_left_2", gp.tileSize * 2, gp.tileSize);
+        right1 = setup("/npc/car/car_right_1", gp.tileSize * 2, gp.tileSize);
+        right2 = setup("/npc/car/car_right_2", gp.tileSize * 2, gp.tileSize);
 
     }
 

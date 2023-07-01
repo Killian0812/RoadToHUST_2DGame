@@ -6,7 +6,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
@@ -48,8 +48,9 @@ public class UI {
         arial_80B = new Font("Arial", Font.BOLD, 80);
         cambria_80 = new Font("Cambria", Font.BOLD, 80);
         try {
-            File f = new File("./res/font/joystix monospace.otf");
-            joystixMonospace = Font.createFont(Font.TRUETYPE_FONT, f);
+            // File f = new File("./res/font/joystix monospace.otf");
+            InputStream is = UI.class.getResourceAsStream("/font/joystix monospace.otf");
+            joystixMonospace = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (FontFormatException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -214,16 +215,17 @@ public class UI {
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         try {
-            File f = new File("./res/title/hustbg.png");
+            // File f = new File("./res/title/hustbg.png");
+            InputStream is = UI.class.getResourceAsStream("/title/hustbg.png");
             BufferedImage image = null;
-            image = ImageIO.read(f);
+            image = ImageIO.read(is);
             g2.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
 
             g2.setColor(new Color(255, 255, 255, 200));
             g2.fillRoundRect(400, 370, 550, 400, 35, 35);
 
-            f = new File("./res/title/title.png");
-            image = ImageIO.read(f);
+            is = UI.class.getResourceAsStream("/title/title.png");
+            image = ImageIO.read(is);
             g2.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight / 2 - 50, null);
 
         } catch (Exception e) {
@@ -231,17 +233,18 @@ public class UI {
         }
 
         try {
-            File f00 = new File("./res/player/hust_boy/hust_boy_down_1.png");
-            BufferedImage image00 = ImageIO.read(f00);
 
-            File f01 = new File("./res/player/hust_boy/hust_boy_down_2.png");
-            BufferedImage image01 = ImageIO.read(f01);
+            InputStream is00 = UI.class.getResourceAsStream("/player/hust_boy/hust_boy_down_1.png");
+            BufferedImage image00 = ImageIO.read(is00);
 
-            File f10 = new File("./res/player/hust_girl/hust_girl_down_1.png");
-            BufferedImage image10 = ImageIO.read(f10);
+            InputStream is01 = UI.class.getResourceAsStream("/player/hust_boy/hust_boy_down_2.png");
+            BufferedImage image01 = ImageIO.read(is01);
 
-            File f11 = new File("./res/player/hust_girl/hust_girl_down_2.png");
-            BufferedImage image11 = ImageIO.read(f11);
+            InputStream is10 = UI.class.getResourceAsStream("/player/hust_girl/hust_girl_down_1.png");
+            BufferedImage image10 = ImageIO.read(is10);
+
+            InputStream is11 = UI.class.getResourceAsStream("/player/hust_girl/hust_girl_down_2.png");
+            BufferedImage image11 = ImageIO.read(is11);
 
             if (gp.tCount <= 20) {
                 g2.drawImage(image00, 40, 400, gp.tileSize * 5, gp.tileSize * 5, null);

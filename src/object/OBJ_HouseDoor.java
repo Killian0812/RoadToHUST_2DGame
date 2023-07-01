@@ -1,6 +1,6 @@
 package object;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -17,8 +17,8 @@ public class OBJ_HouseDoor extends SuperObject {
         needKey = true;
         try {
 
-            File f = new File("./res/objects/door.png");
-            image = ImageIO.read(f);
+            InputStream is = OBJ_HouseDoor.class.getResourceAsStream("/objects/door.png");
+            image = ImageIO.read(is);
             uTool.scaledImage(image, gp.tileSize, 2 * gp.tileSize);
 
         } catch (Exception e) {

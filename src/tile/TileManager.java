@@ -1,13 +1,14 @@
 package tile;
 
 import java.awt.Graphics2D;
-import java.io.File;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.UtilityTool;
+import object.OBJ_Trashcan;
 
 public class TileManager {
 
@@ -28,8 +29,8 @@ public class TileManager {
         }
 
         try {
-            loadMap(0, "./res/maps/world01.txt");
-            loadMap(1, "./res/maps/world01_2.txt");
+            loadMap(0, "/maps/world01.txt");
+            loadMap(1, "/maps/world01_2.txt");
         } catch (Exception e) {
             System.out.println("Can not load map data!");
         }
@@ -37,8 +38,8 @@ public class TileManager {
 
     public void loadMap(int id, String filePath) {
         try {
-            File f = new File(filePath);
-            Scanner sc = new Scanner(f);
+            InputStream is = OBJ_Trashcan.class.getResourceAsStream(filePath);
+            Scanner sc = new Scanner(is);
             int i = 0, j;
             while (sc.hasNextLine() && i < gp.maxWorldRow) {
                 String line = sc.nextLine();
@@ -219,8 +220,8 @@ public class TileManager {
 
         try {
             tile[index] = new Tile();
-            File f = new File("./res/tiles/" + imagePath + ".png");
-            tile[index].image = ImageIO.read(f);
+            InputStream is = TileManager.class.getResourceAsStream("/tiles/" + imagePath + ".png");
+            tile[index].image = ImageIO.read(is);
             tile[index].image = uTool.scaledImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
             tile[index].isFinishLine = isFinishLine;
