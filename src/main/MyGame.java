@@ -30,8 +30,6 @@ public class MyGame {
         window.setVisible(true);
 
         try {
-            // File f = new File("./res/player/hust_boy/hust_boy_down_1.png");
-            // BufferedImage image = ImageIO.read(f);
             InputStream is = MyGame.class.getResourceAsStream("/player/hust_boy/hust_boy_down_1.png");
             image = ImageIO.read(is);
             ImageIcon icon = new ImageIcon(image);

@@ -192,11 +192,6 @@ public class Entity {
             checkCollision();
 
             if (hitPlayer == true) {
-                if (name.equals("Guider1") && gp.player.hasID == true) {
-                    String text44[] = { "Nhanh đi học đi" };
-                    setDialogue(text44, text44);
-                    dialogueIndex = 0;
-                }
                 if (name.equals("Car") || name.equals("NinjaLead")) {
                     if (direction == "left") {
                         gp.player.worldX -= gp.tileSize / 2;

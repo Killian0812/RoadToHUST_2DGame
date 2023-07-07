@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     /// SCREEN SETTINGS
-    public final int tileSize = 16 * 3;
+    public final int tileSize = 16 * 3; 
 
     public final int maxScreenCol = 20;
     public final int maxScreenRow = 17;
@@ -83,7 +83,6 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setObj();
         aSetter.setNPC();
         aSetter.setAggroNPC();
-        // aSetter.setMonster();
         player.setDefaultValues();
         ui.playTime = 0.0;
         ui.isDead = false;
@@ -141,10 +140,9 @@ public class GamePanel extends JPanel implements Runnable {
                 if (monster[i] != null)
                     monster[i].update();
             }
+        }
+        else if (gameState == pauseState) {
 
-            if (gameState == pauseState) {
-
-            }
         }
     }
 
@@ -160,23 +158,6 @@ public class GamePanel extends JPanel implements Runnable {
 
             /// TILE
             tileM.draw(g2);
-
-            // /// NPC
-            // for (int i = 0; i < npc.length; i++) {
-            // if (npc[i] == null)
-            // continue;
-            // npc[i].draw(g2);
-            // }
-
-            // // MONSTER
-            // for (int i = 0; i < monster.length; i++) {
-            // if (monster[i] == null)
-            // continue;
-            // monster[i].draw(g2);
-            // }
-
-            // /// PLAYER
-            // player.draw(g2);
 
             // Add all entity to entityList
             entityList.add(player);

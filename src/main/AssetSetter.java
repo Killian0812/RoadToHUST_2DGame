@@ -13,7 +13,7 @@ public class AssetSetter {
         this.gp = gp;
     }
 
-    public void setObj() {
+    public void setObj() {  
 
         // NET
         gp.obj[0] = new OBJ_NetDoor(gp);
@@ -251,7 +251,7 @@ public class AssetSetter {
 
     public void setMonster() {
 
-        System.out.println("Monsters generated");
+        // System.out.println("Monsters generated");
         gp.monster[0] = new MON_Slime(gp, 0);
         gp.monster[0].worldX = gp.tileSize * 32;
         gp.monster[0].worldY = gp.tileSize * 116;

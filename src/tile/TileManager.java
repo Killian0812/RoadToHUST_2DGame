@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.UtilityTool;
-import object.OBJ_Trashcan;
 
 public class TileManager {
 
@@ -38,18 +37,16 @@ public class TileManager {
 
     public void loadMap(int id, String filePath) {
         try {
-            InputStream is = OBJ_Trashcan.class.getResourceAsStream(filePath);
+            InputStream is = TileManager.class.getResourceAsStream(filePath);
             Scanner sc = new Scanner(is);
             int i = 0, j;
             while (sc.hasNextLine() && i < gp.maxWorldRow) {
                 String line = sc.nextLine();
-                // System.out.println(line);
                 String numbers[] = line.split(" ");
                 for (j = 0; j < gp.maxWorldCol; j++) {
                     mapTileNum[id][i][j] = Integer.parseInt(numbers[j]);
                 }
                 i++;
-
             }
             sc.close();
 
